@@ -1,0 +1,21 @@
+<RCC>
+  <qresource prefix="root">
+    <file>resources/icons8-sword-48.png</file>
+    <file>resources/icons8-sword-32.png</file>
+    <file>resources/icons8-analysis-48.png</file>
+    <file>resources/icons8-analysis-32.png</file>
+    <file>resources/icons8-wifi-alert-48.png</file>
+    <file>resources/icons8-wifi-alert-32.png</file>
+    <file>resources/icons8-info-32.png</file>
+    <file>resources/icons8-secure-48.png</file>
+    <file>resources/icons8-warning-2-48.png</file>
+    <file>resources/icons8-warning-48.png</file>
+    <file>resources/icons8-wifi-48.png</file>
+    <file>resources/icons8-radar-32.png</file>
+    <file>resources/icons8-radar-48.png</file>
+    <file>resources/icons8-wifi-32.png</file>
+    <file>resources/icons8-dashboard-48.png</file>
+    <file>resources/icons8-dashboard-32.png</file>
+    <file>resources/icons8-wifi-64.png</file>
+  </qresource>
+</RCC>

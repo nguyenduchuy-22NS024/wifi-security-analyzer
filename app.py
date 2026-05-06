@@ -1,0 +1,74 @@
+import sys
+from PySide6.QtWidgets import QApplication, QMainWindow
+from ui_mainwindow import Ui_MainWindow
+
+from pages.dashboard.dashboard_page import DashboardPage
+from pages.scan.scan_page import ScanPage
+from pages.suspicious.suspicious_page import SuspiciousPage
+from pages.analyze.analyze_page import AnalyzePage
+from pages.attack.attack_page import AttackPage
+
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+
+        # Initialize pages
+        self.dashboard_page = DashboardPage()
+        self.scan_page = ScanPage()
+        self.suspicious_page = SuspiciousPage()
+        self.analyze_page = AnalyzePage()
+        self.attack_page = AttackPage()
+
+        # Add pages to stacked widget
+        self.ui.stackedWidget.addWidget(self.dashboard_page)
+        self.ui.stackedWidget.addWidget(self.scan_page)
+        self.ui.stackedWidget.addWidget(self.suspicious_page)
+        self.ui.stackedWidget.addWidget(self.analyze_page)
+        self.ui.stackedWidget.addWidget(self.attack_page)
+
+        # Connect navigation buttons
+        self.ui.btnDashboard.clicked.connect(self.navigate_page)
+        self.ui.btnScan.clicked.connect(self.navigate_page)
+        self.ui.btnSuspicious.clicked.connect(self.navigate_page)
+        self.ui.btnAnalyze.clicked.connect(self.navigate_page)
+        self.ui.btnAttack.clicked.connect(self.navigate_page)
+
+        # Start on dashboard page
+        self.ui.stackedWidget.setCurrentWidget(self.dashboard_page)
+
+        # Connect signals between pages
+        self.dashboard_page.scan_data.connect(self.scan_page.update_scan_results)
+        self.dashboard_page.suspicious_data.connect(self.suspicious_page.update_suspicious_networks)
+        self.scan_page.analyze_data.connect(self.analyze_page.analyze_network)
+        # self.scan_page.bssid_attacked.connect(self.attack_page.attack_network)
+
+        self.navigate_page()
+
+    # Navigation logic for sidebar buttons
+    def navigate_page(self):
+        sender = self.sender()
+
+        if sender == self.ui.btnDashboard:
+            self.ui.stackedWidget.setCurrentWidget(self.dashboard_page)
+
+        elif sender == self.ui.btnScan:
+            self.ui.stackedWidget.setCurrentWidget(self.scan_page)
+
+        elif sender == self.ui.btnSuspicious:
+            self.ui.stackedWidget.setCurrentWidget(self.suspicious_page)
+
+        elif sender == self.ui.btnAnalyze:
+            self.ui.stackedWidget.setCurrentWidget(self.analyze_page)
+
+        elif sender == self.ui.btnAttack:
+            self.ui.stackedWidget.setCurrentWidget(self.attack_page)
+
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec())
