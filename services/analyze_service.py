@@ -201,8 +201,3 @@ class AnalyzeService:
             "rating": rating,
             "analysis": {"pros": pros, "cons": cons},
         }
-
-
-# service = AnalyzeService("b8:29:03:02:d5:a8", "wlp1s0")
-# service = AnalyzeService("cc:71:90:d6:04:49", "wlp1s0")
-# print(service.analyze()[0])
