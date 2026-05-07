@@ -1,50 +1,73 @@
-class EvaluateSecurity():
-    def __init__(self):
-        pass
+def evaluate_security(details):
+    # Lấy các chuỗi cấu hình để quét keyword
+    wpa_info = str(details.get("WPA", "")).upper()
+    rsn_info = str(details.get("RSN", "")).upper()
+    wps_info = str(details.get("WPS", "")).upper()
+    cap_info = str(details.get("capability", "")).upper()
 
-def evaluate_security(self, sec, wpa_flags="", rsn_flags=""):
-        sec = sec.upper()
-        flags = (wpa_flags + " " + rsn_flags).upper()
+    all_info = f"{wpa_info} {rsn_info} {wps_info} {cap_info}"
 
-        # 1. Mạng Open (nmcli trả về "--")
-        if "--" in sec or sec.strip() == "":
-            return "Critical (Open Network - No Encryption)"
+    # 1. Kiểm tra WPS (Rủi ro cực cao)
+    has_wps = "WPS" in details or "WI-FI PROTECTED SETUP" in all_info
+    wps_suffix = " [WPS Enabled - High Vulnerability]" if has_wps else ""
 
-        # 2. WEP (Rất yếu)
-        if "WEP" in sec:
-            return "Critical (WEP)"
+    # 2. Kiểm tra Management Frame Protection (MFP)
+    has_mfp = "MFP-CAPABLE" in all_info or "MFP-REQUIRED" in all_info
+    mfp_bonus = " (MFP Protected)" if has_mfp else ""
 
-        # 3. WPA 1
-        # nmcli có thể ghi là "WPA1" hoặc chỉ "WPA"
-        is_wpa1 = "WPA1" in sec or (
-            "WPA" in sec and "WPA2" not in sec and "WPA3" not in sec
-        )
+    # 3. Mạng Open hoặc WEP
+    # Nếu không có Privacy flag trong capability -> Open
+    if "PRIVACY" not in cap_info:
+        return "Critical (Open Network - No Encryption)"
 
-        if is_wpa1:
-            if "WPA2" in sec:
-                if "TKIP" in flags:
-                    return "Critical (Mixed WPA1/WPA2 + TKIP)"
-                return "High Risk (Mixed WPA1/WPA2)"
-            return "High Risk (WPA1)"
+    # Nếu có Privacy nhưng không có WPA/RSN block -> Khả năng cao là WEP
+    if "WPA" not in details and "RSN" not in details:
+        return "Critical (WEP - Legacy/Broken)"
 
-        # 4. WPA2
-        if "WPA2" in sec:
-            # Kiểm tra TKIP trong WPA2
-            if "TKIP" in flags:
-                return "High Risk (WPA2 with TKIP)"
+    # 4. Phân tích chuẩn mã hóa mạnh nhất
+    # SAE = WPA3
+    is_wpa3 = "SAE" in rsn_info
 
-            # Nếu có cả WPA3 hoặc SAE thì là Transition Mode
-            if "WPA3" in sec or "SAE" in sec:
-                return "Medium Risk (WPA3 Transition Mode)"
+    # RSN = WPA2, WPA = WPA1
+    has_rsn = (
+        "RSN" in details or "VERSION: 1" in rsn_info
+    )  # iw dùng RSN Version 1 cho WPA2
+    has_wpa1 = "WPA" in details and "VERSION: 1" in wpa_info
 
-            # Kiểm tra Enterprise
-            if "802.1X" in sec:
-                return "Low Risk (WPA2 Enterprise)"
+    # 5. Kiểm tra Cipher (TKIP là điểm yếu chết người)
+    has_tkip = "TKIP" in all_info
+    has_ccmp = "CCMP" in all_info or "AES" in all_info
 
-            return "Medium Risk (WPA2-PSK AES)"
+    # --- PHÂN LOẠI KẾT QUẢ ---
 
-        # 5. WPA3
-        if "WPA3" in sec or "SAE" in sec:
-            return "Low Risk (WPA3)"
+    # Trường hợp WPA3
+    if is_wpa3:
+        if has_wpa1 or (has_rsn and "PSK" in rsn_info):
+            return f"Low-Medium Risk (WPA3 Transition Mode){mfp_bonus}{wps_suffix}"
+        return f"Very Low Risk (WPA3-SAE Only){mfp_bonus}{wps_suffix}"
 
-        return "Unknown Security"
+    # Trường hợp Mixed Mode WPA1/WPA2
+    if has_rsn and has_wpa1:
+        if has_tkip:
+            return f"Critical (Mixed WPA1/WPA2 + TKIP){wps_suffix}"
+        return f"High Risk (Mixed WPA1/WPA2 AES){wps_suffix}"
+
+    # Trường hợp WPA2 (RSN)
+    if has_rsn:
+        # Kiểm tra Enterprise
+        if "802.1X" in all_info or "IEEE8021X" in all_info or "EAP" in all_info:
+            return f"Low Risk (WPA2 Enterprise){mfp_bonus}{wps_suffix}"
+
+        # WPA2-PSK với TKIP
+        if has_tkip and not has_ccmp:
+            return f"Critical (WPA2 with TKIP Only){wps_suffix}"
+        if has_tkip and has_ccmp:
+            return f"High Risk (WPA2 TKIP/AES Mixed){wps_suffix}"
+
+        return f"Medium Risk (WPA2-PSK AES){mfp_bonus}{wps_suffix}"
+
+    # Trường hợp WPA1 Legacy
+    if has_wpa1:
+        return f"High Risk (WPA1 Legacy){wps_suffix}"
+
+    return f"Unknown Security (Manual Check Required: {cap_info}){wps_suffix}"

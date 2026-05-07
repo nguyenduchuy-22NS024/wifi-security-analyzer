@@ -1,63 +1,124 @@
 from collections import defaultdict
 
+def detect_suspicious_networks(networks):
+    ssid_groups = defaultdict(list)
+    for ap in networks:
+        ssid = ap.get("ssid") or ap.get("details", {}).get("SSID")
+        if ssid:
+            ssid_groups[ssid].append(ap)
 
-class DetectSuspiciousAps:
+    suspicious_results = []
 
-    def __init__(self, networks):
-        self.networks = networks
+    for ssid, aps in ssid_groups.items():
+        if len(aps) <= 1:
+            continue
 
-    def detect(self):
-        ssid_groups = defaultdict(list)
+        reasons = []
+        risk_score = 0
 
-        # Group by SSID
-        for ap in self.networks:
-            if ap["ssid"]:
-                ssid_groups[ap["ssid"]].append(ap)
+        # --- Rule 1: Security/Cipher Mismatch (Trọng số rất cao) ---
+        # Kiểm tra xem có cái dùng WPA2, cái dùng Open không
+        securities = set()
+        for ap in aps:
+            dtl = ap.get("details", {})
+            sec_type = "Open"
+            if "RSN" in dtl or "WPA" in dtl:
+                sec_type = "WPA2/WPA3"
+            securities.add(sec_type)
 
-        suspicious_results = []
+        if len(securities) > 1:
+            reasons.append(f"Security mismatch: {securities}")
+            risk_score += 50
 
-        for ssid, aps in ssid_groups.items():
-            if len(aps) <= 1:
-                continue
+        # --- Rule 2: TSF Anomaly (Uptime chênh lệch quá lớn) ---
+        tsf_values = []
+        for ap in aps:
+            tsf = ap.get("details", {}).get("TSF")
+            if tsf:
+                # TSF format: "4450268683052 usec (51d, 12:11:08)"
+                # Lấy phần số usec đầu tiên
+                try:
+                    val = int(tsf.split()[0])
+                    tsf_values.append(val)
+                except:
+                    pass
 
-            reasons = []
-
-            # --- Rule 1: Multiple BSSID
-            bssids = set(ap["bssid"] for ap in aps)
-            if len(bssids) > 1:
-                reasons.append("Multiple BSSID")
-
-            # --- Rule 2: Security mismatch
-            securities = set(ap["security"] for ap in aps)
-            if len(securities) > 1:
-                reasons.append("Security mismatch")
-
-            # --- Rule 3: Channel/Freq anomaly
-            chans = [int(ap["chan"]) for ap in aps if ap["chan"].isdigit()]
-            if "5G" in ssid and any(c <= 14 for c in chans):
-                reasons.append("5G SSID on 2.4GHz channel")
-
-            # --- Rule 4: Vendor mismatch (OUI)
-            def get_oui(bssid):
-                return bssid[:8]
-
-            ouis = set(get_oui(ap["bssid"]) for ap in aps)
-            if len(ouis) > 1:
-                reasons.append("Different vendors (OUI mismatch)")
-
-            # --- Rule 5: Signal anomaly
-            signals = [int(ap["signal"]) for ap in aps]
-            if max(signals) - min(signals) > 30:
-                reasons.append("Abnormal signal difference")
-
-            # Classify risk level
-            if len(reasons) >= 2:
-                suspicious_results.append(
-                    {"ssid": ssid, "risk": "High", "reasons": reasons, "aps": aps}
+        if len(tsf_values) > 1:
+            uptime_diff_days = (max(tsf_values) - min(tsf_values)) / (10**6 * 3600 * 24)
+            if uptime_diff_days > 7:  # Chênh lệch hơn 7 ngày uptime
+                reasons.append(
+                    f"Uptime mismatch: {uptime_diff_days:.1f} days difference"
                 )
-            elif len(reasons) == 1:
-                suspicious_results.append(
-                    {"ssid": ssid, "risk": "Medium", "reasons": reasons, "aps": aps}
-                )
+                risk_score += 20
 
-        return suspicious_results
+        # --- Rule 3: Capability Mismatch (HT/VHT/HE) ---
+        # Kiểm tra chuẩn WiFi (WiFi 4/5/6)
+        standards = set()
+        for ap in aps:
+            dtl = ap.get("details", {})
+            if "HE capabilities" in dtl:
+                standards.add("WiFi 6 (HE)")
+            elif "VHT capabilities" in dtl:
+                standards.add("WiFi 5 (VHT)")
+            elif "HT capabilities" in dtl:
+                standards.add("WiFi 4 (HT)")
+
+        if len(standards) > 1:
+            reasons.append(f"Standard mismatch: {list(standards)}")
+            risk_score += 30
+
+        # --- Rule 4: Vendor (OUI) Mismatch ---
+        ouis = set(ap["bssid"].upper()[:8] for ap in aps)
+        if len(ouis) > 1:
+            reasons.append(f"Different vendors (OUI): {list(ouis)}")
+            risk_score += 25
+
+        # --- Rule 5: Country Code Mismatch ---
+        countries = set()
+        for ap in aps:
+            c = ap.get("details", {}).get("Country", {}).get("Code")
+            if c:
+                countries.add(c)
+
+        if len(countries) > 1:
+            reasons.append(f"Country code mismatch: {countries}")
+            risk_score += 15
+
+        # --- Rule 6: Signal & Channel Anomaly ---
+        for ap in aps:
+            freq = float(ap.get("details", {}).get("freq", 0))
+            # Nếu tên có "5G" mà freq < 3000MHz (2.4GHz)
+            if "5G" in ssid.upper() and freq < 3000:
+                reasons.append(
+                    f"5G SSID on 2.4GHz freq ({freq}MHz) at BSSID {ap['bssid']}"
+                )
+                risk_score += 40
+
+        # Phân loại rủi ro dựa trên tổng điểm
+        if risk_score > 0:
+            risk_level = "Low"
+            if risk_score >= 60:
+                risk_level = "Critical"
+            elif risk_score >= 40:
+                risk_level = "High"
+            elif risk_score >= 20:
+                risk_level = "Medium"
+
+            suspicious_results.append(
+                {
+                    "ssid": ssid,
+                    "risk_level": risk_level,
+                    "score": risk_score,
+                    "reasons": reasons,
+                    "ap_details": [
+                        {
+                            "bssid": a["bssid"],
+                            "freq": a.get("details", {}).get("freq"),
+                            "signal": a.get("details", {}).get("signal"),
+                        }
+                        for a in aps
+                    ],
+                }
+            )
+
+    return suspicious_results

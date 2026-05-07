@@ -310,6 +310,12 @@
               </property>
               <item>
                <widget class="QFrame" name="frInfoScore">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>192</height>
+                 </size>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
@@ -318,12 +324,12 @@
                 </property>
                 <property name="styleSheet">
                  <string notr="true">#lblInfoScoreHeader {
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: bold;
 }</string>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Shape::StyledPanel</enum>
+                 <enum>QFrame::Shape::NoFrame</enum>
                 </property>
                 <property name="frameShadow">
                  <enum>QFrame::Shadow::Raised</enum>
@@ -360,7 +366,7 @@
                  <item>
                   <widget class="QFrame" name="frInfoScoreContent">
                    <property name="frameShape">
-                    <enum>QFrame::Shape::StyledPanel</enum>
+                    <enum>QFrame::Shape::NoFrame</enum>
                    </property>
                    <property name="frameShadow">
                     <enum>QFrame::Shadow::Raised</enum>
@@ -375,13 +381,16 @@
                     <property name="topMargin">
                      <number>0</number>
                     </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
                     <property name="bottomMargin">
                      <number>0</number>
                     </property>
                     <item>
                      <widget class="QFrame" name="frInfo">
                       <property name="frameShape">
-                       <enum>QFrame::Shape::StyledPanel</enum>
+                       <enum>QFrame::Shape::NoFrame</enum>
                       </property>
                       <property name="frameShadow">
                        <enum>QFrame::Shadow::Raised</enum>
@@ -397,20 +406,40 @@
                         <number>0</number>
                        </property>
                        <property name="rightMargin">
-                        <number>8</number>
+                        <number>0</number>
                        </property>
                        <property name="bottomMargin">
                         <number>0</number>
                        </property>
                        <item>
                         <widget class="QFrame" name="frInfo1">
+                         <property name="styleSheet">
+                          <string notr="true">#lblSSID, #lblBSSID, #lblSecurity, #lblFreqChan, #lblInterface, #lblScore {
+	font-size: 16px;
+}</string>
+                         </property>
                          <property name="frameShape">
-                          <enum>QFrame::Shape::StyledPanel</enum>
+                          <enum>QFrame::Shape::NoFrame</enum>
                          </property>
                          <property name="frameShadow">
                           <enum>QFrame::Shadow::Raised</enum>
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_4">
+                          <property name="spacing">
+                           <number>0</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
                           <item>
                            <widget class="QLabel" name="lblSSID">
                             <property name="text">
@@ -437,13 +466,33 @@
                        </item>
                        <item>
                         <widget class="QFrame" name="frInfo2">
+                         <property name="styleSheet">
+                          <string notr="true">#lblSSID, #lblBSSID, #lblSecurity, #lblFreqChan, #lblInterface, #lblScore {
+	font-size: 16px;
+}</string>
+                         </property>
                          <property name="frameShape">
-                          <enum>QFrame::Shape::StyledPanel</enum>
+                          <enum>QFrame::Shape::NoFrame</enum>
                          </property>
                          <property name="frameShadow">
                           <enum>QFrame::Shadow::Raised</enum>
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_5">
+                          <property name="spacing">
+                           <number>0</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
                           <item>
                            <widget class="QLabel" name="lblFreqChan">
                             <property name="text">
@@ -480,7 +529,7 @@
                        </size>
                       </property>
                       <property name="frameShape">
-                       <enum>QFrame::Shape::StyledPanel</enum>
+                       <enum>QFrame::Shape::NoFrame</enum>
                       </property>
                       <property name="frameShadow">
                        <enum>QFrame::Shadow::Raised</enum>
@@ -495,19 +544,46 @@
               </item>
               <item>
                <widget class="QFrame" name="frDetails">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>250</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>250</height>
+                 </size>
+                </property>
                 <property name="styleSheet">
                  <string notr="true">#lblDetailsHeader {
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: bold;
 }</string>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Shape::StyledPanel</enum>
+                 <enum>QFrame::Shape::NoFrame</enum>
                 </property>
                 <property name="frameShadow">
                  <enum>QFrame::Shadow::Raised</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_7">
+                 <property name="spacing">
+                  <number>4</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>8</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>8</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>8</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>8</number>
+                 </property>
                  <item>
                   <widget class="QLabel" name="lblDetailsHeader">
                    <property name="maximumSize">
@@ -524,11 +600,50 @@
                  <item>
                   <widget class="QFrame" name="frDetailsContent">
                    <property name="frameShape">
-                    <enum>QFrame::Shape::StyledPanel</enum>
+                    <enum>QFrame::Shape::NoFrame</enum>
                    </property>
                    <property name="frameShadow">
                     <enum>QFrame::Shadow::Raised</enum>
                    </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_11">
+                    <property name="spacing">
+                     <number>4</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QTreeWidget" name="treeWidget">
+                      <column>
+                       <property name="text">
+                        <string>Property</string>
+                       </property>
+                      </column>
+                      <column>
+                       <property name="text">
+                        <string>Value</string>
+                       </property>
+                      </column>
+                      <item>
+                       <property name="text">
+                        <string>1</string>
+                       </property>
+                       <property name="text">
+                        <string>2</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                   </layout>
                   </widget>
                  </item>
                 </layout>
@@ -538,17 +653,20 @@
                <widget class="QFrame" name="frSummary">
                 <property name="styleSheet">
                  <string notr="true">#lblSummaryHeader {
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: bold;
 }</string>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Shape::StyledPanel</enum>
+                 <enum>QFrame::Shape::NoFrame</enum>
                 </property>
                 <property name="frameShadow">
                  <enum>QFrame::Shadow::Raised</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_8">
+                 <property name="spacing">
+                  <number>4</number>
+                 </property>
                  <item>
                   <widget class="QLabel" name="lblSummaryHeader">
                    <property name="maximumSize">
@@ -565,7 +683,7 @@
                  <item>
                   <widget class="QFrame" name="frSummaryContent">
                    <property name="frameShape">
-                    <enum>QFrame::Shape::StyledPanel</enum>
+                    <enum>QFrame::Shape::NoFrame</enum>
                    </property>
                    <property name="frameShadow">
                     <enum>QFrame::Shadow::Raised</enum>
@@ -590,17 +708,32 @@
                      <widget class="QFrame" name="frPros">
                       <property name="styleSheet">
                        <string notr="true">#lblProsHeader {
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 600;
 }</string>
                       </property>
                       <property name="frameShape">
-                       <enum>QFrame::Shape::StyledPanel</enum>
+                       <enum>QFrame::Shape::NoFrame</enum>
                       </property>
                       <property name="frameShadow">
                        <enum>QFrame::Shadow::Raised</enum>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_10">
+                       <property name="spacing">
+                        <number>4</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
                        <item>
                         <widget class="QLabel" name="lblProsHeader">
                          <property name="maximumSize">
@@ -617,11 +750,35 @@
                        <item>
                         <widget class="QFrame" name="frProsContent">
                          <property name="frameShape">
-                          <enum>QFrame::Shape::StyledPanel</enum>
+                          <enum>QFrame::Shape::NoFrame</enum>
                          </property>
                          <property name="frameShadow">
                           <enum>QFrame::Shadow::Raised</enum>
                          </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_12">
+                          <property name="spacing">
+                           <number>4</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="label_2">
+                            <property name="text">
+                             <string>Content</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
                         </widget>
                        </item>
                       </layout>
@@ -631,17 +788,32 @@
                      <widget class="QFrame" name="frCons">
                       <property name="styleSheet">
                        <string notr="true">#lblConsHeader {
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 600;
 }</string>
                       </property>
                       <property name="frameShape">
-                       <enum>QFrame::Shape::StyledPanel</enum>
+                       <enum>QFrame::Shape::NoFrame</enum>
                       </property>
                       <property name="frameShadow">
                        <enum>QFrame::Shadow::Raised</enum>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_9">
+                       <property name="spacing">
+                        <number>4</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
                        <item>
                         <widget class="QLabel" name="lblConsHeader">
                          <property name="maximumSize">
@@ -658,11 +830,35 @@
                        <item>
                         <widget class="QFrame" name="frConsContent">
                          <property name="frameShape">
-                          <enum>QFrame::Shape::StyledPanel</enum>
+                          <enum>QFrame::Shape::NoFrame</enum>
                          </property>
                          <property name="frameShadow">
                           <enum>QFrame::Shadow::Raised</enum>
                          </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_13">
+                          <property name="spacing">
+                           <number>4</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="label_3">
+                            <property name="text">
+                             <string>Content</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
                         </widget>
                        </item>
                       </layout>

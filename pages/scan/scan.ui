@@ -332,8 +332,11 @@
                  <enum>Qt::PenStyle::DashDotDotLine</enum>
                 </property>
                 <property name="sortingEnabled">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
+                <attribute name="horizontalHeaderStretchLastSection">
+                 <bool>false</bool>
+                </attribute>
                 <row>
                  <property name="text">
                   <string>New Row</string>
@@ -341,12 +344,12 @@
                 </row>
                 <column>
                  <property name="text">
-                  <string>SSID</string>
+                  <string>IN-USE</string>
                  </property>
                 </column>
                 <column>
                  <property name="text">
-                  <string>SSID-HEX</string>
+                  <string>SSID</string>
                  </property>
                 </column>
                 <column>
@@ -356,37 +359,7 @@
                 </column>
                 <column>
                  <property name="text">
-                  <string>MODE</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>CHANNEL</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>FREQUENCY</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>RATE</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>BANDWIDTH</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
                   <string>SIGNAL</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>SIGNAL LEVEL</string>
                  </property>
                 </column>
                 <column>
@@ -396,50 +369,22 @@
                 </column>
                 <column>
                  <property name="text">
+                  <string>CHANNEL</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>BANDWIDTH</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
                   <string>SECURITY</string>
                  </property>
                 </column>
-                <column>
-                 <property name="text">
-                  <string>SECURITY LEVEL</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>WPA-FLAGS</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>RSN-FLAGS</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>ACTIVE</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>IN-USE</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>INTERFACE</string>
-                 </property>
-                </column>
-                <item row="0" column="0">
-                 <property name="text">
-                  <string/>
-                 </property>
-                </item>
                 <item row="0" column="1">
                  <property name="text">
                   <string/>
-                 </property>
-                 <property name="flags">
-                  <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
                  </property>
                 </item>
                </widget>

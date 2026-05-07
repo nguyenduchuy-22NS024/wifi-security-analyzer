@@ -40,9 +40,9 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentWidget(self.dashboard_page)
 
         # Connect signals between pages
-        self.dashboard_page.scan_data.connect(self.scan_page.update_scan_results)
-        self.dashboard_page.suspicious_data.connect(self.suspicious_page.update_suspicious_networks)
-        self.scan_page.analyze_data.connect(self.analyze_page.analyze_network)
+        self.dashboard_page.networks_data.connect(self.scan_page.update_scan_results)
+        self.dashboard_page.networks_data.connect(self.suspicious_page.update_suspicious_results)
+        self.scan_page.analyze_bssid.connect(self.analyze_page.update_analyze_results)
         # self.scan_page.bssid_attacked.connect(self.attack_page.attack_network)
 
         self.navigate_page()

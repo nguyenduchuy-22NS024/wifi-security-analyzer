@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QSizePolicy, QSpacerItem, QStackedWidget, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QHeaderView,
+    QLabel, QSizePolicy, QSpacerItem, QStackedWidget,
+    QTreeWidget, QTreeWidgetItem, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_Form(object):
@@ -140,12 +140,13 @@ class Ui_Form(object):
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.frInfoScore = QFrame(self.frData)
         self.frInfoScore.setObjectName(u"frInfoScore")
+        self.frInfoScore.setMinimumSize(QSize(0, 192))
         self.frInfoScore.setMaximumSize(QSize(16777215, 192))
         self.frInfoScore.setStyleSheet(u"#lblInfoScoreHeader {\n"
-"	font-size: 20px;\n"
+"	font-size: 16px;\n"
 "	font-weight: bold;\n"
 "}")
-        self.frInfoScore.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frInfoScore.setFrameShape(QFrame.Shape.NoFrame)
         self.frInfoScore.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_6 = QVBoxLayout(self.frInfoScore)
         self.verticalLayout_6.setSpacing(4)
@@ -159,26 +160,31 @@ class Ui_Form(object):
 
         self.frInfoScoreContent = QFrame(self.frInfoScore)
         self.frInfoScoreContent.setObjectName(u"frInfoScoreContent")
-        self.frInfoScoreContent.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frInfoScoreContent.setFrameShape(QFrame.Shape.NoFrame)
         self.frInfoScoreContent.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_5 = QHBoxLayout(self.frInfoScoreContent)
         self.horizontalLayout_5.setSpacing(4)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.horizontalLayout_5.setContentsMargins(0, 0, -1, 0)
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.frInfo = QFrame(self.frInfoScoreContent)
         self.frInfo.setObjectName(u"frInfo")
-        self.frInfo.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frInfo.setFrameShape(QFrame.Shape.NoFrame)
         self.frInfo.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_10 = QHBoxLayout(self.frInfo)
         self.horizontalLayout_10.setSpacing(4)
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
-        self.horizontalLayout_10.setContentsMargins(0, 0, 8, 0)
+        self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
         self.frInfo1 = QFrame(self.frInfo)
         self.frInfo1.setObjectName(u"frInfo1")
-        self.frInfo1.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frInfo1.setStyleSheet(u"#lblSSID, #lblBSSID, #lblSecurity, #lblFreqChan, #lblInterface, #lblScore {\n"
+"	font-size: 16px;\n"
+"}")
+        self.frInfo1.setFrameShape(QFrame.Shape.NoFrame)
         self.frInfo1.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_4 = QVBoxLayout(self.frInfo1)
+        self.verticalLayout_4.setSpacing(0)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.lblSSID = QLabel(self.frInfo1)
         self.lblSSID.setObjectName(u"lblSSID")
 
@@ -199,10 +205,15 @@ class Ui_Form(object):
 
         self.frInfo2 = QFrame(self.frInfo)
         self.frInfo2.setObjectName(u"frInfo2")
-        self.frInfo2.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frInfo2.setStyleSheet(u"#lblSSID, #lblBSSID, #lblSecurity, #lblFreqChan, #lblInterface, #lblScore {\n"
+"	font-size: 16px;\n"
+"}")
+        self.frInfo2.setFrameShape(QFrame.Shape.NoFrame)
         self.frInfo2.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_5 = QVBoxLayout(self.frInfo2)
+        self.verticalLayout_5.setSpacing(0)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.lblFreqChan = QLabel(self.frInfo2)
         self.lblFreqChan.setObjectName(u"lblFreqChan")
 
@@ -227,7 +238,7 @@ class Ui_Form(object):
         self.frScore = QFrame(self.frInfoScoreContent)
         self.frScore.setObjectName(u"frScore")
         self.frScore.setMaximumSize(QSize(136, 136))
-        self.frScore.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frScore.setFrameShape(QFrame.Shape.NoFrame)
         self.frScore.setFrameShadow(QFrame.Shadow.Raised)
 
         self.horizontalLayout_5.addWidget(self.frScore)
@@ -240,14 +251,18 @@ class Ui_Form(object):
 
         self.frDetails = QFrame(self.frData)
         self.frDetails.setObjectName(u"frDetails")
+        self.frDetails.setMinimumSize(QSize(0, 250))
+        self.frDetails.setMaximumSize(QSize(16777215, 250))
         self.frDetails.setStyleSheet(u"#lblDetailsHeader {\n"
-"	font-size: 20px;\n"
+"	font-size: 16px;\n"
 "	font-weight: bold;\n"
 "}")
-        self.frDetails.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frDetails.setFrameShape(QFrame.Shape.NoFrame)
         self.frDetails.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_7 = QVBoxLayout(self.frDetails)
+        self.verticalLayout_7.setSpacing(4)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.verticalLayout_7.setContentsMargins(8, 8, 8, 8)
         self.lblDetailsHeader = QLabel(self.frDetails)
         self.lblDetailsHeader.setObjectName(u"lblDetailsHeader")
         self.lblDetailsHeader.setMaximumSize(QSize(16777215, 32))
@@ -256,8 +271,18 @@ class Ui_Form(object):
 
         self.frDetailsContent = QFrame(self.frDetails)
         self.frDetailsContent.setObjectName(u"frDetailsContent")
-        self.frDetailsContent.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frDetailsContent.setFrameShape(QFrame.Shape.NoFrame)
         self.frDetailsContent.setFrameShadow(QFrame.Shadow.Raised)
+        self.verticalLayout_11 = QVBoxLayout(self.frDetailsContent)
+        self.verticalLayout_11.setSpacing(4)
+        self.verticalLayout_11.setObjectName(u"verticalLayout_11")
+        self.verticalLayout_11.setContentsMargins(0, 0, 0, 0)
+        self.treeWidget = QTreeWidget(self.frDetailsContent)
+        QTreeWidgetItem(self.treeWidget)
+        self.treeWidget.setObjectName(u"treeWidget")
+
+        self.verticalLayout_11.addWidget(self.treeWidget)
+
 
         self.verticalLayout_7.addWidget(self.frDetailsContent)
 
@@ -267,12 +292,13 @@ class Ui_Form(object):
         self.frSummary = QFrame(self.frData)
         self.frSummary.setObjectName(u"frSummary")
         self.frSummary.setStyleSheet(u"#lblSummaryHeader {\n"
-"	font-size: 20px;\n"
+"	font-size: 16px;\n"
 "	font-weight: bold;\n"
 "}")
-        self.frSummary.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frSummary.setFrameShape(QFrame.Shape.NoFrame)
         self.frSummary.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_8 = QVBoxLayout(self.frSummary)
+        self.verticalLayout_8.setSpacing(4)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.lblSummaryHeader = QLabel(self.frSummary)
         self.lblSummaryHeader.setObjectName(u"lblSummaryHeader")
@@ -282,7 +308,7 @@ class Ui_Form(object):
 
         self.frSummaryContent = QFrame(self.frSummary)
         self.frSummaryContent.setObjectName(u"frSummaryContent")
-        self.frSummaryContent.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frSummaryContent.setFrameShape(QFrame.Shape.NoFrame)
         self.frSummaryContent.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_7 = QHBoxLayout(self.frSummaryContent)
         self.horizontalLayout_7.setSpacing(4)
@@ -291,13 +317,15 @@ class Ui_Form(object):
         self.frPros = QFrame(self.frSummaryContent)
         self.frPros.setObjectName(u"frPros")
         self.frPros.setStyleSheet(u"#lblProsHeader {\n"
-"	font-size: 16px;\n"
+"	font-size: 14px;\n"
 "	font-weight: 600;\n"
 "}")
-        self.frPros.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frPros.setFrameShape(QFrame.Shape.NoFrame)
         self.frPros.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_10 = QVBoxLayout(self.frPros)
+        self.verticalLayout_10.setSpacing(4)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
+        self.verticalLayout_10.setContentsMargins(0, 0, 0, 0)
         self.lblProsHeader = QLabel(self.frPros)
         self.lblProsHeader.setObjectName(u"lblProsHeader")
         self.lblProsHeader.setMaximumSize(QSize(16777215, 24))
@@ -306,8 +334,17 @@ class Ui_Form(object):
 
         self.frProsContent = QFrame(self.frPros)
         self.frProsContent.setObjectName(u"frProsContent")
-        self.frProsContent.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frProsContent.setFrameShape(QFrame.Shape.NoFrame)
         self.frProsContent.setFrameShadow(QFrame.Shadow.Raised)
+        self.verticalLayout_12 = QVBoxLayout(self.frProsContent)
+        self.verticalLayout_12.setSpacing(4)
+        self.verticalLayout_12.setObjectName(u"verticalLayout_12")
+        self.verticalLayout_12.setContentsMargins(0, 0, 0, 0)
+        self.label_2 = QLabel(self.frProsContent)
+        self.label_2.setObjectName(u"label_2")
+
+        self.verticalLayout_12.addWidget(self.label_2)
+
 
         self.verticalLayout_10.addWidget(self.frProsContent)
 
@@ -317,13 +354,15 @@ class Ui_Form(object):
         self.frCons = QFrame(self.frSummaryContent)
         self.frCons.setObjectName(u"frCons")
         self.frCons.setStyleSheet(u"#lblConsHeader {\n"
-"	font-size: 16px;\n"
+"	font-size: 14px;\n"
 "	font-weight: 600;\n"
 "}")
-        self.frCons.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frCons.setFrameShape(QFrame.Shape.NoFrame)
         self.frCons.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_9 = QVBoxLayout(self.frCons)
+        self.verticalLayout_9.setSpacing(4)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
+        self.verticalLayout_9.setContentsMargins(0, 0, 0, 0)
         self.lblConsHeader = QLabel(self.frCons)
         self.lblConsHeader.setObjectName(u"lblConsHeader")
         self.lblConsHeader.setMaximumSize(QSize(16777215, 24))
@@ -332,8 +371,17 @@ class Ui_Form(object):
 
         self.frConsContent = QFrame(self.frCons)
         self.frConsContent.setObjectName(u"frConsContent")
-        self.frConsContent.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frConsContent.setFrameShape(QFrame.Shape.NoFrame)
         self.frConsContent.setFrameShadow(QFrame.Shadow.Raised)
+        self.verticalLayout_13 = QVBoxLayout(self.frConsContent)
+        self.verticalLayout_13.setSpacing(4)
+        self.verticalLayout_13.setObjectName(u"verticalLayout_13")
+        self.verticalLayout_13.setContentsMargins(0, 0, 0, 0)
+        self.label_3 = QLabel(self.frConsContent)
+        self.label_3.setObjectName(u"label_3")
+
+        self.verticalLayout_13.addWidget(self.label_3)
+
 
         self.verticalLayout_9.addWidget(self.frConsContent)
 
@@ -379,8 +427,21 @@ class Ui_Form(object):
         self.lblInterface.setText(QCoreApplication.translate("Form", u"TextLabel", None))
         self.lblScore.setText(QCoreApplication.translate("Form", u"TextLabel", None))
         self.lblDetailsHeader.setText(QCoreApplication.translate("Form", u"Details:", None))
+        ___qtreewidgetitem = self.treeWidget.headerItem()
+        ___qtreewidgetitem.setText(1, QCoreApplication.translate("Form", u"Value", None))
+        ___qtreewidgetitem.setText(0, QCoreApplication.translate("Form", u"Property", None))
+
+        __sortingEnabled = self.treeWidget.isSortingEnabled()
+        self.treeWidget.setSortingEnabled(False)
+        ___qtreewidgetitem1 = self.treeWidget.topLevelItem(0)
+        ___qtreewidgetitem1.setText(1, QCoreApplication.translate("Form", u"2", None))
+        ___qtreewidgetitem1.setText(0, QCoreApplication.translate("Form", u"1", None))
+        self.treeWidget.setSortingEnabled(__sortingEnabled)
+
         self.lblSummaryHeader.setText(QCoreApplication.translate("Form", u"Summary:", None))
         self.lblProsHeader.setText(QCoreApplication.translate("Form", u"Good:", None))
+        self.label_2.setText(QCoreApplication.translate("Form", u"Content", None))
         self.lblConsHeader.setText(QCoreApplication.translate("Form", u"Bad:", None))
+        self.label_3.setText(QCoreApplication.translate("Form", u"Content", None))
     # retranslateUi
 

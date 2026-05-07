@@ -1,0 +1,981 @@
+[
+    {
+        "bssid": "cc:71:90:d6:04:49",
+        "interface": "wlp1s0",
+        "associated": true,
+        "details": {
+            "last seen": [
+                "8463.584s [boottime]",
+                "2671 ms ago"
+            ],
+            "TSF": "4450268683052 usec (51d, 12:11:08)",
+            "freq": "5180.0",
+            "beacon interval": "100 TUs",
+            "capability": "ESS Privacy RadioMeasure (0x1011)",
+            "signal": "-42.00 dBm",
+            "Information elements from Probe Response frame": {},
+            "SSID": "P419 5G",
+            "Supported rates": "6.0* 9.0 12.0* 18.0 24.0* 36.0 48.0 54.0",
+            "DS Parameter set": "channel 36",
+            "HT capabilities": {
+                "Capabilities": {
+                    "info": "0x1af",
+                    "flags": [
+                        "RX LDPC",
+                        "HT20/HT40",
+                        "SM Power Save disabled",
+                        "RX HT20 SGI",
+                        "TX STBC",
+                        "RX STBC 1-stream",
+                        "No DSSS/CCK HT40"
+                    ],
+                    "Max AMSDU length": "3839 bytes"
+                },
+                "Maximum RX AMPDU length 65535 bytes (exponent": "0x003)",
+                "Minimum RX AMPDU time spacing": "4 usec (0x05)",
+                "HT RX MCS rate indexes supported": "0-15",
+                "flags": [
+                    "HT TX MCS rate indexes are undefined"
+                ]
+            },
+            "HT operation": {
+                "primary channel": "36",
+                "secondary channel offset": "above",
+                "STA channel width": "any",
+                "RIFS": "0",
+                "HT protection": "20 MHz",
+                "non-GF present": "1",
+                "OBSS non-GF present": "0",
+                "dual beacon": "0",
+                "dual CTS protection": "0",
+                "STBC beacon": "0",
+                "L-SIG TXOP Prot": "0",
+                "PCO active": "0",
+                "PCO phase": "0"
+            },
+            "WPA": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK"
+            },
+            "RSN": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK",
+                "Capabilities": "1-PTKSA-RC 1-GTKSA-RC (0x0000)"
+            },
+            "Extended capabilities": {
+                "flags": [
+                    "BSS Transition",
+                    "Max Number Of MSDUs In A-MSDU is unlimited"
+                ]
+            },
+            "WMM": {
+                "info": "Parameter version 1",
+                "BE": "CW 15-1023, AIFSN 3",
+                "BK": "CW 15-1023, AIFSN 7",
+                "VI": "CW 7-15, AIFSN 2, TXOP 3008 usec",
+                "VO": "CW 3-7, AIFSN 2, TXOP 1504 usec"
+            },
+            "RM enabled capabilities": {
+                "Capabilities": {
+                    "info": "0x02 0x00 0x01 0x00 0x00",
+                    "flags": [
+                        "Neighbor Report",
+                        "AP Channel Report"
+                    ]
+                },
+                "Nonoperating Channel Max Measurement Duration": "0",
+                "Measurement Pilot Capability": "0"
+            },
+            "Power constraint": "3 dB",
+            "TPC report": "TX power: 63 dBm",
+            "Transmit Power Envelope": {
+                "Local Maximum Transmit Power For 20 MHz": "15 dBm",
+                "Local Maximum Transmit Power For 40 MHz": "15 dBm",
+                "Local Maximum Transmit Power For 80 MHz": "15 dBm"
+            },
+            "Country": {
+                "Code": "US",
+                "Environment": "Indoor/Outdoor",
+                "constraints": [
+                    "Channels [36 - 64] @ 30 dBm",
+                    "Channels [100 - 144] @ 30 dBm",
+                    "Channels [149 - 165] @ 30 dBm"
+                ]
+            },
+            "VHT capabilities": {
+                "VHT Capabilities (0x33c00031)": {
+                    "Max MPDU length": "7991",
+                    "Supported Channel Width": "neither 160 nor 80+80",
+                    "flags": [
+                        "RX LDPC",
+                        "short GI (80 MHz)",
+                        "+HTC-VHT",
+                        "RX antenna pattern consistency",
+                        "TX antenna pattern consistency"
+                    ]
+                },
+                "VHT RX MCS set": {
+                    "1 streams": "MCS 0-9",
+                    "2 streams": "MCS 0-9",
+                    "3 streams": "not supported",
+                    "4 streams": "not supported",
+                    "5 streams": "not supported",
+                    "6 streams": "not supported",
+                    "7 streams": "not supported",
+                    "8 streams": "not supported"
+                },
+                "VHT RX highest supported": "780 Mbps",
+                "VHT TX MCS set": {
+                    "1 streams": "MCS 0-9",
+                    "2 streams": "MCS 0-9",
+                    "3 streams": "not supported",
+                    "4 streams": "not supported",
+                    "5 streams": "not supported",
+                    "6 streams": "not supported",
+                    "7 streams": "not supported",
+                    "8 streams": "not supported"
+                },
+                "VHT TX highest supported": "780 Mbps",
+                "VHT extended NSS": "not supported"
+            },
+            "VHT operation": {
+                "channel width": "1 (80 MHz)",
+                "center freq segment 1": "42",
+                "center freq segment 2": "0",
+                "VHT basic MCS set": "0xfffa"
+            }
+        }
+    },
+    {
+        "bssid": "4c:12:e8:e8:21:38",
+        "interface": "wlp1s0",
+        "associated": false,
+        "details": {
+            "last seen": [
+                "8463.318s [boottime]",
+                "2937 ms ago"
+            ],
+            "TSF": "341686631191 usec (3d, 22:54:46)",
+            "freq": "2427.0",
+            "beacon interval": "100 TUs",
+            "capability": "ESS Privacy ShortSlotTime (0x0411)",
+            "signal": "-52.00 dBm",
+            "Information elements from Probe Response frame": {},
+            "SSID": "P420-2",
+            "Supported rates": "1.0* 2.0* 5.5* 11.0* 9.0 18.0 36.0 54.0",
+            "DS Parameter set": "channel 4",
+            "ERP": "Barker_Preamble_Mode",
+            "Extended supported rates": "6.0 12.0 24.0 48.0",
+            "HT capabilities": {
+                "Capabilities": {
+                    "info": "0x1ad",
+                    "flags": [
+                        "RX LDPC",
+                        "HT20",
+                        "SM Power Save disabled",
+                        "RX HT20 SGI",
+                        "TX STBC",
+                        "RX STBC 1-stream",
+                        "No DSSS/CCK HT40"
+                    ],
+                    "Max AMSDU length": "3839 bytes"
+                },
+                "Maximum RX AMPDU length 65535 bytes (exponent": "0x003)",
+                "Minimum RX AMPDU time spacing": "4 usec (0x05)",
+                "HT RX MCS rate indexes supported": "0-15",
+                "flags": [
+                    "HT TX MCS rate indexes are undefined"
+                ]
+            },
+            "HT operation": {
+                "primary channel": "4",
+                "secondary channel offset": "no secondary",
+                "STA channel width": "20 MHz",
+                "RIFS": "0",
+                "HT protection": "no",
+                "non-GF present": "1",
+                "OBSS non-GF present": "0",
+                "dual beacon": "0",
+                "dual CTS protection": "0",
+                "STBC beacon": "0",
+                "L-SIG TXOP Prot": "0",
+                "PCO active": "0",
+                "PCO phase": "0"
+            },
+            "WPA": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK"
+            },
+            "RSN": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK",
+                "Capabilities": "1-PTKSA-RC 1-GTKSA-RC (0x0000)"
+            },
+            "Extended capabilities": {
+                "flags": [
+                    "HT Information Exchange Supported",
+                    "BSS Transition"
+                ]
+            },
+            "WMM": {
+                "info": "Parameter version 1",
+                "BE": "CW 15-1023, AIFSN 3",
+                "BK": "CW 15-1023, AIFSN 7",
+                "VI": "CW 7-15, AIFSN 2, TXOP 3008 usec",
+                "VO": "CW 3-7, AIFSN 2, TXOP 1504 usec"
+            },
+            "Country": {
+                "Code": "US",
+                "Environment": "Indoor/Outdoor",
+                "constraints": [
+                    "Channels [1 - 11] @ 30 dBm"
+                ]
+            }
+        }
+    },
+    {
+        "bssid": "cc:71:90:8b:57:c1",
+        "interface": "wlp1s0",
+        "associated": false,
+        "details": {
+            "last seen": [
+                "8463.584s [boottime]",
+                "2671 ms ago"
+            ],
+            "TSF": "4097887917367 usec (47d, 10:18:07)",
+            "freq": "5180.0",
+            "beacon interval": "100 TUs",
+            "capability": "ESS Privacy RadioMeasure (0x1011)",
+            "signal": "-69.00 dBm",
+            "Information elements from Probe Response frame": {},
+            "SSID": "P306 5G",
+            "Supported rates": "6.0* 9.0 12.0* 18.0 24.0* 36.0 48.0 54.0",
+            "DS Parameter set": "channel 36",
+            "HT capabilities": {
+                "Capabilities": {
+                    "info": "0x1af",
+                    "flags": [
+                        "RX LDPC",
+                        "HT20/HT40",
+                        "SM Power Save disabled",
+                        "RX HT20 SGI",
+                        "TX STBC",
+                        "RX STBC 1-stream",
+                        "No DSSS/CCK HT40"
+                    ],
+                    "Max AMSDU length": "3839 bytes"
+                },
+                "Maximum RX AMPDU length 65535 bytes (exponent": "0x003)",
+                "Minimum RX AMPDU time spacing": "4 usec (0x05)",
+                "HT RX MCS rate indexes supported": "0-15",
+                "flags": [
+                    "HT TX MCS rate indexes are undefined"
+                ]
+            },
+            "HT operation": {
+                "primary channel": "36",
+                "secondary channel offset": "above",
+                "STA channel width": "any",
+                "RIFS": "0",
+                "HT protection": "no",
+                "non-GF present": "1",
+                "OBSS non-GF present": "0",
+                "dual beacon": "0",
+                "dual CTS protection": "0",
+                "STBC beacon": "0",
+                "L-SIG TXOP Prot": "0",
+                "PCO active": "0",
+                "PCO phase": "0"
+            },
+            "WPA": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK"
+            },
+            "RSN": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK",
+                "Capabilities": "1-PTKSA-RC 1-GTKSA-RC (0x0000)"
+            },
+            "Extended capabilities": {
+                "flags": [
+                    "BSS Transition",
+                    "Max Number Of MSDUs In A-MSDU is unlimited"
+                ]
+            },
+            "WMM": {
+                "info": "Parameter version 1",
+                "BE": "CW 15-1023, AIFSN 3",
+                "BK": "CW 15-1023, AIFSN 7",
+                "VI": "CW 7-15, AIFSN 2, TXOP 3008 usec",
+                "VO": "CW 3-7, AIFSN 2, TXOP 1504 usec"
+            },
+            "RM enabled capabilities": {
+                "Capabilities": {
+                    "info": "0x02 0x00 0x01 0x00 0x00",
+                    "flags": [
+                        "Neighbor Report",
+                        "AP Channel Report"
+                    ]
+                },
+                "Nonoperating Channel Max Measurement Duration": "0",
+                "Measurement Pilot Capability": "0"
+            },
+            "Power constraint": "3 dB",
+            "TPC report": "TX power: 63 dBm",
+            "Transmit Power Envelope": {
+                "Local Maximum Transmit Power For 20 MHz": "15 dBm",
+                "Local Maximum Transmit Power For 40 MHz": "15 dBm",
+                "Local Maximum Transmit Power For 80 MHz": "15 dBm"
+            },
+            "Country": {
+                "Code": "US",
+                "Environment": "Indoor/Outdoor",
+                "constraints": [
+                    "Channels [36 - 64] @ 30 dBm",
+                    "Channels [100 - 144] @ 30 dBm",
+                    "Channels [149 - 165] @ 30 dBm"
+                ]
+            },
+            "VHT capabilities": {
+                "VHT Capabilities (0x33c00031)": {
+                    "Max MPDU length": "7991",
+                    "Supported Channel Width": "neither 160 nor 80+80",
+                    "flags": [
+                        "RX LDPC",
+                        "short GI (80 MHz)",
+                        "+HTC-VHT",
+                        "RX antenna pattern consistency",
+                        "TX antenna pattern consistency"
+                    ]
+                },
+                "VHT RX MCS set": {
+                    "1 streams": "MCS 0-9",
+                    "2 streams": "MCS 0-9",
+                    "3 streams": "not supported",
+                    "4 streams": "not supported",
+                    "5 streams": "not supported",
+                    "6 streams": "not supported",
+                    "7 streams": "not supported",
+                    "8 streams": "not supported"
+                },
+                "VHT RX highest supported": "780 Mbps",
+                "VHT TX MCS set": {
+                    "1 streams": "MCS 0-9",
+                    "2 streams": "MCS 0-9",
+                    "3 streams": "not supported",
+                    "4 streams": "not supported",
+                    "5 streams": "not supported",
+                    "6 streams": "not supported",
+                    "7 streams": "not supported",
+                    "8 streams": "not supported"
+                },
+                "VHT TX highest supported": "780 Mbps",
+                "VHT extended NSS": "not supported"
+            },
+            "VHT operation": {
+                "channel width": "1 (80 MHz)",
+                "center freq segment 1": "42",
+                "center freq segment 2": "0",
+                "VHT basic MCS set": "0xfffa"
+            }
+        }
+    },
+    {
+        "bssid": "cc:71:90:9c:06:69",
+        "interface": "wlp1s0",
+        "associated": false,
+        "details": {
+            "last seen": [
+                "8464.997s [boottime]",
+                "1258 ms ago"
+            ],
+            "TSF": "3605704092509 usec (41d, 17:35:04)",
+            "freq": "5540.0",
+            "beacon interval": "100 TUs",
+            "capability": "ESS Privacy SpectrumMgmt RadioMeasure (0x1111)",
+            "signal": "-79.00 dBm",
+            "Information elements from Probe Response frame": {},
+            "SSID": "P413 5G",
+            "Supported rates": "6.0* 9.0 12.0* 18.0 24.0* 36.0 48.0 54.0",
+            "DS Parameter set": "channel 108",
+            "HT capabilities": {
+                "Capabilities": {
+                    "info": "0x1af",
+                    "flags": [
+                        "RX LDPC",
+                        "HT20/HT40",
+                        "SM Power Save disabled",
+                        "RX HT20 SGI",
+                        "TX STBC",
+                        "RX STBC 1-stream",
+                        "No DSSS/CCK HT40"
+                    ],
+                    "Max AMSDU length": "3839 bytes"
+                },
+                "Maximum RX AMPDU length 65535 bytes (exponent": "0x003)",
+                "Minimum RX AMPDU time spacing": "4 usec (0x05)",
+                "HT RX MCS rate indexes supported": "0-15",
+                "flags": [
+                    "HT TX MCS rate indexes are undefined"
+                ]
+            },
+            "HT operation": {
+                "primary channel": "108",
+                "secondary channel offset": "above",
+                "STA channel width": "any",
+                "RIFS": "0",
+                "HT protection": "20 MHz",
+                "non-GF present": "1",
+                "OBSS non-GF present": "0",
+                "dual beacon": "0",
+                "dual CTS protection": "0",
+                "STBC beacon": "0",
+                "L-SIG TXOP Prot": "0",
+                "PCO active": "0",
+                "PCO phase": "0"
+            },
+            "WPA": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK"
+            },
+            "RSN": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK",
+                "Capabilities": "1-PTKSA-RC 1-GTKSA-RC (0x0000)"
+            },
+            "Extended capabilities": {
+                "flags": [
+                    "BSS Transition",
+                    "Max Number Of MSDUs In A-MSDU is unlimited"
+                ]
+            },
+            "WMM": {
+                "info": "Parameter version 1",
+                "BE": "CW 15-1023, AIFSN 3",
+                "BK": "CW 15-1023, AIFSN 7",
+                "VI": "CW 7-15, AIFSN 2, TXOP 3008 usec",
+                "VO": "CW 3-7, AIFSN 2, TXOP 1504 usec"
+            },
+            "RM enabled capabilities": {
+                "Capabilities": {
+                    "info": "0x02 0x00 0x01 0x00 0x00",
+                    "flags": [
+                        "Neighbor Report",
+                        "AP Channel Report"
+                    ]
+                },
+                "Nonoperating Channel Max Measurement Duration": "0",
+                "Measurement Pilot Capability": "0"
+            },
+            "Power constraint": "3 dB",
+            "TPC report": "TX power: 63 dBm",
+            "Transmit Power Envelope": {
+                "Local Maximum Transmit Power For 20 MHz": "15 dBm",
+                "Local Maximum Transmit Power For 40 MHz": "15 dBm",
+                "Local Maximum Transmit Power For 80 MHz": "15 dBm"
+            },
+            "Country": {
+                "Code": "US",
+                "Environment": "Indoor/Outdoor",
+                "constraints": [
+                    "Channels [36 - 64] @ 30 dBm",
+                    "Channels [100 - 144] @ 30 dBm",
+                    "Channels [149 - 165] @ 30 dBm"
+                ]
+            },
+            "VHT capabilities": {
+                "VHT Capabilities (0x33c00031)": {
+                    "Max MPDU length": "7991",
+                    "Supported Channel Width": "neither 160 nor 80+80",
+                    "flags": [
+                        "RX LDPC",
+                        "short GI (80 MHz)",
+                        "+HTC-VHT",
+                        "RX antenna pattern consistency",
+                        "TX antenna pattern consistency"
+                    ]
+                },
+                "VHT RX MCS set": {
+                    "1 streams": "MCS 0-9",
+                    "2 streams": "MCS 0-9",
+                    "3 streams": "not supported",
+                    "4 streams": "not supported",
+                    "5 streams": "not supported",
+                    "6 streams": "not supported",
+                    "7 streams": "not supported",
+                    "8 streams": "not supported"
+                },
+                "VHT RX highest supported": "780 Mbps",
+                "VHT TX MCS set": {
+                    "1 streams": "MCS 0-9",
+                    "2 streams": "MCS 0-9",
+                    "3 streams": "not supported",
+                    "4 streams": "not supported",
+                    "5 streams": "not supported",
+                    "6 streams": "not supported",
+                    "7 streams": "not supported",
+                    "8 streams": "not supported"
+                },
+                "VHT TX highest supported": "780 Mbps",
+                "VHT extended NSS": "not supported"
+            },
+            "VHT operation": {
+                "channel width": "1 (80 MHz)",
+                "center freq segment 1": "106",
+                "center freq segment 2": "0",
+                "VHT basic MCS set": "0xfffa"
+            }
+        }
+    },
+    {
+        "bssid": "4c:12:e8:e8:21:39",
+        "interface": "wlp1s0",
+        "associated": false,
+        "details": {
+            "last seen": [
+                "8465.610s [boottime]",
+                "645 ms ago"
+            ],
+            "TSF": "341688936361 usec (3d, 22:54:48)",
+            "freq": "5600.0",
+            "beacon interval": "100 TUs",
+            "capability": "ESS Privacy SpectrumMgmt RadioMeasure (0x1111)",
+            "signal": "-68.00 dBm",
+            "Information elements from Probe Response frame": {},
+            "SSID": "P420-2 5G",
+            "Supported rates": "6.0* 9.0 12.0* 18.0 24.0* 36.0 48.0 54.0",
+            "DS Parameter set": "channel 120",
+            "HT capabilities": {
+                "Capabilities": {
+                    "info": "0x1af",
+                    "flags": [
+                        "RX LDPC",
+                        "HT20/HT40",
+                        "SM Power Save disabled",
+                        "RX HT20 SGI",
+                        "TX STBC",
+                        "RX STBC 1-stream",
+                        "No DSSS/CCK HT40"
+                    ],
+                    "Max AMSDU length": "3839 bytes"
+                },
+                "Maximum RX AMPDU length 65535 bytes (exponent": "0x003)",
+                "Minimum RX AMPDU time spacing": "4 usec (0x05)",
+                "HT RX MCS rate indexes supported": "0-15",
+                "flags": [
+                    "HT TX MCS rate indexes are undefined"
+                ]
+            },
+            "HT operation": {
+                "primary channel": "120",
+                "secondary channel offset": "below",
+                "STA channel width": "any",
+                "RIFS": "0",
+                "HT protection": "20 MHz",
+                "non-GF present": "1",
+                "OBSS non-GF present": "0",
+                "dual beacon": "0",
+                "dual CTS protection": "0",
+                "STBC beacon": "0",
+                "L-SIG TXOP Prot": "0",
+                "PCO active": "0",
+                "PCO phase": "0"
+            },
+            "WPA": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK"
+            },
+            "RSN": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK",
+                "Capabilities": "1-PTKSA-RC 1-GTKSA-RC (0x0000)"
+            },
+            "Extended capabilities": {
+                "flags": [
+                    "BSS Transition",
+                    "Max Number Of MSDUs In A-MSDU is unlimited"
+                ]
+            },
+            "WMM": {
+                "info": "Parameter version 1",
+                "BE": "CW 15-1023, AIFSN 3",
+                "BK": "CW 15-1023, AIFSN 7",
+                "VI": "CW 7-15, AIFSN 2, TXOP 3008 usec",
+                "VO": "CW 3-7, AIFSN 2, TXOP 1504 usec"
+            },
+            "RM enabled capabilities": {
+                "Capabilities": {
+                    "info": "0x02 0x00 0x01 0x00 0x00",
+                    "flags": [
+                        "Neighbor Report",
+                        "AP Channel Report"
+                    ]
+                },
+                "Nonoperating Channel Max Measurement Duration": "0",
+                "Measurement Pilot Capability": "0"
+            },
+            "Power constraint": "3 dB",
+            "TPC report": "TX power: 63 dBm",
+            "Transmit Power Envelope": {
+                "Local Maximum Transmit Power For 20 MHz": "15 dBm",
+                "Local Maximum Transmit Power For 40 MHz": "15 dBm",
+                "Local Maximum Transmit Power For 80 MHz": "15 dBm"
+            },
+            "Country": {
+                "Code": "US",
+                "Environment": "Indoor/Outdoor",
+                "constraints": [
+                    "Channels [36 - 64] @ 30 dBm",
+                    "Channels [100 - 144] @ 30 dBm",
+                    "Channels [149 - 165] @ 30 dBm"
+                ]
+            },
+            "VHT capabilities": {
+                "VHT Capabilities (0x33c00031)": {
+                    "Max MPDU length": "7991",
+                    "Supported Channel Width": "neither 160 nor 80+80",
+                    "flags": [
+                        "RX LDPC",
+                        "short GI (80 MHz)",
+                        "+HTC-VHT",
+                        "RX antenna pattern consistency",
+                        "TX antenna pattern consistency"
+                    ]
+                },
+                "VHT RX MCS set": {
+                    "1 streams": "MCS 0-9",
+                    "2 streams": "MCS 0-9",
+                    "3 streams": "not supported",
+                    "4 streams": "not supported",
+                    "5 streams": "not supported",
+                    "6 streams": "not supported",
+                    "7 streams": "not supported",
+                    "8 streams": "not supported"
+                },
+                "VHT RX highest supported": "780 Mbps",
+                "VHT TX MCS set": {
+                    "1 streams": "MCS 0-9",
+                    "2 streams": "MCS 0-9",
+                    "3 streams": "not supported",
+                    "4 streams": "not supported",
+                    "5 streams": "not supported",
+                    "6 streams": "not supported",
+                    "7 streams": "not supported",
+                    "8 streams": "not supported"
+                },
+                "VHT TX highest supported": "780 Mbps",
+                "VHT extended NSS": "not supported"
+            },
+            "VHT operation": {
+                "channel width": "1 (80 MHz)",
+                "center freq segment 1": "122",
+                "center freq segment 2": "0",
+                "VHT basic MCS set": "0xfffa"
+            }
+        }
+    },
+    {
+        "bssid": "cc:71:90:d6:04:48",
+        "interface": "wlp1s0",
+        "associated": false,
+        "details": {
+            "last seen": [
+                "8463.405s [boottime]",
+                "2850 ms ago"
+            ],
+            "TSF": "4450268473239 usec (51d, 12:11:08)",
+            "freq": "2437.0",
+            "beacon interval": "100 TUs",
+            "capability": "ESS Privacy ShortSlotTime (0x0411)",
+            "signal": "-39.00 dBm",
+            "Information elements from Probe Response frame": {},
+            "SSID": "P419",
+            "Supported rates": "1.0* 2.0* 5.5* 11.0* 9.0 18.0 36.0 54.0",
+            "DS Parameter set": "channel 6",
+            "ERP": "Barker_Preamble_Mode",
+            "Extended supported rates": "6.0 12.0 24.0 48.0",
+            "HT capabilities": {
+                "Capabilities": {
+                    "info": "0x1ad",
+                    "flags": [
+                        "RX LDPC",
+                        "HT20",
+                        "SM Power Save disabled",
+                        "RX HT20 SGI",
+                        "TX STBC",
+                        "RX STBC 1-stream",
+                        "No DSSS/CCK HT40"
+                    ],
+                    "Max AMSDU length": "3839 bytes"
+                },
+                "Maximum RX AMPDU length 65535 bytes (exponent": "0x003)",
+                "Minimum RX AMPDU time spacing": "4 usec (0x05)",
+                "HT RX MCS rate indexes supported": "0-15",
+                "flags": [
+                    "HT TX MCS rate indexes are undefined"
+                ]
+            },
+            "HT operation": {
+                "primary channel": "6",
+                "secondary channel offset": "no secondary",
+                "STA channel width": "20 MHz",
+                "RIFS": "0",
+                "HT protection": "no",
+                "non-GF present": "1",
+                "OBSS non-GF present": "0",
+                "dual beacon": "0",
+                "dual CTS protection": "0",
+                "STBC beacon": "0",
+                "L-SIG TXOP Prot": "0",
+                "PCO active": "0",
+                "PCO phase": "0"
+            },
+            "WPA": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK"
+            },
+            "RSN": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK",
+                "Capabilities": "1-PTKSA-RC 1-GTKSA-RC (0x0000)"
+            },
+            "Extended capabilities": {
+                "flags": [
+                    "HT Information Exchange Supported",
+                    "BSS Transition"
+                ]
+            },
+            "WMM": {
+                "info": "Parameter version 1",
+                "BE": "CW 15-1023, AIFSN 3",
+                "BK": "CW 15-1023, AIFSN 7",
+                "VI": "CW 7-15, AIFSN 2, TXOP 3008 usec",
+                "VO": "CW 3-7, AIFSN 2, TXOP 1504 usec"
+            },
+            "Country": {
+                "Code": "US",
+                "Environment": "Indoor/Outdoor",
+                "constraints": [
+                    "Channels [1 - 11] @ 30 dBm"
+                ]
+            }
+        }
+    },
+    {
+        "bssid": "4c:12:e8:32:6b:08",
+        "interface": "wlp1s0",
+        "associated": false,
+        "details": {
+            "last seen": [
+                "8463.405s [boottime]",
+                "2850 ms ago"
+            ],
+            "TSF": "2699607454527 usec (31d, 05:53:27)",
+            "freq": "2442.0",
+            "beacon interval": "100 TUs",
+            "capability": "ESS Privacy ShortSlotTime (0x0411)",
+            "signal": "-61.00 dBm",
+            "Information elements from Probe Response frame": {},
+            "SSID": "P319",
+            "Supported rates": "1.0* 2.0* 5.5* 11.0* 9.0 18.0 36.0 54.0",
+            "DS Parameter set": "channel 7",
+            "ERP": "Barker_Preamble_Mode",
+            "Extended supported rates": "6.0 12.0 24.0 48.0",
+            "HT capabilities": {
+                "Capabilities": {
+                    "info": "0x1ad",
+                    "flags": [
+                        "RX LDPC",
+                        "HT20",
+                        "SM Power Save disabled",
+                        "RX HT20 SGI",
+                        "TX STBC",
+                        "RX STBC 1-stream",
+                        "No DSSS/CCK HT40"
+                    ],
+                    "Max AMSDU length": "3839 bytes"
+                },
+                "Maximum RX AMPDU length 65535 bytes (exponent": "0x003)",
+                "Minimum RX AMPDU time spacing": "4 usec (0x05)",
+                "HT RX MCS rate indexes supported": "0-15",
+                "flags": [
+                    "HT TX MCS rate indexes are undefined"
+                ]
+            },
+            "HT operation": {
+                "primary channel": "7",
+                "secondary channel offset": "no secondary",
+                "STA channel width": "20 MHz",
+                "RIFS": "0",
+                "HT protection": "no",
+                "non-GF present": "1",
+                "OBSS non-GF present": "0",
+                "dual beacon": "0",
+                "dual CTS protection": "0",
+                "STBC beacon": "0",
+                "L-SIG TXOP Prot": "0",
+                "PCO active": "0",
+                "PCO phase": "0"
+            },
+            "WPA": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK"
+            },
+            "RSN": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK",
+                "Capabilities": "1-PTKSA-RC 1-GTKSA-RC (0x0000)"
+            },
+            "Extended capabilities": {
+                "flags": [
+                    "HT Information Exchange Supported",
+                    "BSS Transition"
+                ]
+            },
+            "WMM": {
+                "info": "Parameter version 1",
+                "BE": "CW 15-1023, AIFSN 3",
+                "BK": "CW 15-1023, AIFSN 7",
+                "VI": "CW 7-15, AIFSN 2, TXOP 3008 usec",
+                "VO": "CW 3-7, AIFSN 2, TXOP 1504 usec"
+            },
+            "Country": {
+                "Code": "US",
+                "Environment": "Indoor/Outdoor",
+                "constraints": [
+                    "Channels [1 - 11] @ 30 dBm"
+                ]
+            }
+        }
+    },
+    {
+        "bssid": "b8:29:03:02:d5:a8",
+        "interface": "wlp1s0",
+        "associated": false,
+        "details": {
+            "last seen": [
+                "8463.498s [boottime]",
+                "2757 ms ago"
+            ],
+            "TSF": "321272121048 usec (3d, 17:14:32)",
+            "freq": "2462.0",
+            "beacon interval": "100 TUs",
+            "capability": "ESS Privacy ShortSlotTime (0x0411)",
+            "signal": "-53.00 dBm",
+            "Information elements from Probe Response frame": {},
+            "SSID": "P418",
+            "Supported rates": "1.0* 2.0* 5.5* 11.0* 9.0 18.0 36.0 54.0",
+            "DS Parameter set": "channel 11",
+            "ERP": "Barker_Preamble_Mode",
+            "Extended supported rates": "6.0 12.0 24.0 48.0",
+            "HT capabilities": {
+                "Capabilities": {
+                    "info": "0x11ef",
+                    "flags": [
+                        "RX LDPC",
+                        "HT20/HT40",
+                        "SM Power Save disabled",
+                        "RX HT20 SGI",
+                        "RX HT40 SGI",
+                        "TX STBC",
+                        "RX STBC 1-stream",
+                        "DSSS/CCK HT40"
+                    ],
+                    "Max AMSDU length": "3839 bytes"
+                },
+                "Maximum RX AMPDU length 65535 bytes (exponent": "0x003)",
+                "Minimum RX AMPDU time spacing": "4 usec (0x05)",
+                "HT RX MCS rate indexes supported": "0-15, 32",
+                "flags": [
+                    "HT TX MCS rate indexes are undefined"
+                ]
+            },
+            "HT operation": {
+                "primary channel": "11",
+                "secondary channel offset": "no secondary",
+                "STA channel width": "20 MHz",
+                "RIFS": "0",
+                "HT protection": "20 MHz",
+                "non-GF present": "1",
+                "OBSS non-GF present": "0",
+                "dual beacon": "0",
+                "dual CTS protection": "0",
+                "STBC beacon": "0",
+                "L-SIG TXOP Prot": "0",
+                "PCO active": "0",
+                "PCO phase": "0"
+            },
+            "WPA": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK"
+            },
+            "RSN": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK",
+                "Capabilities": "1-PTKSA-RC 1-GTKSA-RC (0x0000)"
+            },
+            "Extended capabilities": {
+                "flags": [
+                    "HT Information Exchange Supported",
+                    "BSS Transition"
+                ]
+            },
+            "WMM": {
+                "info": "Parameter version 1",
+                "BE": "CW 15-1023, AIFSN 3",
+                "BK": "CW 15-1023, AIFSN 7",
+                "VI": "CW 7-15, AIFSN 2, TXOP 3008 usec",
+                "VO": "CW 3-7, AIFSN 2, TXOP 1504 usec"
+            },
+            "Overlapping BSS scan params": {
+                "passive dwell": "20 TUs",
+                "active dwell": "10 TUs",
+                "channel width trigger scan interval": "300 s",
+                "scan passive total per channel": "200 TUs",
+                "scan active total per channel": "20 TUs",
+                "BSS width channel transition delay factor": "5",
+                "OBSS Scan Activity Threshold": "0.25 %"
+            },
+            "Country": {
+                "Code": "US",
+                "Environment": "Indoor/Outdoor",
+                "constraints": [
+                    "Channels [1 - 11] @ 30 dBm"
+                ]
+            }
+        }
+    },
+    ...
+]

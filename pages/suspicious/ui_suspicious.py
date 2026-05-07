@@ -91,6 +91,7 @@ class Ui_Form(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.label_2 = QLabel(self.frEmpty)
         self.label_2.setObjectName(u"label_2")
+        self.label_2.setWordWrap(True)
 
         self.verticalLayout_3.addWidget(self.label_2)
 
@@ -121,6 +122,9 @@ class Ui_Form(object):
 
 
         self.retranslateUi(Form)
+
+        self.stackedWidget.setCurrentIndex(0)
+
 
         QMetaObject.connectSlotsByName(Form)
     # setupUi

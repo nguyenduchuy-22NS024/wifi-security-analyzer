@@ -1,121 +1,113 @@
+import json
+
 from PySide6.QtWidgets import QHeaderView, QMenu, QTableWidgetItem, QWidget
 from PySide6.QtCore import Signal
-from PySide6.QtGui import QColor, Qt
+from PySide6.QtGui import QColor, Qt, QIcon
 
 from pages.scan.ui_scan import Ui_Form
+from services.analyze_networks import analyze_scan_table
 
 
 class ScanPage(QWidget):
 
-    analyze_data = Signal(str, str)
-    attack_data = Signal(str)
+    analyze_bssid = Signal(str, list)
+    attack_bssid = Signal(str)
 
     def __init__(self):
         super().__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+        self.networks = []
 
         # Start with the empty page shown
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageEmpty)
 
         # Set the table to resize columns to fit their contents
-        self.ui.tableScanData.horizontalHeader().setSectionResizeMode(
-            QHeaderView.ResizeToContents
-        )
-        self.ui.tableScanData.verticalHeader().setSectionResizeMode(
-            QHeaderView.ResizeToContents
-        )
+        # self.ui.tableScanData.horizontalHeader().setSectionResizeMode(
+        #     QHeaderView.ResizeToContents
+        # )
+
+        header = self.ui.tableScanData.horizontalHeader()
+
+        # Các cột nhỏ thì vừa khít nội dung
+        header.setSectionResizeMode(0, QHeaderView.ResizeToContents)  # In-use
+        header.setSectionResizeMode(1, QHeaderView.ResizeToContents)  # SSID
+        header.setSectionResizeMode(2, QHeaderView.ResizeToContents)  # BSSID
+        header.setSectionResizeMode(3, QHeaderView.ResizeToContents)  # Signal
+        header.setSectionResizeMode(4, QHeaderView.ResizeToContents)  # Bars
+        header.setSectionResizeMode(5, QHeaderView.ResizeToContents)  # Channel
+        header.setSectionResizeMode(6, QHeaderView.ResizeToContents)  # Band
+
+        header.setSectionResizeMode(7, QHeaderView.Stretch)  # Security
+
+        # Tắt thanh cuộn ngang
+        # self.ui.tableScanData.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
 
         # Enable custom context menu for the table
         self.ui.tableScanData.setContextMenuPolicy(Qt.CustomContextMenu)
         self.ui.tableScanData.customContextMenuRequested.connect(self.show_context_menu)
 
     # Method to update the scan results in the table
-    def update_scan_results(self, networks, interface):
-        # print(networks)
+    def update_scan_results(self, networks):
+        self.networks = networks
+        table_data = analyze_scan_table(networks)
         self.ui.stackedWidget.setCurrentWidget(self.ui.pageData)
-        self.ui.tableScanData.setRowCount(0)  # Clear existing rows
+        self.ui.tableScanData.setRowCount(0)
 
-        for network in networks:
+        for network in table_data:
             row_position = self.ui.tableScanData.rowCount()
             self.ui.tableScanData.insertRow(row_position)
 
+            # --- Cột 0: IN-USE ---
+            in_use_text = "●" if network["in_use"] else ""
+            item_in_use = QTableWidgetItem(in_use_text)
+            item_in_use.setTextAlignment(Qt.AlignCenter)
+            self.ui.tableScanData.setItem(row_position, 0, item_in_use)
+
+            # --- Cột 1, 2, 3 ---
             self.ui.tableScanData.setItem(
-                row_position, 0, QTableWidgetItem(network["ssid"])
-            )
-            self.ui.tableScanData.setItem(
-                row_position, 1, QTableWidgetItem(network["ssid_hex"])
+                row_position, 1, QTableWidgetItem(network["ssid"])
             )
             self.ui.tableScanData.setItem(
                 row_position, 2, QTableWidgetItem(network["bssid"])
             )
             self.ui.tableScanData.setItem(
-                row_position, 3, QTableWidgetItem(network["mode"])
+                row_position, 3, QTableWidgetItem(network["signal"])
             )
 
+            # --- Cột 4: BARS ---
+            item_bars = QTableWidgetItem()
+            level = network["bar_level"]
+            icon_path = f":/root/resources/icons8-wifi-{level}-24.png"
+            item_bars.setIcon(QIcon(icon_path))
+            item_bars.setTextAlignment(Qt.AlignCenter)
+            self.ui.tableScanData.setItem(row_position, 4, item_bars)
+
+            # --- Cột 5, 6 ---
             self.ui.tableScanData.setItem(
-                row_position, 4, QTableWidgetItem(network["chan"])
+                row_position, 5, QTableWidgetItem(str(network["channel"]))
             )
             self.ui.tableScanData.setItem(
-                row_position, 5, QTableWidgetItem(network["freq"])
-            )
-            self.ui.tableScanData.setItem(
-                row_position, 6, QTableWidgetItem(network["rate"])
-            )
-            self.ui.tableScanData.setItem(
-                row_position, 7, QTableWidgetItem(network["bandwidth"])
-            )
-            self.ui.tableScanData.setItem(
-                row_position, 8, QTableWidgetItem(network["signal"])
+                row_position, 6, QTableWidgetItem(network["band"])
             )
 
-            self.ui.tableScanData.setItem(
-                row_position, 9, QTableWidgetItem(network["signal_level"])
-            )
+            # --- Cột 7: SECURITY ---
+            sec_text = network["security"]
+            self.ui.tableScanData.setItem(row_position, 7, QTableWidgetItem(sec_text))
 
-            self.ui.tableScanData.setItem(
-                row_position, 10, QTableWidgetItem(network["bars"])
-            )
-
-            self.ui.tableScanData.setItem(
-                row_position, 11, QTableWidgetItem(network["security"])
-            )
-
-            self.ui.tableScanData.setItem(
-                row_position, 12, QTableWidgetItem(network["security_level"])
-            )
-
-            self.ui.tableScanData.setItem(
-                row_position, 13, QTableWidgetItem(network["wpa_flags"])
-            )
-
-            self.ui.tableScanData.setItem(
-                row_position, 14, QTableWidgetItem(network["rsn_flags"])
-            )
-
-            self.ui.tableScanData.setItem(
-                row_position, 15, QTableWidgetItem(network["active"])
-            )
-
-            self.ui.tableScanData.setItem(
-                row_position, 16, QTableWidgetItem(network["in_use"])
-            )
-
-            self.ui.tableScanData.setItem(row_position, 17, QTableWidgetItem(interface))
-
-            if "Low Risk" in network["security_level"]:
-                color = "#ccffcc"
-            elif "Medium Risk" in network["security_level"]:
+            # --- MÀU SẮC DỰA TRÊN RISK ---
+            if "Very Low Risk" in sec_text:
+                color = "#d1ffd1"
+            elif "Low Risk" in sec_text:
+                color = "#e5ffcc"
+            elif "Medium Risk" in sec_text:
                 color = "#fff5cc"
-            elif (
-                "High Risk" in network["security_level"]
-                or "Critical" in network["security_level"]
-                or "Unknown" in network["security_level"]
-            ):
+            elif any(x in sec_text for x in ["High Risk", "Critical", "Unknown"]):
                 color = "#ffcccc"
             else:
                 color = "#ffffff"
 
+            # Áp dụng màu nền
             for col in range(self.ui.tableScanData.columnCount()):
                 item = self.ui.tableScanData.item(row_position, col)
                 if item:
@@ -144,15 +136,10 @@ class ScanPage(QWidget):
         elif action == action_attack:
             self.attack_network(row)
 
-    # Method to handle the "Analyze" action from the context menu
     def analyze_network(self, row):
-        # Get the BSSID from the selected row and emit the signal to analyze it
         bssid = self.ui.tableScanData.item(row, 2).text()
-        interface = self.ui.tableScanData.item(row, 17).text()
-        self.analyze_data.emit(bssid, interface)
+        self.analyze_bssid.emit(bssid, self.networks)
 
-    # Method to handle the "Attack" action from the context menu
     def attack_network(self, row):
-        # Get the BSSID from the selected row and emit the signal to attack it
         bssid = self.ui.tableScanData.item(row, 2).text()
-        self.attack_data.emit(bssid)
+        print(bssid)
