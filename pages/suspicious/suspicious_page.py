@@ -15,6 +15,6 @@ class SuspiciousPage(QWidget):
     def update_suspicious_results(self, networks):
         self.networks = networks
         suspicious_networks = detect_suspicious_networks(self.networks)
-        print(suspicious_networks)
-        
+        # print(suspicious_networks)
+
         self.ui.label_2.setText(json.dumps(suspicious_networks, indent=4))
