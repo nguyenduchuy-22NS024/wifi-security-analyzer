@@ -14,20 +14,19 @@ def analyze_network(target_bssid, networks):
 
     details = net.get("details", {})
     ssid = details.get("SSID", "N/A")
+    score_history = []  # Tracks the scoring process
 
-    # --- 1. CHẠY HÀM PHÁT HIỆN MẠNG ĐÁNG NGỜ ---
+    # --- 1. SUSPICIOUS NETWORK DETECTION ---
     suspicious_list = detect_suspicious_networks(networks)
-    # Tìm xem SSID của mạng hiện tại có trong danh sách bị cảnh báo không
     suspicious_data = next(
         (item for item in suspicious_list if item["ssid"] == ssid), None
     )
 
-    # --- 2. THU THẬP THÔNG TIN CƠ BẢN ---
-    interface = net.get("interface", "N/A")
+    # --- 2. BASIC INFORMATION COLLECTION ---
     freq = float(details.get("freq", 0))
     band = "5GHz" if freq > 4000 else "2.4GHz"
     channel = details.get("DS Parameter set", "N/A")
-
+    interface = net.get("interface", "N/A")
     try:
         signal = int(float(details.get("signal", "-100").split()[0]))
     except:
@@ -36,45 +35,60 @@ def analyze_network(target_bssid, networks):
     security_status = evaluate_security(details)
     quality = evaluate_network_quality(details)
 
-    # --- 3. TÍCH HỢP CẢNH BÁO VÀO CONS ---
-    pros = quality["pros"]
-    cons = quality["cons"]
+    # --- 3. BASE SCORE CALCULATION ---
+    base_score, base_breakdown = calculate_base_score(
+        details, signal, band, security_status
+    )
+    score_history.extend(base_breakdown)
+
+    # --- 4. APPLY PENALTY MULTIPLIER ---
+    multiplier = 1.0
+    penalty_reason = ""
 
     if suspicious_data:
         risk_lvl = suspicious_data["risk_level"]
-        # Thêm tiêu đề cảnh báo nguy hiểm
-        cons.insert(0, f"⚠️ SECURITY ALERT: This SSID is flagged as {risk_lvl} RISK!")
-
-        # Thêm từng lý do phát hiện được từ hàm detect_suspicious_networks
-        for reason in suspicious_data["reasons"]:
-            cons.append(f"❗ Suspicious Activity: {reason}")
-
-    # --- 4. TỐI ƯU TÍNH ĐIỂM ---
-    total_score = calculate_base_score(
-        details, signal, band, security_status
-    )  # Tách hàm tính điểm base
-
-    multiplier = 1.0
-
-    if suspicious_data:
-        # Nếu mạng bị nghi ngờ
-        if suspicious_data["risk_level"] == "CRITICAL":
-            multiplier = 0.4  # Giữ lại 40%
-        elif suspicious_data["risk_level"] == "HIGH":
+        if risk_lvl == "CRITICAL":
+            multiplier = 0.4
+            penalty_reason = (
+                "CRITICAL spoofing/Rogue AP attempt detected (60% score reduction)"
+            )
+        elif risk_lvl == "HIGH":
             multiplier = 0.6
+            penalty_reason = (
+                "HIGH-risk abnormal activity detected (40% score reduction)"
+            )
         else:
             multiplier = 0.8
+            penalty_reason = "System security warning (20% score reduction)"
     else:
-        # Phạt lỗi bảo mật thông thường
+        # Penalty for configuration flaws
         if "Critical" in security_status:
-            multiplier = 0.5  # Mạng Open/WEP vẫn giữ được 50% điểm hiệu năng
+            multiplier = 0.5
+            penalty_reason = (
+                "Critical security flaw - legacy encryption protocol (50% reduction)"
+            )
         elif "High Risk" in security_status:
             multiplier = 0.7
+            penalty_reason = "High-risk security configuration (30% reduction)"
         elif "Medium Risk" in security_status:
             multiplier = 0.9
+            penalty_reason = "Sub-optimal security configuration (10% reduction)"
 
-    final_score = int(total_score * multiplier)
+    if multiplier < 1.0:
+        score_history.append(f"- Penalty Multiplier: {multiplier} ({penalty_reason})")
+
+    final_score = int(base_score * multiplier)
     final_score = max(10, min(100, final_score))
+
+    # Integrate alerts into Cons
+    pros = quality.get("pros", [])
+    cons = quality.get("cons", [])
+    if suspicious_data:
+        cons.insert(
+            0, f"⚠️ SECURITY ALERT: Flagged as {suspicious_data['risk_level']} RISK!"
+        )
+        for r in suspicious_data["reasons"]:
+            cons.append(f"❗ {r}")
 
     return {
         "SSID": ssid,
@@ -84,7 +98,8 @@ def analyze_network(target_bssid, networks):
         "Channel": f"{channel} ({band})",
         "Interface": interface,
         "Signal": f"{signal} dBm",
-        "Score": f"{final_score}/100",
+        "Score": final_score,
+        "ScoreBreakdown": score_history,
         "Pros": pros,
         "Cons": cons,
         "Details": details,
@@ -92,45 +107,56 @@ def analyze_network(target_bssid, networks):
 
 
 def calculate_base_score(details, signal, band, security_status):
-    # Khởi đầu với 30 điểm "cơ sở" cho mọi mạng đang hoạt động
     score = 30
+    breakdown = ["+ Base initialization score: +30"]
 
-    # --- 1. Tín hiệu (Tối đa 40đ) ---
+    # --- 1. Signal Strength ---
     if signal >= -55:
-        score += 40  # Rất mạnh
+        score += 40
+        breakdown.append(f"+ Excellent signal strength ({signal} dBm): +40")
     elif signal >= -67:
-        score += 30  # Tốt
+        score += 30
+        breakdown.append(f"+ Good signal strength ({signal} dBm): +30")
     elif signal >= -75:
-        score += 15  # Trung bình
+        score += 15
+        breakdown.append(f"+ Fair signal strength ({signal} dBm): +15")
     else:
-        score += 5  # Yếu
+        score += 5
+        breakdown.append(f"+ Weak signal strength ({signal} dBm): +5")
 
-    # --- 2. Công nghệ & Băng tần (Tối đa 20đ) ---
-    if "HE capabilities" in details:
-        score += 15  # WiFi 6
-    elif "VHT capabilities" in details:
-        score += 10  # WiFi 5
-    elif "HT capabilities" in details:
-        score += 5  # WiFi 4
+    # --- 2. WiFi Technology ---
+    details_str = str(details)
+    if "HE capabilities" in details_str:
+        score += 15
+        breakdown.append("+ Wi-Fi 6 (HE) support: +15")
+    elif "VHT capabilities" in details_str:
+        score += 10
+        breakdown.append("+ Wi-Fi 5 (VHT) support: +10")
+    elif "HT capabilities" in details_str:
+        score += 5
+        breakdown.append("+ Wi-Fi 4 (HT) support: +5")
 
     if band == "5GHz":
         score += 5
+        breakdown.append("+ 5GHz Band (Lower interference): +5")
 
-    # --- 3. Tính năng tối ưu (Tối đa 10đ) ---
+    # --- 3. Optimization Features ---
     ext_caps = str(details.get("Extended capabilities", ""))
     if "BSS Transition" in ext_caps:
-        score += 5  # Hỗ trợ Roaming mượt
+        score += 5
+        breakdown.append("+ Roaming support (BSS Transition): +5")
 
     vht_op = str(details.get("VHT operation", ""))
     if "80 MHz" in vht_op or "160 MHz" in vht_op:
-        score += 5  # Băng thông rộng
+        score += 5
+        breakdown.append("+ High bandwidth (80/160 MHz): +5")
 
-    # --- 4. Bảo mật an toàn (Bonus 10đ) ---
-    # Nếu dùng các chuẩn bảo mật cực an toàn thì thưởng thêm
+    # --- 4. Security Bonus ---
     if any(x in security_status for x in ["WPA3", "Enterprise", "MFP Protected"]):
         score += 10
+        breakdown.append("+ Modern security standard (WPA3/Enterprise): +10")
 
-    return min(100, score)
+    return score, breakdown
 
 
 def evaluate_network_quality(details):

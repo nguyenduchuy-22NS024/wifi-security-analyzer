@@ -320,4 +320,4 @@ def evaluate_security(details):
 
 
 # networks = scan_networks("wlp1s0")
-# print(detect_suspicious_networks(networks))
+# print(json.dumps(networks, indent=4))
