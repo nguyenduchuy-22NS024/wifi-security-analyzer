@@ -34,7 +34,7 @@ class MainWindow(QMainWindow):
         self.ui.btnScan.clicked.connect(self.navigate_page)
         self.ui.btnSuspicious.clicked.connect(self.navigate_page)
         self.ui.btnAnalyze.clicked.connect(self.navigate_page)
-        self.ui.btnAttack.clicked.connect(self.navigate_page)
+        # self.ui.btnAttack.clicked.connect(self.navigate_page)
 
         # Start on dashboard page
         self.ui.stackedWidget.setCurrentWidget(self.dashboard_page)
@@ -62,9 +62,6 @@ class MainWindow(QMainWindow):
 
         elif sender == self.ui.btnAnalyze:
             self.ui.stackedWidget.setCurrentWidget(self.analyze_page)
-
-        elif sender == self.ui.btnAttack:
-            self.ui.stackedWidget.setCurrentWidget(self.attack_page)
 
 
 if __name__ == "__main__":

@@ -18,7 +18,6 @@ class DashboardPage(QWidget):
         self.ui.setupUi(self)
         self.networks = []
         
-        # Tạo Layout cho các Frame chứa biểu đồ (nếu trong UI Designer chưa tạo)
         for frame in [self.ui.frCipher, self.ui.frMfp, self.ui.frWps, self.ui.frAuth]:
             if not frame.layout():
                 QVBoxLayout(frame)

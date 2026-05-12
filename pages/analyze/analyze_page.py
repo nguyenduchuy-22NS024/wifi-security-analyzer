@@ -39,7 +39,7 @@ class AnalyzePage(QWidget):
     def update_analyze_results(self, bssid, networks):
         self.networks = networks
         data = analyze_network(bssid, self.networks)
-        # print(data)
+        print(data)
 
         # 1. Kiểm tra nếu không tìm thấy dữ liệu
         if data is None:
@@ -56,7 +56,7 @@ class AnalyzePage(QWidget):
         self.ui.lblBSSID.setText(f"BSSID: {data['BSSID']}")
         self.ui.lblSecurity.setText(f"Security: {data['Security']}")
         self.ui.lblFreqChan.setText(f"Channel: {data['Channel']}")
-        self.ui.lblInterface.setText(f"Interface: {data['Interface']}")
+        # self.ui.lblInterface.setText(f"Interface: {data['Interface']}")
         self.ui.lblScore.setText(f"Overall Score: {data['Score']}")
 
         # 3. Làm sạch dữ liệu cũ

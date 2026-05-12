@@ -172,17 +172,6 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addWidget(self.btnSuspicious)
 
-        self.btnAttack = QPushButton(self.frNav)
-        self.btnAttack.setObjectName(u"btnAttack")
-        icon5 = QIcon()
-        icon5.addFile(u":/root/resources/icons8-sword-32.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnAttack.setIcon(icon5)
-        self.btnAttack.setIconSize(QSize(32, 32))
-        self.btnAttack.setCheckable(True)
-        self.btnAttack.setAutoExclusive(True)
-
-        self.verticalLayout_2.addWidget(self.btnAttack)
-
 
         self.verticalLayout.addWidget(self.frNav)
 
@@ -241,7 +230,6 @@ class Ui_MainWindow(object):
         self.btnScan.setText(QCoreApplication.translate("MainWindow", u"Scan", None))
         self.btnAnalyze.setText(QCoreApplication.translate("MainWindow", u"Analyze", None))
         self.btnSuspicious.setText(QCoreApplication.translate("MainWindow", u"Suspicious", None))
-        self.btnAttack.setText(QCoreApplication.translate("MainWindow", u"Attack", None))
         self.lblVersion.setText(QCoreApplication.translate("MainWindow", u"v1.0.2 - nguyenduchuy", None))
     # retranslateUi
 
