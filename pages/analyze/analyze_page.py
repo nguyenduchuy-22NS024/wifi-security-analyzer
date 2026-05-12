@@ -39,7 +39,7 @@ class AnalyzePage(QWidget):
     def update_analyze_results(self, bssid, networks):
         self.networks = networks
         data = analyze_network(bssid, self.networks)
-        print(data)
+        # print(data)
 
         # 1. Kiểm tra nếu không tìm thấy dữ liệu
         if data is None:

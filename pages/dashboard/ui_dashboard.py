@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QHBoxLayout,
-    QLabel, QPushButton, QSizePolicy, QSpacerItem,
-    QStackedWidget, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
+    QHBoxLayout, QLabel, QPushButton, QSizePolicy,
+    QSpacerItem, QStackedWidget, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_Form(object):
@@ -187,7 +187,7 @@ class Ui_Form(object):
         self.frData = QFrame(self.pageData)
         self.frData.setObjectName(u"frData")
         self.frData.setGeometry(QRect(0, 0, 1016, 652))
-        self.frData.setMinimumSize(QSize(0, 0))
+        self.frData.setMinimumSize(QSize(1016, 652))
         self.frData.setFrameShape(QFrame.Shape.NoFrame)
         self.frData.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout = QVBoxLayout(self.frData)
@@ -196,7 +196,8 @@ class Ui_Form(object):
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.frCard = QFrame(self.frData)
         self.frCard.setObjectName(u"frCard")
-        self.frCard.setMaximumSize(QSize(16777215, 64))
+        self.frCard.setMinimumSize(QSize(0, 48))
+        self.frCard.setMaximumSize(QSize(16777215, 48))
         self.frCard.setStyleSheet(u"#frCard1, #frCard2, #frCard3, #frCard4 {\n"
 "	border-radius: 8px;\n"
 "	border: 1px solid #dfdfdf;\n"
@@ -366,10 +367,49 @@ class Ui_Form(object):
 
         self.frChart = QFrame(self.frData)
         self.frChart.setObjectName(u"frChart")
-        self.frChart.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frChart.setFrameShape(QFrame.Shape.NoFrame)
         self.frChart.setFrameShadow(QFrame.Shadow.Raised)
+        self.gridLayout = QGridLayout(self.frChart)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.gridLayout.setHorizontalSpacing(4)
+        self.gridLayout.setContentsMargins(8, 8, 8, 8)
+        self.frMfp = QFrame(self.frChart)
+        self.frMfp.setObjectName(u"frMfp")
+        self.frMfp.setFrameShape(QFrame.Shape.NoFrame)
+        self.frMfp.setFrameShadow(QFrame.Shadow.Raised)
+
+        self.gridLayout.addWidget(self.frMfp, 0, 1, 1, 1)
+
+        self.frWps = QFrame(self.frChart)
+        self.frWps.setObjectName(u"frWps")
+        self.frWps.setFrameShape(QFrame.Shape.NoFrame)
+        self.frWps.setFrameShadow(QFrame.Shadow.Raised)
+
+        self.gridLayout.addWidget(self.frWps, 1, 0, 1, 1)
+
+        self.frCipher = QFrame(self.frChart)
+        self.frCipher.setObjectName(u"frCipher")
+        self.frCipher.setFrameShape(QFrame.Shape.NoFrame)
+        self.frCipher.setFrameShadow(QFrame.Shadow.Raised)
+
+        self.gridLayout.addWidget(self.frCipher, 0, 0, 1, 1)
+
+        self.frAuth = QFrame(self.frChart)
+        self.frAuth.setObjectName(u"frAuth")
+        self.frAuth.setFrameShape(QFrame.Shape.NoFrame)
+        self.frAuth.setFrameShadow(QFrame.Shadow.Raised)
+
+        self.gridLayout.addWidget(self.frAuth, 1, 1, 1, 1)
+
 
         self.verticalLayout.addWidget(self.frChart)
+
+        self.lblNotification = QLabel(self.frData)
+        self.lblNotification.setObjectName(u"lblNotification")
+        self.lblNotification.setMinimumSize(QSize(0, 24))
+        self.lblNotification.setMaximumSize(QSize(16777215, 24))
+
+        self.verticalLayout.addWidget(self.lblNotification)
 
         self.stackedWidget.addWidget(self.pageData)
 
@@ -384,7 +424,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -413,5 +453,6 @@ class Ui_Form(object):
         self.lblCardLogo4.setText("")
         self.lblCardName4.setText(QCoreApplication.translate("Form", u"Suspicious APs:", None))
         self.lblCardValue4.setText(QCoreApplication.translate("Form", u"0", None))
+        self.lblNotification.setText(QCoreApplication.translate("Form", u"TextLabel", None))
     # retranslateUi
 

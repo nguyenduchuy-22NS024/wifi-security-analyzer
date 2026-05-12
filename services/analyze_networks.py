@@ -238,16 +238,12 @@ def evaluate_network_quality(details):
 
 
 def analyze_dashboard_stats(networks):
-    """
-    Phân tích danh sách networks để trả về các thông số hiển thị trên Dashboard
-    và dữ liệu cấu trúc cho biểu đồ.
-    """
     stats = {
-        "total_aps": 0,
+        "total_aps": len(networks),
         "strong_security": 0,
         "weak_security": 0,
         "suspicious_aps": 0,
-        # Thống kê chi tiết các cấp độ rủi ro (Risk Levels)
+        # 1. Biểu đồ: Mức độ rủi ro
         "risk_dist": {
             "Very Low Risk": 0,
             "Low Risk": 0,
@@ -256,7 +252,7 @@ def analyze_dashboard_stats(networks):
             "Critical": 0,
             "Unknown": 0,
         },
-        # Thống kê chi tiết loại hình bảo mật (Security Types)
+        # 2. Biểu đồ: Chi tiết chuẩn bảo mật (Ví dụ: WPA3, WPA2...)
         "security_detailed": {
             "WPA3 Only": 0,
             "WPA2/WPA3 Mixed": 0,
@@ -267,34 +263,39 @@ def analyze_dashboard_stats(networks):
             "Open": 0,
             "Others": 0,
         },
-        # Dữ liệu cho biểu đồ
-        "freq_dist": {"2.4 GHz": 0, "5 GHz": 0, "6 GHz": 0},
-        "signal_dist": {"Excellent": 0, "Good": 0, "Fair": 0, "Poor": 0},
-        "security_detailed": defaultdict(
-            int
-        ),  # Phân loại chi tiết (WPA2, WPA3, Open...)
-        "channel_dist": defaultdict(int),  # Mật độ thiết bị trên mỗi kênh
-        "vendor_dist": defaultdict(int),  # Phân phối theo nhà sản xuất (OUI)
+        # 3. Biểu đồ mới: Phân phối Cipher (Mã hóa luồng - Rất quan trọng trong bảo mật)
+        "cipher_dist": {
+            "AES/CCMP (Strong)": 0,
+            "TKIP (Weak/Legacy)": 0,
+            "Mixed (AES+TKIP)": 0,
+            "No Encryption": 0,
+        },
+        # 4. Biểu đồ mới: Trạng thái WPS (Lỗ hổng cực lớn)
+        "wps_dist": {"WPS Enabled (Vulnerable)": 0, "WPS Disabled/Hidden": 0},
+        # 5. Biểu đồ mới: Management Frame Protection (MFP - Chống tấn công ngắt kết nối)
+        "mfp_dist": {"MFP Required": 0, "MFP Capable": 0, "No MFP": 0},
+        # 6. Biểu đồ mới: Loại hình xác thực
+        "auth_dist": {"Personal (PSK)": 0, "Enterprise (802.1X)": 0, "None (Open)": 0},
     }
-
-    stats["total_aps"] = len(networks)
 
     for ap in networks:
         details = ap.get("details", {})
+        all_info_str = str(details).upper()
 
-        # 1. Xử lý Bảo mật
+        # --- A. ĐÁNH GIÁ RỦI RO & CHUẨN BẢO MẬT ---
         sec_label = evaluate_security(details)
 
-        if "Very Low Risk" in sec_label:
+        # Cập nhật risk_dist và strong/weak stats
+        if "Very Low" in sec_label:
             stats["risk_dist"]["Very Low Risk"] += 1
             stats["strong_security"] += 1
         elif "Low Risk" in sec_label:
             stats["risk_dist"]["Low Risk"] += 1
             stats["strong_security"] += 1
-        elif "Medium Risk" in sec_label:
+        elif "Medium" in sec_label:
             stats["risk_dist"]["Medium Risk"] += 1
             stats["strong_security"] += 1
-        elif "High Risk" in sec_label:
+        elif "High" in sec_label:
             stats["risk_dist"]["High Risk"] += 1
             stats["weak_security"] += 1
         elif "Critical" in sec_label:
@@ -303,83 +304,66 @@ def analyze_dashboard_stats(networks):
         else:
             stats["risk_dist"]["Unknown"] += 1
 
-        # Phân loại cho biểu đồ dựa trên cấu trúc key
+        # Cập nhật security_detailed
         if "WPA3-SAE Only" in sec_label:
             stats["security_detailed"]["WPA3 Only"] += 1
-        elif "WPA3 Transition Mode" in sec_label:
+        elif "WPA3 Transition" in sec_label:
             stats["security_detailed"]["WPA2/WPA3 Mixed"] += 1
         elif "Mixed WPA1/WPA2" in sec_label:
             stats["security_detailed"]["WPA1/WPA2 Mixed"] += 1
         elif "WPA2" in sec_label:
-            # Bao gồm WPA2 AES, WPA2 TKIP, WPA2 Enterprise
             stats["security_detailed"]["WPA2 Only"] += 1
-        elif "WPA1 Legacy" in sec_label:
+        elif "WPA1" in sec_label:
             stats["security_detailed"]["WPA1 Legacy"] += 1
         elif "WEP" in sec_label:
             stats["security_detailed"]["WEP"] += 1
-        elif "Open Network" in sec_label:
+        elif "Open" in sec_label:
             stats["security_detailed"]["Open"] += 1
         else:
             stats["security_detailed"]["Others"] += 1
 
-        # 2. Phân phối Băng tần (Frequency)
-        try:
-            freq = float(details.get("freq", 0))
-            if 2400 <= freq < 3000:
-                stats["freq_dist"]["2.4 GHz"] += 1
-            elif 5000 <= freq < 6000:
-                stats["freq_dist"]["5 GHz"] += 1
-            elif freq >= 6000:
-                stats["freq_dist"]["6 GHz"] += 1
-        except:
-            pass
+        # --- B. PHÂN TÍCH CIPHER (MÃ HÓA LUỒNG) ---
+        has_ccmp = "CCMP" in all_info_str or "AES" in all_info_str
+        has_tkip = "TKIP" in all_info_str
+        if "PRIVACY" not in str(details.get("capability", "")).upper():
+            stats["cipher_dist"]["No Encryption"] += 1
+        elif has_ccmp and has_tkip:
+            stats["cipher_dist"]["Mixed (AES+TKIP)"] += 1
+        elif has_tkip:
+            stats["cipher_dist"]["TKIP (Weak/Legacy)"] += 1
+        elif has_ccmp:
+            stats["cipher_dist"]["AES/CCMP (Strong)"] += 1
 
-        # 3. Phân phối Tín hiệu (Signal Strength)
-        try:
-            # Signal format: "-43.00 dBm"
-            sig_raw = details.get("signal", "-100")
-            sig_val = int(float(sig_raw.split()[0]))
+        # --- C. PHÂN TÍCH WPS ---
+        if "WPS" in details or "WI-FI PROTECTED SETUP" in all_info_str:
+            stats["wps_dist"]["WPS Enabled (Vulnerable)"] += 1
+        else:
+            stats["wps_dist"]["WPS Disabled/Hidden"] += 1
 
-            if sig_val >= -50:
-                stats["signal_dist"]["Excellent"] += 1
-            elif -60 <= sig_val < -50:
-                stats["signal_dist"]["Good"] += 1
-            elif -70 <= sig_val < -60:
-                stats["signal_dist"]["Fair"] += 1
-            else:
-                stats["signal_dist"]["Poor"] += 1
-        except:
-            pass
+        # --- D. PHÂN TÍCH MFP (BẢO VỆ KHUNG QUẢN LÝ) ---
+        if "MFP-REQUIRED" in all_info_str:
+            stats["mfp_dist"]["MFP Required"] += 1
+        elif "MFP-CAPABLE" in all_info_str:
+            stats["mfp_dist"]["MFP Capable"] += 1
+        else:
+            stats["mfp_dist"]["No MFP"] += 1
 
-        # 4. Phân phối Kênh (Channel)
-        # Lấy từ "DS Parameter set" hoặc "primary channel"
-        chan = details.get("DS Parameter set") or details.get("HT operation", {}).get(
-            "primary channel"
-        )
-        if chan:
-            stats["channel_dist"][str(chan)] += 1
-
-        # 5. Phân phối Nhà sản xuất (Vendor OUI)
-        bssid = ap.get("bssid", "").upper()
-        if bssid and len(bssid) >= 8:
-            oui = bssid[:8]  # Lấy 3 byte đầu
-            stats["vendor_dist"][oui] += 1
+        # --- E. PHÂN TÍCH LOẠI HÌNH XÁC THỰC ---
+        if "802.1X" in all_info_str or "EAP" in all_info_str:
+            stats["auth_dist"]["Enterprise (802.1X)"] += 1
+        elif "PSK" in all_info_str or "SAE" in all_info_str:
+            stats["auth_dist"]["Personal (PSK)"] += 1
+        else:
+            stats["auth_dist"]["None (Open)"] += 1
 
     # 6. Đếm số lượng AP nghi vấn
-    suspicious_results = detect_suspicious_networks(networks)
-    total_suspicious_count = 0
-    for item in suspicious_results:
-        total_suspicious_count += item.get("ap_count", 0)
-    stats["suspicious_aps"] = total_suspicious_count
-
-    stats["security_detailed"] = dict(stats["security_detailed"])
-    stats["channel_dist"] = dict(
-        sorted(
-            stats["channel_dist"].items(),
-            key=lambda x: int(x[0]) if x[0].isdigit() else 0,
+    try:
+        suspicious_results = detect_suspicious_networks(networks)
+        stats["suspicious_aps"] = sum(
+            item.get("ap_count", 0) for item in suspicious_results
         )
-    )
-    stats["vendor_dist"] = dict(stats["vendor_dist"])
+    except:
+        stats["suspicious_aps"] = 0
 
     return stats
 

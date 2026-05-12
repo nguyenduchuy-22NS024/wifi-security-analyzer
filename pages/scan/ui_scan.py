@@ -229,7 +229,7 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.lblPageIcon.setText("")
-        self.lblPageName.setText(QCoreApplication.translate("Form", u"Scan results", None))
+        self.lblPageName.setText(QCoreApplication.translate("Form", u"Scan", None))
         self.lblStatusIcon.setText("")
         self.lblStatusText.setText(QCoreApplication.translate("Form", u"No data.", None))
         ___qtablewidgetitem = self.tableScanData.horizontalHeaderItem(0)

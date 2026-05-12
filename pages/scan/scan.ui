@@ -110,7 +110,7 @@
          <item>
           <widget class="QLabel" name="lblPageName">
            <property name="text">
-            <string>Scan results</string>
+            <string>Scan</string>
            </property>
           </widget>
          </item>
