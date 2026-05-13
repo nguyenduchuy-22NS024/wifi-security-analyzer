@@ -2,7 +2,149 @@ from services.scan_networks import detect_suspicious_networks, evaluate_security
 import re
 
 
+def process_security_analysis(details, security_status, suspicious_data):
+    """
+    Unified security analysis: Focuses strictly on security configurations for scoring.
+    Performance metrics (Signal/Freq) are excluded from the final score.
+    """
+    score = 80  # Base score for a standard WPA2-PSK network
+    score_breakdown = []
+    pros = []
+    cons = []
+
+    all_info = str(details).upper()
+    ssid = details.get("SSID", "")
+    score_breakdown.append("Base score: " + str(score))
+
+    # 1. CRITICAL FAILURES (Immediate 0 Score)
+    if "Open Network" in security_status or "WEP" in security_status:
+        score = 0
+        score_breakdown.append("Critical: Unencrypted or WEP network detected (0pts)")
+        cons.append(
+            "Unencrypted network: Data transmission is fully visible to attackers."
+        )
+        return score, score_breakdown, pros, cons
+
+    if suspicious_data:
+        score = 0
+        score_breakdown.append("Critical: Rogue AP / Evil Twin detected! (0pts)")
+        cons.append(
+            "Rogue AP indicator: This access point is likely spoofed or malicious."
+        )
+        return score, score_breakdown, pros, cons
+
+    # 2. PROTOCOL & ENCRYPTION BONUSES / PENALTIES
+    # WPA3 SAE Bonus
+    if "WPA3" in security_status and "Transition" not in security_status:
+        score += 15
+        score_breakdown.append("Modern WPA3-SAE encryption (+15pts)")
+        pros.append("Modern WPA3-SAE: Provides the highest level of Wi-Fi security.")
+    elif "Transition" in security_status:
+        score += 5
+        score_breakdown.append("WPA3 Transition Mode active (+5pts)")
+        pros.append(
+            "WPA3 Transition Mode: Supports newer security while maintaining compatibility."
+        )
+
+    # Legacy Protocols Penalties
+    if "WPA1" in security_status:
+        score -= 40
+        score_breakdown.append("Legacy WPA1 protocol detected (-40pts)")
+        cons.append(
+            "Legacy WPA1: Outdated protocol with severe security vulnerabilities."
+        )
+
+    # Cipher Analysis
+    if "TKIP" in security_status:
+        score -= 20
+        score_breakdown.append("Weak TKIP cipher detected (-20pts)")
+        cons.append(
+            "Weak TKIP cipher: Highly susceptible to packet decryption attacks."
+        )
+    elif "AES" in all_info or "CCMP" in all_info:
+        pros.append("Strong encryption algorithm (AES/CCMP) is active.")
+
+    # 3. AUTHENTICATION BONUSES (Enterprise vs Personal)
+    if "802.1X" in all_info or "EAP" in all_info:
+        score += 15
+        score_breakdown.append("Enterprise-grade 802.1X authentication (+15pts)")
+        pros.append(
+            "Enterprise 802.1X (RADIUS): Significantly harder to crack than personal passwords."
+        )
+    else:
+        # Standard PSK deduction (compared to Enterprise)
+        score -= 5
+        score_breakdown.append("Personal PSK authentication (-5pts)")
+        cons.append(
+            "Personal PSK: Vulnerable to offline dictionary and brute-force attacks."
+        )
+
+    # 4. SECURITY FEATURE BONUSES / PENALTIES (WPS & MFP)
+    # WPS Vulnerability
+    if "WPS" in details or "WI-FI PROTECTED SETUP" in all_info:
+        score -= 30
+        score_breakdown.append("Vulnerable WPS protocol enabled (-30pts)")
+        cons.append("WPS enabled: High risk of brute-force attacks on the WPS PIN.")
+
+    # Management Frame Protection (MFP)
+    if "MFP-REQUIRED" in all_info:
+        score += 10
+        score_breakdown.append("MFP Required (+10pts)")
+        pros.append(
+            "Strict MFP: All management frames are cryptographically protected."
+        )
+    elif "MFP-CAPABLE" in all_info:
+        score += 5
+        score_breakdown.append("MFP Capable (+5pts)")
+        pros.append(
+            "MFP Capable: Supports management frame protection for compatible devices."
+        )
+    else:
+        score -= 10
+        score_breakdown.append("MFP missing (-10pts)")
+        cons.append(
+            "Missing MFP: Vulnerable to de-authentication and Wi-Fi jamming attacks."
+        )
+
+    # 5. CONFIGURATION ISSUES
+    if not ssid or "\\x00" in ssid or "<length: 0>" in ssid:
+        score -= 10
+        score_breakdown.append("Hidden SSID configuration (-10pts)")
+        cons.append(
+            "Hidden SSID: Reduces privacy by triggering client device probe leakage."
+        )
+
+    # 6. METADATA FOR PROS/CONS (Not affecting Score)
+    try:
+        freq = float(str(details.get("freq", "0")).split()[0])
+        signal = float(str(details.get("signal", "0")).split()[0])
+
+        if freq > 4000:
+            pros.append(
+                "5GHz Band: Better isolation and lower interference than 2.4GHz."
+            )
+
+        if signal > -50 and signal != 0:
+            pros.append(
+                "Strong signal: High connection stability and resistance to noise."
+            )
+        elif signal < -80 and signal != 0:
+            cons.append(
+                "Weak signal: Poor connectivity may lead to session hijacking risks."
+            )
+    except:
+        pass
+
+    # Final Score Normalization (0-100)
+    score = max(0, min(100, score))
+
+    return score, score_breakdown, pros, cons
+
+
 def analyze_network(target_bssid, networks):
+    """
+    Main analysis function for a specific network.
+    """
     target_bssid = target_bssid.lower()
     net = next(
         (n for n in networks if n.get("bssid", "").lower() == target_bssid), None
@@ -14,29 +156,38 @@ def analyze_network(target_bssid, networks):
     details = net.get("details", {})
     ssid = details.get("SSID", "Unknown")
 
-    # --- Bước 1: Chẩn đoán Bảo mật (Dùng hàm của bạn) ---
+    # Step 1: Security Diagnosis
     security_status = evaluate_security(details)
 
-    # --- Bước 2: Kiểm tra dấu hiệu giả mạo (Rogue AP) ---
-    # Giả định bạn đã có hàm detect_suspicious_networks
-    suspicious_list = detect_suspicious_networks(networks)
+    # Step 2: Rogue AP Check
+    try:
+        suspicious_list = detect_suspicious_networks(networks)
+    except:
+        suspicious_list = []
+
     suspicious_data = next(
         (item for item in suspicious_list if item["bssid"].lower() == target_bssid),
         None,
     )
 
-    # --- Bước 3: Tính điểm & Đánh giá (Module mới) ---
-    final_score, score_breakdown = calculate_security_score(
+    # Step 3: Scoring & Detail Evaluation
+    final_score, score_breakdown, pros, cons = process_security_analysis(
         details, security_status, suspicious_data
     )
-    analysis = evaluate_security_pros_cons(details, security_status, suspicious_data)
 
-    # Thu thập metadata cơ bản
-    freq = float(details.get("freq", 0))
+    # Basic Metadata collection
+    try:
+        freq_str = details.get("freq", "0")
+        freq = float(str(freq_str).split()[0])
+    except:
+        freq = 0
+
     band = "5GHz" if freq > 4000 else "2.4GHz"
     channel = details.get("DS Parameter set", "N/A")
-    signal = details.get("signal", "N/A")
+    signal_raw = details.get("signal", "N/A")
+    signal = signal_raw.split()[0] if " " in str(signal_raw) else signal_raw
 
+    # Return structure maintained as requested
     return {
         "SSID": ssid,
         "BSSID": target_bssid.upper(),
@@ -46,144 +197,11 @@ def analyze_network(target_bssid, networks):
         "Signal": signal,
         "Score": final_score,
         "ScoreBreakdown": score_breakdown,
-        "Pros": analysis["pros"],
-        "Cons": analysis["cons"],
+        "Pros": pros,
+        "Cons": cons,
         "IsRogue": True if suspicious_data else False,
         "Details": details,
     }
-
-
-def calculate_security_score(details, security_status, suspicious_data):
-    """
-    Tính điểm tập trung hoàn toàn vào bảo mật.
-    Thang điểm 100.
-    """
-    score = 100
-    breakdown = []
-
-    # --- 1. Đánh giá dựa trên chuẩn mã hóa (Từ hàm evaluate_security) ---
-    if "Critical" in security_status:
-        score = 10
-        breakdown.append(
-            f"+ CRITICAL: Protocol is severely flawed ({security_status}): 10pts"
-        )
-    elif "High Risk" in security_status:
-        score = 40
-        breakdown.append(
-            f"+ HIGH RISK: Legacy or mixed encryption ({security_status}): 40pts"
-        )
-    elif "Medium Risk" in security_status:
-        score = 70
-        breakdown.append(f"+ MEDIUM RISK: Standard protection ({security_status}): 70pts")
-    elif "Low Risk" in security_status or "Very Low Risk" in security_status:
-        score = 95
-        breakdown.append(f"+ SECURE: Modern encryption ({security_status}): 95pts")
-        if "WPA3" in security_status:
-            score = 100
-            breakdown.append("+ BONUS: Cutting-edge WPA3 protection: 5pts")
-
-    # --- 2. Hình phạt bổ sung (Vulnerabilities) ---
-    # WPS là lỗ hổng cực nghiêm trọng
-    if "WPS Enabled" in security_status:
-        score -= 40
-        breakdown.append(
-            "- VULNERABILITY: WPS Enabled (Pixie-Dust/Brute-force risk): -40pts"
-        )
-
-    # Management Frame Protection (MFP)
-    if "MFP Protected" not in security_status and score > 20:
-        score -= 10
-        breakdown.append(
-            "- WARNING: MFP not active (Vulnerable to De-auth attacks): -10pts"
-        )
-
-    # Hidden SSID (Không tăng bảo mật, chỉ gây rối)
-    if details.get("SSID") == "" or "length: 0" in str(details):
-        score -= 5
-        breakdown.append("- INFO: Hidden SSID (Ineffective security-by-obscurity): 5pts")
-
-    # --- 3. Hình phạt từ hệ thống phát hiện Rogue AP ---
-    if suspicious_data:
-        risk_lvl = suspicious_data["risk_level"]
-        if risk_lvl == "CRITICAL":
-            score = 0
-            breakdown.append(
-                "- ALERT: Confirmed Rogue AP/Evil Twin detected: SCORE RESET TO 0"
-            )
-        elif risk_lvl == "HIGH":
-            score -= 50
-            breakdown.append(
-                "- ALERT: Highly suspicious activity (MAC Spoofing?): -50pts"
-            )
-
-    # Tín hiệu quá mạnh (Nghi vấn AP giả ngay cạnh)
-    try:
-        signal = int(float(details.get("signal", "-100").split()[0]))
-        if signal > -25:
-            score -= 15
-            breakdown.append(
-                f"- WARNING: Signal too strong ({signal} dBm), potential Evil Twin: -15pts"
-            )
-    except:
-        pass
-
-    final_score = max(0, min(100, score))
-    return final_score, breakdown
-
-
-def evaluate_security_pros_cons(details, security_status, suspicious_data):
-    pros = []
-    cons = []
-
-    # Phân tích từ security_status
-    if "WPA3" in security_status:
-        pros.append(
-            "Modern Encryption: WPA3 (SAE) provides robust protection against offline dictionary attacks"
-        )
-    if "Enterprise" in security_status:
-        pros.append(
-            "Enterprise Auth: 802.1X provides individual credentials, increasing accountability"
-        )
-    if "MFP Protected" in security_status:
-        pros.append(
-            "Anti-Deauth: Management Frame Protection (MFP) prevents forced disconnections"
-        )
-    if "AES" in security_status or "CCMP" in security_status:
-        pros.append(
-            "Strong Cipher: CCMP/AES is a secure, hardware-accelerated encryption method"
-        )
-
-    # Phân tích nhược điểm
-    if "Critical" in security_status or "Open" in security_status:
-        cons.append("CRITICAL: Network is unencrypted. Anyone can sniff your traffic")
-    if "WPS Enabled" in security_status:
-        cons.append(
-            "VULNERABILITY: WPS is ON. Attackers can recover your password via PIN brute-force"
-        )
-    if "TKIP" in security_status:
-        cons.append(
-            "Legacy Cipher: TKIP is deprecated and vulnerable to decryption attacks"
-        )
-
-    # Rogue AP
-    if suspicious_data:
-        cons.append(
-            f"SPOOFING ALERT: This AP matches a known SSID but has suspicious characteristics ({suspicious_data['risk_level']})"
-        )
-        for reason in suspicious_data.get("reasons", []):
-            cons.append(f"Risk Factor: {reason}")
-
-    # Tín hiệu & Vật lý
-    try:
-        signal = int(float(details.get("signal", "-100").split()[0]))
-        if signal < -80:
-            cons.append(
-                "DoS Risk: Signal is too weak, easily disrupted by noise or intentional jamming"
-            )
-    except:
-        pass
-
-    return {"pros": pros, "cons": cons}
 
 
 def analyze_dashboard_stats(networks):

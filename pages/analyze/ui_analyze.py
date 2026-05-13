@@ -141,7 +141,7 @@ class Ui_Form(object):
         self.frInfoScore = QFrame(self.frData)
         self.frInfoScore.setObjectName(u"frInfoScore")
         self.frInfoScore.setMinimumSize(QSize(0, 192))
-        self.frInfoScore.setMaximumSize(QSize(16777215, 192))
+        self.frInfoScore.setMaximumSize(QSize(16777215, 16777215))
         self.frInfoScore.setStyleSheet(u"#lblInfoScoreHeader {\n"
 "	font-size: 16px;\n"
 "	font-weight: bold;\n"
@@ -251,8 +251,8 @@ class Ui_Form(object):
 
         self.frDetails = QFrame(self.frData)
         self.frDetails.setObjectName(u"frDetails")
-        self.frDetails.setMinimumSize(QSize(0, 250))
-        self.frDetails.setMaximumSize(QSize(16777215, 250))
+        self.frDetails.setMinimumSize(QSize(0, 0))
+        self.frDetails.setMaximumSize(QSize(16777215, 16777215))
         self.frDetails.setStyleSheet(u"#lblDetailsHeader {\n"
 "	font-size: 16px;\n"
 "	font-weight: bold;\n"
@@ -291,6 +291,8 @@ class Ui_Form(object):
 
         self.frSummary = QFrame(self.frData)
         self.frSummary.setObjectName(u"frSummary")
+        self.frSummary.setMinimumSize(QSize(0, 0))
+        self.frSummary.setMaximumSize(QSize(16777215, 16777215))
         self.frSummary.setStyleSheet(u"#lblSummaryHeader {\n"
 "	font-size: 16px;\n"
 "	font-weight: bold;\n"
