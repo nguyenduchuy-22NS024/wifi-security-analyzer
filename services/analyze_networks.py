@@ -4,17 +4,16 @@ import re
 
 def process_security_analysis(details, security_status, suspicious_data):
     """
-    Unified security analysis: Focuses strictly on security configurations for scoring.
-    Performance metrics (Signal/Freq) are excluded from the final score.
+    Unified security analysis: Includes specific evaluations for Mixed Mode configurations.
     """
-    score = 80  # Base score for a standard WPA2-PSK network
+    score = 80  # Base score for a standard WPA2-PSK (AES Only) network
     score_breakdown = []
     pros = []
     cons = []
+    score_breakdown.append(f"Base score: {score}")
 
     all_info = str(details).upper()
     ssid = details.get("SSID", "")
-    score_breakdown.append("Base score: " + str(score))
 
     # 1. CRITICAL FAILURES (Immediate 0 Score)
     if "Open Network" in security_status or "WEP" in security_status:
@@ -33,109 +32,118 @@ def process_security_analysis(details, security_status, suspicious_data):
         )
         return score, score_breakdown, pros, cons
 
-    # 2. PROTOCOL & ENCRYPTION BONUSES / PENALTIES
-    # WPA3 SAE Bonus
-    if "WPA3" in security_status and "Transition" not in security_status:
-        score += 15
-        score_breakdown.append("Modern WPA3-SAE encryption (+15pts)")
-        pros.append("Modern WPA3-SAE: Provides the highest level of Wi-Fi security.")
-    elif "Transition" in security_status:
-        score += 5
-        score_breakdown.append("WPA3 Transition Mode active (+5pts)")
-        pros.append(
-            "WPA3 Transition Mode: Supports newer security while maintaining compatibility."
-        )
+    # 2. PROTOCOL & MIXED MODE EVALUATION
+    # Case A: WPA3 SAE (Pure or Transition)
+    if "WPA3" in security_status:
+        if "Transition" in security_status or "Mixed" in security_status:
+            score += 5
+            score_breakdown.append("WPA2/WPA3 Mixed Mode (Transition) detected (+5pts)")
+            pros.append(
+                "WPA3 Support: Provides enhanced security for compatible modern devices."
+            )
+            cons.append(
+                "Mixed Mode: Maintains WPA2 compatibility, which may allow downgrade attacks."
+            )
+        else:
+            score += 20  # Premium score for pure WPA3
+            score_breakdown.append("Pure WPA3-SAE encryption (+20pts)")
+            pros.append(
+                "Pure WPA3-SAE: Highest security standard with mandatory protection features."
+            )
 
-    # Legacy Protocols Penalties
-    if "WPA1" in security_status:
-        score -= 40
-        score_breakdown.append("Legacy WPA1 protocol detected (-40pts)")
+    # Case B: WPA1/WPA2 Mixed
+    elif "Mixed" in security_status and "WPA1" in security_status:
+        score -= 30
+        score_breakdown.append("Legacy Mixed Mode (WPA1/WPA2) detected (-30pts)")
         cons.append(
-            "Legacy WPA1: Outdated protocol with severe security vulnerabilities."
+            "Legacy Mixed Mode: Compromises security by supporting outdated WPA1 protocols."
         )
 
-    # Cipher Analysis
+    # Case C: Pure Legacy WPA1
+    elif "WPA1" in security_status and "WPA2" not in security_status:
+        score -= 50
+        score_breakdown.append("Legacy WPA1 protocol only (-50pts)")
+        cons.append("Legacy WPA1: Highly vulnerable and obsolete encryption protocol.")
+
+    # 3. CIPHER ANALYSIS (TKIP vs AES)
     if "TKIP" in security_status:
         score -= 20
         score_breakdown.append("Weak TKIP cipher detected (-20pts)")
         cons.append(
-            "Weak TKIP cipher: Highly susceptible to packet decryption attacks."
+            "Weak TKIP cipher: Outdated encryption susceptible to packet decryption."
         )
     elif "AES" in all_info or "CCMP" in all_info:
-        pros.append("Strong encryption algorithm (AES/CCMP) is active.")
+        pros.append(
+            "Strong AES/CCMP encryption: The current industry standard for data privacy."
+        )
 
-    # 3. AUTHENTICATION BONUSES (Enterprise vs Personal)
+    # 4. AUTHENTICATION BONUSES
     if "802.1X" in all_info or "EAP" in all_info:
         score += 15
         score_breakdown.append("Enterprise-grade 802.1X authentication (+15pts)")
         pros.append(
-            "Enterprise 802.1X (RADIUS): Significantly harder to crack than personal passwords."
+            "802.1X Enterprise: Strongest authentication method using individual credentials."
         )
     else:
-        # Standard PSK deduction (compared to Enterprise)
         score -= 5
         score_breakdown.append("Personal PSK authentication (-5pts)")
         cons.append(
             "Personal PSK: Vulnerable to offline dictionary and brute-force attacks."
         )
 
-    # 4. SECURITY FEATURE BONUSES / PENALTIES (WPS & MFP)
+    # 5. SECURITY FEATURE BONUSES / PENALTIES
     # WPS Vulnerability
     if "WPS" in details or "WI-FI PROTECTED SETUP" in all_info:
         score -= 30
         score_breakdown.append("Vulnerable WPS protocol enabled (-30pts)")
-        cons.append("WPS enabled: High risk of brute-force attacks on the WPS PIN.")
+        cons.append(
+            "WPS enabled: Vulnerable to PIN brute-force attacks (e.g., Reaver/Bully)."
+        )
 
     # Management Frame Protection (MFP)
     if "MFP-REQUIRED" in all_info:
         score += 10
-        score_breakdown.append("MFP Required (+10pts)")
-        pros.append(
-            "Strict MFP: All management frames are cryptographically protected."
-        )
+        score_breakdown.append("Strict MFP Requirement (+10pts)")
+        pros.append("Strict MFP: Protects all management frames from being spoofed.")
     elif "MFP-CAPABLE" in all_info:
         score += 5
         score_breakdown.append("MFP Capable (+5pts)")
         pros.append(
-            "MFP Capable: Supports management frame protection for compatible devices."
+            "MFP Capable: Offers protection for management frames if supported by clients."
         )
     else:
         score -= 10
         score_breakdown.append("MFP missing (-10pts)")
         cons.append(
-            "Missing MFP: Vulnerable to de-authentication and Wi-Fi jamming attacks."
+            "Missing MFP: Vulnerable to targeted de-authentication (disconnection) attacks."
         )
 
-    # 5. CONFIGURATION ISSUES
+    # 6. CONFIGURATION ISSUES
     if not ssid or "\\x00" in ssid or "<length: 0>" in ssid:
         score -= 10
-        score_breakdown.append("Hidden SSID configuration (-10pts)")
+        score_breakdown.append("Hidden SSID detected (-10pts)")
         cons.append(
-            "Hidden SSID: Reduces privacy by triggering client device probe leakage."
+            "Hidden SSID: Leaks device information through constant probe requests."
         )
 
-    # 6. METADATA FOR PROS/CONS (Not affecting Score)
+    # 7. PERFORMANCE METADATA (Pros/Cons Only)
     try:
         freq = float(str(details.get("freq", "0")).split()[0])
         signal = float(str(details.get("signal", "0")).split()[0])
-
         if freq > 4000:
             pros.append(
-                "5GHz Band: Better isolation and lower interference than 2.4GHz."
+                "5GHz Band: Higher bandwidth and lower interference than 2.4GHz."
             )
-
         if signal > -50 and signal != 0:
-            pros.append(
-                "Strong signal: High connection stability and resistance to noise."
-            )
+            pros.append("Excellent signal: High connection stability and SNR.")
         elif signal < -80 and signal != 0:
             cons.append(
-                "Weak signal: Poor connectivity may lead to session hijacking risks."
+                "Weak signal: Unreliable connection might risk session hijacking."
             )
     except:
         pass
 
-    # Final Score Normalization (0-100)
+    # Final Score Normalization
     score = max(0, min(100, score))
 
     return score, score_breakdown, pros, cons
