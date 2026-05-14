@@ -118,7 +118,7 @@ class ScanPage(QWidget):
         menu = QMenu()
 
         # Add actions to the context menu
-        action_attack = menu.addAction("Attack")
+        # action_add_whitelist = menu.addAction("Add to whitelist")
         action_analyze = menu.addAction("Analyze")
 
         # Get the row that was right-clicked
@@ -133,13 +133,13 @@ class ScanPage(QWidget):
 
         if action == action_analyze:
             self.analyze_network(row)
-        elif action == action_attack:
-            self.attack_network(row)
+        # elif action == action_add_whitelist:
+        #     self.add_whitelist_network(row)
 
     def analyze_network(self, row):
         bssid = self.ui.tableScanData.item(row, 2).text()
         self.analyze_bssid.emit(bssid, self.networks)
 
-    def attack_network(self, row):
+    def add_whitelist_network(self, row):
         bssid = self.ui.tableScanData.item(row, 2).text()
         print(bssid)

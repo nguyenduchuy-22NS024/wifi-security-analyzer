@@ -56,7 +56,7 @@ class AnalyzePage(QWidget):
         self.ui.lblBSSID.setText(f"BSSID: {data['BSSID']}")
         self.ui.lblSecurity.setText(f"Security: {data['Security']}")
         self.ui.lblFreqChan.setText(f"Channel: {data['Channel']}")
-        # self.ui.lblInterface.setText(f"Interface: {data['Interface']}")
+        self.ui.lblInterface.setText(f"Interface: {data['Interface']}")
         self.ui.lblScore.setText(f"Overall Score: {data['Score']}")
 
         # 3. Làm sạch dữ liệu cũ

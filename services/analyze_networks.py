@@ -173,10 +173,7 @@ def analyze_network(target_bssid, networks):
     except:
         suspicious_list = []
 
-    suspicious_data = next(
-        (item for item in suspicious_list if item["bssid"].lower() == target_bssid),
-        None,
-    )
+    suspicious_data = None
 
     # Step 3: Scoring & Detail Evaluation
     final_score, score_breakdown, pros, cons = process_security_analysis(
@@ -193,6 +190,7 @@ def analyze_network(target_bssid, networks):
     band = "5GHz" if freq > 4000 else "2.4GHz"
     channel = details.get("DS Parameter set", "N/A")
     signal_raw = details.get("signal", "N/A")
+    interface = details.get("Interface", "N/A")
     signal = signal_raw.split()[0] if " " in str(signal_raw) else signal_raw
 
     # Return structure maintained as requested
@@ -204,6 +202,7 @@ def analyze_network(target_bssid, networks):
         "Channel": channel,
         "Signal": signal,
         "Score": final_score,
+        "Interface": interface,
         "ScoreBreakdown": score_breakdown,
         "Pros": pros,
         "Cons": cons,
