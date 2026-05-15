@@ -122,122 +122,148 @@ def detect_suspicious_networks(networks):
         if len(aps) <= 1:
             continue
 
-        reasons = []
-        score = 0
+        # Gom nhóm theo tiền tố MAC (4 cặp đầu) để xác định các cụm AP vật lý "họ hàng"
+        mac_clusters = defaultdict(list)
+        for ap in aps:
+            prefix = ":".join(ap["bssid"].upper().split(":")[:4])
+            mac_clusters[prefix].append(ap)
 
-        # --- Rule 1: Security Mismatch (Trọng số cao nhất: 80đ) ---
-        securities = set()
+        # Baseline: Tìm đặc điểm chung của số đông AP trong SSID này (giả định là mạng thật)
+        # 1. Vendor phổ biến nhất
+        vendor_counts = defaultdict(int)
+        for ap in aps:
+            vendor_counts[ap["bssid"].upper()[:8]] += 1
+        common_vendor = max(vendor_counts, key=vendor_counts.get)
+
+        # 2. Capabilities phổ biến nhất (Dấu vân tay phần cứng)
+        cap_counts = defaultdict(int)
         for ap in aps:
             dtl = ap.get("details", {})
-            sec_type = "Open"
-            if "RSN" in dtl or "WPA" in dtl:
-                sec_type = "Encrypted"
-            securities.add(sec_type)
-
-        if len(securities) > 1:
-            reasons.append(
-                "Security mismatch (Found Open and Encrypted APs with same SSID)"
+            # Tạo một chuỗi định danh phần cứng từ các hex capabilities
+            hw_sig = (
+                f"HT:{dtl.get('HT capabilities', {}).get('Capabilities', 'None')}|"
+                f"VHT:{dtl.get('VHT capabilities', {}).get('VHT Capabilities (hex)', 'None')}|"
+                f"HE:{dtl.get('HE capabilities', {}).get('HE MAC Capabilities', 'None')}"
             )
-            score += 80
+            cap_counts[hw_sig] += 1
+        common_hw_sig = max(cap_counts, key=cap_counts.get)
 
-        # --- Rule 2: 5G SSID on 2.4GHz Frequency (Trọng số: 60đ) ---
-        # Tên mạng ghi 5G nhưng tần số phát lại là 2.4GHz (dấu hiệu lừa đảo kỹ thuật).
-        freq_anomaly = False
-        for ap in aps:
+        # Duyệt từng AP để tính điểm nghi vấn (Anomaly Detection)
+        for target_ap in aps:
+            reasons = []
+            score = 0
+            dtl = target_ap.get("details", {})
+            bssid = target_ap["bssid"].upper()
+
+            # --- Rule 1: Security Mismatch (80đ) ---
+            # Nếu AP này là Open trong khi số đông là Encrypted
+            is_open = "RSN" not in dtl and "WPA" not in dtl
+            has_encrypted_peers = any(
+                ("RSN" in a.get("details", {}) or "WPA" in a.get("details", {}))
+                for a in aps
+                if a != target_ap
+            )
+            if is_open and has_encrypted_peers:
+                reasons.append(
+                    "Security Mismatch: AP is OPEN while others are Encrypted"
+                )
+                score += 80
+
+            # --- Rule 2: MAC Spoofing Detection - HW Sig (70đ) ---
+            # Dù MAC có thể giả mạo, nhưng Hex Capabilities của chipset rất khó giả mạo giống hệt
+            target_hw_sig = (
+                f"HT:{dtl.get('HT capabilities', {}).get('Capabilities', 'None')}|"
+                f"VHT:{dtl.get('VHT capabilities', {}).get('VHT Capabilities (hex)', 'None')}|"
+                f"HE:{dtl.get('HE capabilities', {}).get('HE MAC Capabilities', 'None')}"
+            )
+            if target_hw_sig != common_hw_sig and len(cap_counts) > 1:
+                reasons.append(f"Hardware Signature Mismatch (Possible MAC Spoofing)")
+                score += 70
+
+            # --- Rule 3: Signal Strength Anomaly (60đ) ---
+            # Tín hiệu quá mạnh thường là do kẻ giả mạo ngồi ngay cạnh nạn nhân
             try:
-                freq = float(ap.get("details", {}).get("freq", 0))
-                if "5G" in ssid.upper() and freq < 3000:
-                    freq_anomaly = True
-                    break
+                sig_val = float(dtl.get("signal", "0").split()[0])
+                if sig_val > -30:
+                    reasons.append(
+                        f"Signal strength anomaly ({sig_val} dBm) - Device very close"
+                    )
+                    score += 60
             except:
                 pass
-        if freq_anomaly:
-            reasons.append("Frequency anomaly (5G SSID detected on 2.4GHz band)")
-            score += 60
 
-        # --- Rule 3: Capability/Standard Mismatch (Trọng số: 40đ) ---
-        # Một AP dùng WiFi 6 (HE), một AP cùng tên chỉ dùng WiFi 4 (HT).
-        standards = set()
-        for ap in aps:
-            dtl = ap.get("details", {})
-            if "HE capabilities" in dtl:
-                standards.add("WiFi 6")
-            elif "VHT capabilities" in dtl:
-                standards.add("WiFi 5")
-            elif "HT capabilities" in dtl:
-                standards.add("WiFi 4")
-
-        if len(standards) > 1:
-            reasons.append(f"Hardware capability mismatch: {list(standards)}")
-            score += 40
-
-        # --- Rule 4: Vendor (OUI) Mismatch (Trọng số: 30đ) ---
-        # Các hệ thống Mesh doanh nghiệp thường dùng cùng 1 hãng thiết bị.
-        ouis = set(ap["bssid"].upper()[:8] for ap in aps)
-        if len(ouis) > 1:
-            reasons.append(f"Vendor mismatch (Multiple manufacturers: {list(ouis)})")
-            score += 30
-
-        # --- Rule 5: TSF Anomaly - Uptime (Trọng số: 25đ) ---
-        # AP mới dựng (giả mạo) có thời gian hoạt động cực thấp so với AP thật.
-        tsf_values = []
-        for ap in aps:
+            # --- Rule 4: TSF Anomaly - Uptime (50đ) ---
+            # Nếu AP này có uptime cực thấp trong khi cụm MAC "họ hàng" có uptime cực cao
             try:
-                tsf = ap.get("details", {}).get("TSF", "").split()[0]
-                if tsf:
-                    tsf_values.append(int(tsf))
+                target_tsf = int(dtl.get("TSF", "0").split()[0])
+                peer_tsfs = [
+                    int(a.get("details", {}).get("TSF", "0").split()[0])
+                    for a in aps
+                    if a != target_ap
+                ]
+                if peer_tsfs and target_tsf < max(peer_tsfs) / 100:  # Thấp hơn 100 lần
+                    reasons.append(
+                        "TSF Anomaly: Uptime is significantly lower than peers"
+                    )
+                    score += 50
             except:
                 pass
-        if len(tsf_values) > 1:
-            diff_days = (max(tsf_values) - min(tsf_values)) / (10**6 * 3600 * 24)
-            if diff_days > 10:  # Chênh lệch trên 10 ngày
-                reasons.append(f"Significant uptime difference ({diff_days:.1f} days)")
-                score += 25
 
-        # --- Rule 6: Country Code Mismatch (Trọng số: 15đ) ---
-        countries = set(
-            ap.get("details", {}).get("Country", {}).get("Code") for ap in aps
-        )
-        countries.discard(None)
-        if len(countries) > 1:
-            reasons.append(f"Regulatory domain mismatch: {countries}")
-            score += 15
+            # --- Rule 5: Vendor Mismatch (40đ) ---
+            if bssid[:8] != common_vendor:
+                reasons.append(f"Vendor Mismatch: {bssid[:8]} (Main: {common_vendor})")
+                score += 40
 
-        # Giới hạn điểm tối đa là 100
-        final_score = min(100, score)
+            # --- Rule 6: Information Elements Inconsistency (30đ) ---
+            # Kiểm tra Country Code và BSS Color
+            target_cc = dtl.get("Country", {}).get("Code")
+            target_color = dtl.get("HE Operation", {}).get("BSS Color")
 
-        # Phân loại rủi ro theo thang điểm 100
-        if final_score > 0:
-            risk_level = "Informational"
-            if final_score >= 85:
-                risk_level = "CRITICAL"
-            elif final_score >= 60:
-                risk_level = "HIGH"
-            elif final_score >= 30:
-                risk_level = "MEDIUM"
-            else:
+            # Lấy CC và Color phổ biến nhất trong nhóm
+            all_cc = [
+                a.get("details", {}).get("Country", {}).get("Code")
+                for a in aps
+                if a.get("details", {}).get("Country", {}).get("Code")
+            ]
+            all_color = [
+                a.get("details", {}).get("HE Operation", {}).get("BSS Color")
+                for a in aps
+                if a.get("details", {}).get("HE Operation", {}).get("BSS Color")
+            ]
+
+            if all_cc and target_cc and target_cc != max(set(all_cc), key=all_cc.count):
+                reasons.append(f"Country Code mismatch: {target_cc}")
+                score += 30
+            if (
+                all_color
+                and target_color
+                and target_color != max(set(all_color), key=all_color.count)
+            ):
+                reasons.append(f"BSS Color mismatch: {target_color}")
+                score += 20
+
+            # --- Tổng hợp kết quả cho từng AP nghi vấn ---
+            final_score = min(100, score)
+            if final_score >= 30:
                 risk_level = "LOW"
+                if final_score >= 85:
+                    risk_level = "CRITICAL"
+                elif final_score >= 60:
+                    risk_level = "HIGH"
+                elif final_score >= 40:
+                    risk_level = "MEDIUM"
 
-            suspicious_results.append(
-                {
-                    "ssid": ssid,
-                    "risk_level": risk_level,
-                    "risk_score": final_score,
-                    "reasons": reasons,
-                    "ap_count": len(aps),
-                    "details": [
-                        {
-                            "bssid": a["bssid"],
-                            "freq": a.get("details", {}).get("freq"),
-                            "signal": a.get("details", {}).get("signal"),
-                            "vendor_oui": a["bssid"].upper()[:8],
-                        }
-                        for a in aps
-                    ],
-                }
-            )
+                suspicious_results.append(
+                    {
+                        "ssid": ssid,
+                        "bssid": target_ap["bssid"],
+                        "risk_level": risk_level,
+                        "risk_score": final_score,
+                        "reasons": list(set(reasons)),
+                        "signal": dtl.get("signal"),
+                    }
+                )
 
-    # Sắp xếp kết quả theo điểm số giảm dần
     return sorted(suspicious_results, key=lambda x: x["risk_score"], reverse=True)
 
 
