@@ -138,6 +138,13 @@
           </spacer>
          </item>
          <item>
+          <widget class="QPushButton" name="btnTrusted">
+           <property name="text">
+            <string>Trusted</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="btnReport">
            <property name="cursor">
             <cursorShape>PointingHandCursor</cursorShape>
@@ -738,6 +745,18 @@
                     </property>
                     <item>
                      <widget class="QFrame" name="frPros">
+                      <property name="minimumSize">
+                       <size>
+                        <width>497</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>497</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
                       <property name="styleSheet">
                        <string notr="true">#lblProsHeader {
 	font-size: 14px;

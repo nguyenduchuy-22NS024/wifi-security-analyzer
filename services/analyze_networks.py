@@ -4,7 +4,7 @@ import re
 
 def process_security_analysis(details, security_status):
     """
-    Unified security analysis: Includes specific evaluations for Mixed Mode configurations.
+    Unified security analysis: Returns score, breakdown, pros, and cons with integrated solutions.
     """
     score = 80  # Base score for a standard WPA2-PSK (AES Only) network
     score_breakdown = []
@@ -17,97 +17,115 @@ def process_security_analysis(details, security_status):
 
     # 1. CRITICAL FAILURES (Immediate 0 Score)
     if "Open Network" in security_status or "WEP" in security_status:
-        score = 0
-        score_breakdown.append("Critical: Unencrypted or WEP network detected (0pts)")
-        cons.append(
-            "Unencrypted network: Data transmission is fully visible to attackers."
-        )
-        return score, score_breakdown, pros, cons
+        issue = "Unencrypted network or WEP detected."
+        solution = "Immediately access your router settings and set a strong password using WPA2-AES or WPA3-SAE. Open/WEP networks allow anyone to steal your data."
+        cons.append({"issue": issue, "solution": solution})
+        return 0, ["Critical: Insecure encryption (0pts)"], [], cons
 
     # 2. PROTOCOL & MIXED MODE EVALUATION
     # Case A: WPA3 SAE (Pure or Transition)
     if "WPA3" in security_status:
         if "Transition" in security_status or "Mixed" in security_status:
             score += 5
-            score_breakdown.append("WPA2/WPA3 Mixed Mode (Transition) detected (+5pts)")
-            pros.append(
-                "WPA3 Support: Provides enhanced security for compatible modern devices."
-            )
+            score_breakdown.append("WPA2/WPA3 Mixed Mode (+5pts)")
+            pros.append("WPA3 Support: Enhanced security for modern devices.")
             cons.append(
-                "Mixed Mode: Maintains WPA2 compatibility, which may allow downgrade attacks."
+                {
+                    "issue": "WPA3 Transition Mode: Maintains compatibility with older WPA2 devices.",
+                    "solution": "If all your devices support WPA3, switch the router to 'WPA3-SAE Only' mode to prevent Downgrade Attacks.",
+                }
             )
         else:
-            score += 20  # Premium score for pure WPA3
+            score += 20
             score_breakdown.append("Pure WPA3-SAE encryption (+20pts)")
             pros.append(
-                "Pure WPA3-SAE: Highest security standard with mandatory protection features."
+                "Pure WPA3-SAE: Maximum security with mandatory protection features."
             )
 
     # Case B: WPA1/WPA2 Mixed
     elif "Mixed" in security_status and "WPA1" in security_status:
         score -= 30
-        score_breakdown.append("Legacy Mixed Mode (WPA1/WPA2) detected (-30pts)")
+        score_breakdown.append("Legacy Mixed Mode (WPA1/WPA2) (-30pts)")
         cons.append(
-            "Legacy Mixed Mode: Compromises security by supporting outdated WPA1 protocols."
+            {
+                "issue": "Legacy Mixed Mode: Supports outdated WPA1 protocols.",
+                "solution": "Update router configuration to 'WPA2-AES Only'. Supporting WPA1 makes your network vulnerable to older exploits.",
+            }
         )
 
     # Case C: Pure Legacy WPA1
     elif "WPA1" in security_status and "WPA2" not in security_status:
         score -= 50
         score_breakdown.append("Legacy WPA1 protocol only (-50pts)")
-        cons.append("Legacy WPA1: Highly vulnerable and obsolete encryption protocol.")
+        cons.append(
+            {
+                "issue": "Legacy WPA1: Obsolete and highly vulnerable encryption.",
+                "solution": "Upgrade your router or firmware immediately. WPA1 is no longer considered secure against modern hacking tools.",
+            }
+        )
 
     # 3. CIPHER ANALYSIS (TKIP vs AES)
     if "TKIP" in security_status:
         score -= 20
         score_breakdown.append("Weak TKIP cipher detected (-20pts)")
         cons.append(
-            "Weak TKIP cipher: Outdated encryption susceptible to packet decryption."
+            {
+                "issue": "Weak TKIP cipher: Susceptible to packet decryption.",
+                "solution": "Change 'Encryption Type' from 'TKIP' or 'Auto' to 'AES' or 'CCMP' in your wireless security settings.",
+            }
         )
     elif "AES" in all_info or "CCMP" in all_info:
         pros.append(
             "Strong AES/CCMP encryption: The current industry standard for data privacy."
         )
 
-    # 4. AUTHENTICATION BONUSES
+    # 4. AUTHENTICATION
     if "802.1X" in all_info or "EAP" in all_info:
         score += 15
         score_breakdown.append("Enterprise-grade 802.1X authentication (+15pts)")
         pros.append(
-            "802.1X Enterprise: Strongest authentication method using individual credentials."
+            "802.1X Enterprise: Strongest authentication using individual credentials."
         )
     else:
         score -= 5
         score_breakdown.append("Personal PSK authentication (-5pts)")
         cons.append(
-            "Personal PSK: Vulnerable to offline dictionary and brute-force attacks."
+            {
+                "issue": "Personal PSK: Vulnerable to offline dictionary/brute-force attacks.",
+                "solution": "Use a complex password (12+ characters, mixed cases, numbers, symbols) and change it periodically.",
+            }
         )
 
-    # 5. SECURITY FEATURE BONUSES / PENALTIES
-    # WPS Vulnerability
+    # 5. SECURITY FEATURES (WPS & MFP)
     if "WPS" in details or "WI-FI PROTECTED SETUP" in all_info:
         score -= 30
         score_breakdown.append("Vulnerable WPS protocol enabled (-30pts)")
         cons.append(
-            "WPS enabled: Vulnerable to PIN brute-force attacks (e.g., Reaver/Bully)."
+            {
+                "issue": "WPS enabled: High risk of PIN brute-force attacks.",
+                "solution": "Disable WPS (Wi-Fi Protected Setup) in your router's advanced settings to prevent tools like Reaver/Bully from cracking your PIN.",
+            }
         )
 
     # Management Frame Protection (MFP)
     if "MFP-REQUIRED" in all_info:
         score += 10
         score_breakdown.append("Strict MFP Requirement (+10pts)")
-        pros.append("Strict MFP: Protects all management frames from being spoofed.")
+        pros.append("Strict MFP: Protects all management frames from spoofing.")
     elif "MFP-CAPABLE" in all_info:
         score += 5
         score_breakdown.append("MFP Capable (+5pts)")
         pros.append(
-            "MFP Capable: Offers protection for management frames if supported by clients."
+            "MFP Capable: Supports management frame protection for compatible clients."
         )
     else:
         score -= 10
         score_breakdown.append("MFP missing (-10pts)")
         cons.append(
-            "Missing MFP: Vulnerable to targeted de-authentication (disconnection) attacks."
+            {
+                "issue": "Missing MFP: Vulnerable to de-authentication (disconnection) attacks.",
+                "solution": "Enable 'Management Frame Protection' (802.11w) in security settings to prevent attackers from forcibly disconnecting your devices.",
+            }
         )
 
     # 6. CONFIGURATION ISSUES
@@ -115,7 +133,10 @@ def process_security_analysis(details, security_status):
         score -= 10
         score_breakdown.append("Hidden SSID detected (-10pts)")
         cons.append(
-            "Hidden SSID: Leaks device information through constant probe requests."
+            {
+                "issue": "Hidden SSID: Leaks device information through probe requests.",
+                "solution": "Un-hide your SSID. It provides 'security by obscurity' only, and actually makes your devices easier to track.",
+            }
         )
 
     # 7. PERFORMANCE METADATA (Pros/Cons Only)
@@ -126,11 +147,12 @@ def process_security_analysis(details, security_status):
             pros.append(
                 "5GHz Band: Higher bandwidth and lower interference than 2.4GHz."
             )
-        if signal > -50 and signal != 0:
-            pros.append("Excellent signal: High connection stability and SNR.")
-        elif signal < -80 and signal != 0:
+        if signal < -80 and signal != 0:
             cons.append(
-                "Weak signal: Unreliable connection might risk session hijacking."
+                {
+                    "issue": "Weak signal strength: Connection may be unreliable.",
+                    "solution": "Move closer to the Access Point or use a Wi-Fi extender to ensure a stable and secure connection.",
+                }
             )
     except:
         pass

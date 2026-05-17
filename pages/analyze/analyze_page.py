@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QWidget, QLabel, QTreeWidgetItem, QHeaderView, QVBoxLayout
 from PySide6.QtCore import Qt, QRectF
-from PySide6.QtWidgets import QWidget
+from PySide6.QtWidgets import QWidget, QHBoxLayout
 from PySide6.QtGui import QPainter, QPen, QColor, QFont
 
 from pages.analyze.ui_analyze import Ui_Form
@@ -39,7 +39,7 @@ class AnalyzePage(QWidget):
     def update_analyze_results(self, bssid, networks):
         self.networks = networks
         data = analyze_network(bssid, self.networks)
-        # print(data)
+        print(data)
 
         # 1. Kiểm tra nếu không tìm thấy dữ liệu
         if data is None:
@@ -72,27 +72,50 @@ class AnalyzePage(QWidget):
             self.ui.verticalLayout_12.addWidget(lbl)
         self.ui.verticalLayout_12.addStretch()
 
-        # 5. Đổ danh sách Cons
+        # --- 5. ĐỔ DANH SÁCH CONS (PHIÊN BẢN MỚI CÓ TOOLTIP) ---
         self.clear_layout(self.ui.verticalLayout_13)
-        for con in data.get("Cons", []):
-            lbl = QLabel(con)
-            lbl.setWordWrap(True)
+        cons_data = data.get("Cons", [])
+        
+        for item in cons_data:
+            # Tạo container cho mỗi hàng lỗi
+            row_widget = QWidget()
+            row_layout = QHBoxLayout(row_widget)
+            row_layout.setContentsMargins(0, 2, 0, 2)
+            row_layout.setSpacing(8)
 
-            # Nếu là cảnh báo bảo mật từ hàm detect_suspicious_networks
-            if "SECURITY ALERT" in con or "CRITICAL" in con:
-                lbl.setStyleSheet("""
-                    color: white; 
-                    background-color: #d32f2f; 
-                    font-weight: bold; 
-                    padding: 4px; 
-                    border-radius: 2px;
-                """)
-            elif "Suspicious" in con:
-                lbl.setStyleSheet("color: #b71c1c; font-weight: bold;")
-            else:
-                lbl.setStyleSheet("color: #d32f2f; font-weight: 500;")
+            # 1. Nhãn hiển thị tên lỗi (Issue)
+            lbl_issue = QLabel(f"✘ {item['issue']}")
+            lbl_issue.setWordWrap(True)
+            lbl_issue.setStyleSheet("color: #d32f2f; font-weight: 500; font-size: 12px;")
+            
+            # 2. Icon dấu chấm hỏi (Dùng QLabel để bắt sự kiện Tooltip)
+            lbl_help = QLabel("?")
+            lbl_help.setFixedSize(16, 16)
+            lbl_help.setAlignment(Qt.AlignCenter)
+            lbl_help.setCursor(Qt.PointingHandCursor)
+            
+            # Đặt nội dung giải pháp vào ToolTip của icon này
+            lbl_help.setToolTip(f"<b>Solution:</b><br>{item['solution']}")
+            
+            # Style cho icon dấu chấm hỏi: Hình tròn, màu xanh dương, chữ trắng
+            lbl_help.setStyleSheet("""
+                QLabel {
+                    background-color: #1976d2;
+                    color: white;
+                    border-radius: 8px;
+                    font-size: 11px;
+                    font-weight: bold;
+                }
+                QLabel:hover {
+                    background-color: #0d47a1;
+                }
+            """)
 
-            self.ui.verticalLayout_13.addWidget(lbl)
+            row_layout.addWidget(lbl_issue, 1) # Chiếm phần lớn không gian
+            row_layout.addWidget(lbl_help, 0)   # Đứng cạnh bên phải
+            
+            self.ui.verticalLayout_13.addWidget(row_widget)
+
         self.ui.verticalLayout_13.addStretch()
 
         # 6. Đổ dữ liệu vào TreeWidget (Phần Details)
