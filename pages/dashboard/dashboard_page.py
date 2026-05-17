@@ -9,6 +9,7 @@ from services.scan_worker import ScanWorker
 from services.scan_networks import get_network_interfaces
 from services.analyze_networks import analyze_dashboard_stats
 
+
 class DashboardPage(QWidget):
     networks_data = Signal(list)
 
@@ -17,7 +18,7 @@ class DashboardPage(QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.networks = []
-        
+
         for frame in [self.ui.frCipher, self.ui.frMfp, self.ui.frWps, self.ui.frAuth]:
             if not frame.layout():
                 QVBoxLayout(frame)
@@ -28,13 +29,13 @@ class DashboardPage(QWidget):
 
     def update_dashboard(self, networks):
         stats = analyze_dashboard_stats(networks)
-        
+
         # 1. Cập nhật các thẻ số liệu (Cards)
         self.ui.lblCardValue1.setText(str(stats["total_aps"]))
         self.ui.lblCardValue2.setText(str(stats["strong_security"]))
         self.ui.lblCardValue3.setText(str(stats["weak_security"]))
         self.ui.lblCardValue4.setText(str(stats["suspicious_aps"]))
-        
+
         self.ui.frCard2.setToolTip(
             f"Very Low Risk: {stats['risk_dist']["Very Low Risk"]}\n"
             f"Low Risk: {stats['risk_dist']["Low Risk"]}\n"
@@ -53,13 +54,13 @@ class DashboardPage(QWidget):
     def render_charts(self, stats):
         # Biểu đồ 1: Cipher Distribution
         self.setup_chart(self.ui.frCipher, stats["cipher_dist"], "Cipher Distribution")
-        
+
         # Biểu đồ 2: Security Detailed
         self.setup_chart(self.ui.frMfp, stats["mfp_dist"], "Security Protocols")
-        
+
         # Biểu đồ 3: WPS Status
         self.setup_chart(self.ui.frWps, stats["wps_dist"], "WPS Vulnerability")
-        
+
         # Biểu đồ 4: Authentication
         self.setup_chart(self.ui.frAuth, stats["auth_dist"], "Authentication Types")
 
@@ -75,7 +76,7 @@ class DashboardPage(QWidget):
         # Tạo series dữ liệu
         series = QPieSeries()
         for label, value in data_dict.items():
-            if value > 0: # Chỉ hiển thị các mục có dữ liệu
+            if value > 0:  # Chỉ hiển thị các mục có dữ liệu
                 series.append(f"{label}: {value}", value)
 
         # Tạo Chart
@@ -84,12 +85,12 @@ class DashboardPage(QWidget):
         chart.setTitle(title)
         chart.setAnimationOptions(QChart.SeriesAnimations)
         chart.legend().setAlignment(Qt.AlignRight)
-        chart.setBackgroundVisible(False) # Để tiệp màu với nền trắng của bạn
+        chart.setBackgroundVisible(False)
 
         # Tạo ChartView
         chart_view = QChartView(chart)
         chart_view.setRenderHint(QPainter.Antialiasing)
-        
+
         layout.addWidget(chart_view)
 
     # --- Các hàm start_scan, on_scan_completed giữ nguyên như cũ ---
@@ -111,7 +112,8 @@ class DashboardPage(QWidget):
         self.ui.lblStatusText.setText("Scan completed")
         self.ui.btnScan.setEnabled(True)
         self.ui.btnScan.setText("Scan")
-        self.networks_data.emit(networks)
+        self.networks_data.emit(self.networks)
+        # print(json.dumps(self.networks))
 
     def on_scan_error(self, error_message):
         self.ui.lblStatusText.setText(f"Error: {error_message}")
