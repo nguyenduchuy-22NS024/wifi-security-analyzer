@@ -1,5 +1,6 @@
-from services.scan_networks import evaluate_security
 import re
+
+from services.scan_networks import evaluate_security
 
 
 def process_security_analysis(details, security_status):

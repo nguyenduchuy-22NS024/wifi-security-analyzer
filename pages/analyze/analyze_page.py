@@ -1,10 +1,13 @@
+from datetime import datetime
+
 from PySide6.QtWidgets import QWidget, QLabel, QTreeWidgetItem, QHeaderView, QVBoxLayout
 from PySide6.QtCore import Qt, QRectF
-from PySide6.QtWidgets import QWidget, QHBoxLayout
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QFileDialog, QMessageBox
 from PySide6.QtGui import QPainter, QPen, QColor, QFont
 
 from pages.analyze.ui_analyze import Ui_Form
 from services.analyze_networks import analyze_network
+from services.report_generator import generate_wifi_report
 
 
 class AnalyzePage(QWidget):
@@ -13,6 +16,7 @@ class AnalyzePage(QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.networks = []
+        self.current_bssid = None
 
         # Cấu hình giao diện ban đầu cho TreeWidget
         self.setup_tree_style()
@@ -26,6 +30,9 @@ class AnalyzePage(QWidget):
         self.circular_score = CircularScoreWidget()
         self.score_layout.addWidget(self.circular_score)
 
+        self.ui.btnTrusted.clicked.connect(self.trusted_network)
+        self.ui.btnReport.clicked.connect(self.report_network)
+
         self.setStyleSheet("""
     QToolTip {
         background-color: #ffffff;
@@ -36,8 +43,46 @@ class AnalyzePage(QWidget):
     }
 """)
 
+    def report_network(self):
+        """Chức năng xuất báo cáo PDF cho mạng Wi-Fi hiện tại"""
+        if not self.current_bssid:
+            QMessageBox.warning(
+                self, "Warning", "Please select a network to analyze first."
+            )
+            return
+
+        # Lấy dữ liệu phân tích hiện tại
+        data = analyze_network(self.current_bssid, self.networks)
+        if not data:
+            return
+
+        # Mở hộp thoại lưu file
+        default_name = (
+            f"Wifi_Report_{data['SSID']}_{datetime.now().strftime('%Y%m%d')}.pdf"
+        )
+        file_path, _ = QFileDialog.getSaveFileName(
+            self, "Save Report", default_name, "PDF Files (*.pdf)"
+        )
+
+        if file_path:
+            try:
+                # Gọi service tạo PDF
+                success = generate_wifi_report(data, file_path)
+                if success:
+                    QMessageBox.information(
+                        self, "Success", f"Report saved successfully to:\n{file_path}"
+                    )
+            except Exception as e:
+                QMessageBox.critical(
+                    self, "Error", f"Failed to generate report: {str(e)}"
+                )
+
+    def trusted_network(self):
+        pass
+
     def update_analyze_results(self, bssid, networks):
         self.networks = networks
+        self.current_bssid = bssid
         data = analyze_network(bssid, self.networks)
         print(data)
 
@@ -75,7 +120,7 @@ class AnalyzePage(QWidget):
         # --- 5. ĐỔ DANH SÁCH CONS (PHIÊN BẢN MỚI CÓ TOOLTIP) ---
         self.clear_layout(self.ui.verticalLayout_13)
         cons_data = data.get("Cons", [])
-        
+
         for item in cons_data:
             # Tạo container cho mỗi hàng lỗi
             row_widget = QWidget()
@@ -86,17 +131,19 @@ class AnalyzePage(QWidget):
             # 1. Nhãn hiển thị tên lỗi (Issue)
             lbl_issue = QLabel(f"✘ {item['issue']}")
             lbl_issue.setWordWrap(True)
-            lbl_issue.setStyleSheet("color: #d32f2f; font-weight: 500; font-size: 12px;")
-            
+            lbl_issue.setStyleSheet(
+                "color: #d32f2f; font-weight: 500; font-size: 12px;"
+            )
+
             # 2. Icon dấu chấm hỏi (Dùng QLabel để bắt sự kiện Tooltip)
             lbl_help = QLabel("?")
             lbl_help.setFixedSize(16, 16)
             lbl_help.setAlignment(Qt.AlignCenter)
             lbl_help.setCursor(Qt.PointingHandCursor)
-            
+
             # Đặt nội dung giải pháp vào ToolTip của icon này
             lbl_help.setToolTip(f"<b>Solution:</b><br>{item['solution']}")
-            
+
             # Style cho icon dấu chấm hỏi: Hình tròn, màu xanh dương, chữ trắng
             lbl_help.setStyleSheet("""
                 QLabel {
@@ -111,9 +158,9 @@ class AnalyzePage(QWidget):
                 }
             """)
 
-            row_layout.addWidget(lbl_issue, 1) # Chiếm phần lớn không gian
-            row_layout.addWidget(lbl_help, 0)   # Đứng cạnh bên phải
-            
+            row_layout.addWidget(lbl_issue, 1)  # Chiếm phần lớn không gian
+            row_layout.addWidget(lbl_help, 0)  # Đứng cạnh bên phải
+
             self.ui.verticalLayout_13.addWidget(row_widget)
 
         self.ui.verticalLayout_13.addStretch()
