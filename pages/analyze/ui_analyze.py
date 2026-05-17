@@ -16,8 +16,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QHeaderView,
-    QLabel, QSizePolicy, QSpacerItem, QStackedWidget,
-    QTreeWidget, QTreeWidgetItem, QVBoxLayout, QWidget)
+    QLabel, QPushButton, QSizePolicy, QSpacerItem,
+    QStackedWidget, QTreeWidget, QTreeWidgetItem, QVBoxLayout,
+    QWidget)
 import resources_rc
 
 class Ui_Form(object):
@@ -46,6 +47,16 @@ class Ui_Form(object):
 "	text-transform: uppercase;\n"
 "	font-weight: bold;\n"
 "	color: #6fc6d4;\n"
+"}\n"
+"\n"
+"#btnReport {\n"
+"	padding: 8px 16px;\n"
+"	font-size: 14px;\n"
+"	background-color: #199be2;\n"
+"	color: #ffffff;\n"
+"	border: none;\n"
+"	border-radius: 8px;\n"
+"	font-weight: bold;\n"
 "}")
         self.frHeader.setFrameShape(QFrame.Shape.NoFrame)
         self.horizontalLayout_2 = QHBoxLayout(self.frHeader)
@@ -67,6 +78,12 @@ class Ui_Form(object):
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer)
+
+        self.btnReport = QPushButton(self.frHeader)
+        self.btnReport.setObjectName(u"btnReport")
+        self.btnReport.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.horizontalLayout_2.addWidget(self.btnReport)
 
 
         self.verticalLayout.addWidget(self.frHeader)
@@ -205,7 +222,7 @@ class Ui_Form(object):
 
         self.frInfo2 = QFrame(self.frInfo)
         self.frInfo2.setObjectName(u"frInfo2")
-        self.frInfo2.setStyleSheet(u"#lblSSID, #lblBSSID, #lblSecurity, #lblFreqChan, #lblInterface, #lblScore {\n"
+        self.frInfo2.setStyleSheet(u"#lblSSID, #lblBSSID, #lblSecurity, #lblFreqChan, #lblBand, #lblScore {\n"
 "	font-size: 16px;\n"
 "}")
         self.frInfo2.setFrameShape(QFrame.Shape.NoFrame)
@@ -219,10 +236,10 @@ class Ui_Form(object):
 
         self.verticalLayout_5.addWidget(self.lblFreqChan)
 
-        self.lblInterface = QLabel(self.frInfo2)
-        self.lblInterface.setObjectName(u"lblInterface")
+        self.lblBand = QLabel(self.frInfo2)
+        self.lblBand.setObjectName(u"lblBand")
 
-        self.verticalLayout_5.addWidget(self.lblInterface)
+        self.verticalLayout_5.addWidget(self.lblBand)
 
         self.lblScore = QLabel(self.frInfo2)
         self.lblScore.setObjectName(u"lblScore")
@@ -419,6 +436,7 @@ class Ui_Form(object):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.lblPageIcon.setText("")
         self.lblPageName.setText(QCoreApplication.translate("Form", u"analyze network", None))
+        self.btnReport.setText(QCoreApplication.translate("Form", u"Report", None))
         self.lblStatusIcon.setText("")
         self.lblStatusText.setText(QCoreApplication.translate("Form", u"No data.", None))
         self.lblInfoScoreHeader.setText(QCoreApplication.translate("Form", u"Information:", None))
@@ -426,7 +444,7 @@ class Ui_Form(object):
         self.lblBSSID.setText(QCoreApplication.translate("Form", u"TextLabel", None))
         self.lblSecurity.setText(QCoreApplication.translate("Form", u"TextLabel", None))
         self.lblFreqChan.setText(QCoreApplication.translate("Form", u"TextLabel", None))
-        self.lblInterface.setText(QCoreApplication.translate("Form", u"TextLabel", None))
+        self.lblBand.setText(QCoreApplication.translate("Form", u"TextLabel", None))
         self.lblScore.setText(QCoreApplication.translate("Form", u"TextLabel", None))
         self.lblDetailsHeader.setText(QCoreApplication.translate("Form", u"Details:", None))
         ___qtreewidgetitem = self.treeWidget.headerItem()
