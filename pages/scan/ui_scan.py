@@ -184,25 +184,25 @@ class Ui_Form(object):
         self.horizontalLayout_3.setSpacing(4)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.horizontalLayout_3.setContentsMargins(4, 4, 4, 4)
-        self.lineEdit = QLineEdit(self.frFilter)
-        self.lineEdit.setObjectName(u"lineEdit")
+        self.lineSSID = QLineEdit(self.frFilter)
+        self.lineSSID.setObjectName(u"lineSSID")
 
-        self.horizontalLayout_3.addWidget(self.lineEdit)
+        self.horizontalLayout_3.addWidget(self.lineSSID)
 
-        self.lineEdit_2 = QLineEdit(self.frFilter)
-        self.lineEdit_2.setObjectName(u"lineEdit_2")
+        self.lineBSSID = QLineEdit(self.frFilter)
+        self.lineBSSID.setObjectName(u"lineBSSID")
 
-        self.horizontalLayout_3.addWidget(self.lineEdit_2)
+        self.horizontalLayout_3.addWidget(self.lineBSSID)
 
-        self.comboBox_2 = QComboBox(self.frFilter)
-        self.comboBox_2.setObjectName(u"comboBox_2")
+        self.cbSecurity = QComboBox(self.frFilter)
+        self.cbSecurity.setObjectName(u"cbSecurity")
 
-        self.horizontalLayout_3.addWidget(self.comboBox_2)
+        self.horizontalLayout_3.addWidget(self.cbSecurity)
 
-        self.comboBox = QComboBox(self.frFilter)
-        self.comboBox.setObjectName(u"comboBox")
+        self.cbBand = QComboBox(self.frFilter)
+        self.cbBand.setObjectName(u"cbBand")
 
-        self.horizontalLayout_3.addWidget(self.comboBox)
+        self.horizontalLayout_3.addWidget(self.cbBand)
 
 
         self.verticalLayout_4.addWidget(self.frFilter)
