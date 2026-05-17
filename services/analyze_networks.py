@@ -190,7 +190,6 @@ def analyze_network(target_bssid, networks):
     band = "5GHz" if freq > 4000 else "2.4GHz"
     channel = details.get("DS Parameter set", "N/A")
     signal_raw = details.get("signal", "N/A")
-    interface = details.get("Interface", "N/A")
     signal = signal_raw.split()[0] if " " in str(signal_raw) else signal_raw
 
     # Return structure maintained as requested
@@ -202,7 +201,6 @@ def analyze_network(target_bssid, networks):
         "Channel": channel,
         "Signal": signal,
         "Score": final_score,
-        "Interface": interface,
         "ScoreBreakdown": score_breakdown,
         "Pros": pros,
         "Cons": cons,
