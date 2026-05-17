@@ -30,7 +30,6 @@ class AnalyzePage(QWidget):
         self.circular_score = CircularScoreWidget()
         self.score_layout.addWidget(self.circular_score)
 
-        self.ui.btnTrusted.clicked.connect(self.trusted_network)
         self.ui.btnReport.clicked.connect(self.report_network)
 
         self.setStyleSheet("""

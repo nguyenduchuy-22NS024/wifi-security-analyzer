@@ -79,11 +79,6 @@ class Ui_Form(object):
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer)
 
-        self.btnTrusted = QPushButton(self.frHeader)
-        self.btnTrusted.setObjectName(u"btnTrusted")
-
-        self.horizontalLayout_2.addWidget(self.btnTrusted)
-
         self.btnReport = QPushButton(self.frHeader)
         self.btnReport.setObjectName(u"btnReport")
         self.btnReport.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
@@ -443,7 +438,6 @@ class Ui_Form(object):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.lblPageIcon.setText("")
         self.lblPageName.setText(QCoreApplication.translate("Form", u"analyze network", None))
-        self.btnTrusted.setText(QCoreApplication.translate("Form", u"Trusted", None))
         self.btnReport.setText(QCoreApplication.translate("Form", u"Report", None))
         self.lblStatusIcon.setText("")
         self.lblStatusText.setText(QCoreApplication.translate("Form", u"No data.", None))

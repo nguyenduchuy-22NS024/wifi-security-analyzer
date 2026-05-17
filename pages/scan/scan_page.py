@@ -42,6 +42,7 @@ class ScanPage(QWidget):
 
         # Tắt thanh cuộn ngang
         # self.ui.tableScanData.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.ui.tableScanData.itemDoubleClicked.connect(self.on_row_double_clicked)
 
         # Enable custom context menu for the table
         self.ui.tableScanData.setContextMenuPolicy(Qt.CustomContextMenu)
@@ -113,6 +114,15 @@ class ScanPage(QWidget):
                 if item:
                     item.setBackground(QColor(color))
 
+    def on_row_double_clicked(self, item):
+        """Xử lý khi người dùng nhấn đúp vào bất kỳ ô nào trong dòng"""
+        row = item.row()
+        bssid_item = self.ui.tableScanData.item(row, 2)
+
+        if bssid_item:
+            bssid = bssid_item.text()
+            self.analyze_bssid.emit(bssid, self.networks)
+
     # Method to show context menu when right-clicking on a table row
     def show_context_menu(self, position):
         menu = QMenu()
@@ -139,8 +149,3 @@ class ScanPage(QWidget):
     def analyze_network(self, row):
         bssid_item = self.ui.tableScanData.item(row, 2).text()
         self.analyze_bssid.emit(bssid_item, self.networks)
-
-    def add_trusted_network(self, row):
-        bssid_item = self.ui.tableScanData.item(row, 2).text()
-        print(bssid_item)
-        return

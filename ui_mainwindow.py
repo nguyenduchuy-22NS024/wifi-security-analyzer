@@ -157,17 +157,6 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addWidget(self.btnAnalyze)
 
-        self.btnTrusted = QPushButton(self.frNav)
-        self.btnTrusted.setObjectName(u"btnTrusted")
-        icon4 = QIcon()
-        icon4.addFile(u":/root/resources/icons8-test-passed-32.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnTrusted.setIcon(icon4)
-        self.btnTrusted.setIconSize(QSize(32, 32))
-        self.btnTrusted.setCheckable(True)
-        self.btnTrusted.setAutoExclusive(True)
-
-        self.verticalLayout_2.addWidget(self.btnTrusted)
-
 
         self.verticalLayout.addWidget(self.frNav)
 
@@ -225,7 +214,6 @@ class Ui_MainWindow(object):
         self.btnDashboard.setText(QCoreApplication.translate("MainWindow", u"Dashboard", None))
         self.btnScan.setText(QCoreApplication.translate("MainWindow", u"Scan", None))
         self.btnAnalyze.setText(QCoreApplication.translate("MainWindow", u"Analyze", None))
-        self.btnTrusted.setText(QCoreApplication.translate("MainWindow", u"Trusted", None))
         self.lblVersion.setText(QCoreApplication.translate("MainWindow", u"v1.0.4 - nguyenduchuy", None))
     # retranslateUi
 

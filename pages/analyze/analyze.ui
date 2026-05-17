@@ -138,13 +138,6 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="btnTrusted">
-           <property name="text">
-            <string>Trusted</string>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QPushButton" name="btnReport">
            <property name="cursor">
             <cursorShape>PointingHandCursor</cursorShape>
