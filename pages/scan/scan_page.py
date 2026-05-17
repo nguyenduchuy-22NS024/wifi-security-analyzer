@@ -1,6 +1,6 @@
 import json
 
-from PySide6.QtWidgets import QHeaderView, QMenu, QTableWidgetItem, QWidget
+from PySide6.QtWidgets import QHeaderView, QMenu, QTableWidgetItem, QWidget, QMessageBox
 from PySide6.QtCore import Signal
 from PySide6.QtGui import QColor, Qt, QIcon
 
@@ -118,8 +118,8 @@ class ScanPage(QWidget):
         menu = QMenu()
 
         # Add actions to the context menu
-        # action_add_whitelist = menu.addAction("Add to whitelist")
         action_analyze = menu.addAction("Analyze")
+        action_add_trusted_network = menu.addAction("Trusted Network")
 
         # Get the row that was right-clicked
         index = self.ui.tableScanData.indexAt(position)
@@ -133,13 +133,14 @@ class ScanPage(QWidget):
 
         if action == action_analyze:
             self.analyze_network(row)
-        # elif action == action_add_whitelist:
-        #     self.add_whitelist_network(row)
+        elif action == action_add_trusted_network:
+            self.add_trusted_network(row)
 
     def analyze_network(self, row):
-        bssid = self.ui.tableScanData.item(row, 2).text()
-        self.analyze_bssid.emit(bssid, self.networks)
+        bssid_item = self.ui.tableScanData.item(row, 2).text()
+        self.analyze_bssid.emit(bssid_item, self.networks)
 
-    def add_whitelist_network(self, row):
-        bssid = self.ui.tableScanData.item(row, 2).text()
-        print(bssid)
+    def add_trusted_network(self, row):
+        bssid_item = self.ui.tableScanData.item(row, 2).text()
+        print(bssid_item)
+        return
