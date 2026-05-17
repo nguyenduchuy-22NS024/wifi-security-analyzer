@@ -1,978 +1,1113 @@
-BSS ec:fc:c6:26:7f:f1(on wlp1s0) -- associated
-	last seen: 2575.751s [boottime]
-	TSF: 106260636956 usec (1d, 05:31:00)
-	freq: 5580.0
-	beacon interval: 100 TUs
-	capability: ESS Privacy (0x0011)
-	signal: -51.00 dBm
-	last seen: 1388 ms ago
-	Information elements from Probe Response frame:
-	SSID: VKU_Student
-	Supported rates: 6.0* 9.0 12.0* 18.0 24.0* 36.0 48.0 54.0 
-	DS Parameter set: channel 116
-	Country: VN	Environment: Indoor/Outdoor
-		Channels [36 - 64] @ 23 dBm
-		Channels [100 - 140] @ 30 dBm
-		Channels [149 - 165] @ 23 dBm
-	Power constraint: 0 dB
-	TPC report: TX power: 24 dBm
-	RSN:	 * Version: 1
-		 * Group cipher: CCMP
-		 * Pairwise ciphers: CCMP
-		 * Authentication suites: PSK
-		 * Capabilities: 4-PTKSA-RC 4-GTKSA-RC (0x0028)
-	HT capabilities:
-		Capabilities: 0x1ef
-			RX LDPC
-			HT20/HT40
-			SM Power Save disabled
-			RX HT20 SGI
-			RX HT40 SGI
-			TX STBC
-			RX STBC 1-stream
-			Max AMSDU length: 3839 bytes
-			No DSSS/CCK HT40
-		Maximum RX AMPDU length 65535 bytes (exponent: 0x003)
-		Minimum RX AMPDU time spacing: 4 usec (0x05)
-		HT RX MCS rate indexes supported: 0-31
-		HT TX MCS rate indexes are undefined
-	HT operation:
-		 * primary channel: 116
-		 * secondary channel offset: above
-		 * STA channel width: any
-		 * RIFS: 0
-		 * HT protection: no
-		 * non-GF present: 1
-		 * OBSS non-GF present: 0
-		 * dual beacon: 0
-		 * dual CTS protection: 0
-		 * STBC beacon: 0
-		 * L-SIG TXOP Prot: 0
-		 * PCO active: 0
-		 * PCO phase: 0
-	Extended capabilities:
-		 * Extended Channel Switching
-		 * BSS Transition
-		 * Operating Mode Notification
-		 * TWT Responder Support
-		 * Max Number Of MSDUs In A-MSDU is unlimited
-	VHT capabilities:
-		VHT Capabilities (0x0f8b79b0):
-			Max MPDU length: 3895
-			Supported Channel Width: neither 160 nor 80+80
-			RX LDPC
-			short GI (80 MHz)
-			TX STBC
-			SU Beamformer
-			SU Beamformee
-			MU Beamformer
-		VHT RX MCS set:
-			1 streams: MCS 0-9
-			2 streams: MCS 0-9
-			3 streams: MCS 0-9
-			4 streams: MCS 0-9
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-		VHT RX highest supported: 0 Mbps
-		VHT TX MCS set:
-			1 streams: MCS 0-9
-			2 streams: MCS 0-9
-			3 streams: MCS 0-9
-			4 streams: MCS 0-9
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-		VHT TX highest supported: 0 Mbps
-		VHT extended NSS: supported
-	VHT operation:
-		 * channel width: 1 (80 MHz)
-		 * center freq segment 1: 122
-		 * center freq segment 2: 0
-		 * VHT basic MCS set: 0x0000
-	Transmit Power Envelope:
-		 * Local Maximum Transmit Power For 20 MHz: 30 dBm
-		 * Local Maximum Transmit Power For 40 MHz: 30 dBm
-		 * Local Maximum Transmit Power For 80 MHz: 30 dBm
-	HE capabilities:
-		HE MAC Capabilities (0x000512081000):
-			+HTC HE Supported
-			TWT Responder
-			BSR
-			OM Control
-			Maximum A-MPDU Length Exponent: 2
-			OM Control UL MU Data Disable RX
-		HE PHY Capabilities: (0x44200ec06f5b8518000c00):
-			HE40/HE80/5GHz
-			242 tone RUs/5GHz
-			LDPC Coding in Payload
-			NDP with 4x HE-LTF and 3.2us GI
-			STBC Tx <= 80MHz
-			STBC Rx <= 80MHz
-			Rx HE MU PPDU from Non-AP STA
-			SU Beamformer
-			SU Beamformee
-			MU Beamformer
-			Beamformee STS <= 80MHz: 3
-			Beamformee STS > 80MHz: 3
-			Sounding Dimensions <= 80MHz: 3
-			Sounding Dimensions > 80MHz: 3
-			Ng = 16 SU Feedback
-			Codebook Size SU Feedback
-			Triggered SU Beamforming Feedback
-			PPE Threshold Present
-			Max NC: 3
-			TX 1024-QAM
-			RX 1024-QAM
-		HE RX MCS and NSS set <= 80 MHz
-			1 streams: MCS 0-11
-			2 streams: MCS 0-11
-			3 streams: MCS 0-11
-			4 streams: MCS 0-11
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-		HE TX MCS and NSS set <= 80 MHz
-			1 streams: MCS 0-11
-			2 streams: MCS 0-11
-			3 streams: MCS 0-11
-			4 streams: MCS 0-11
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-		PPE Threshold 0x3b 0x1c 0xc7 0x71 0x1c 0xc7 0x71 0x1c 0xc7 0x71 
-	HE Operation:
-		HE Operation Parameters: (0x003ff4)
-			Default PE Duration: 4
-			TXOP Duration RTS Threshold: 1023
-		BSS Color: 40
-		Basic HE-MCS NSS Set: 0xfffc
-			1 streams: MCS 0-7
-			2 streams: not supported
-			3 streams: not supported
-			4 streams: not supported
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-	WMM:	 * Parameter version 1
-		 * u-APSD
-		 * BE: CW 255-1023, AIFSN 3
-		 * BK: CW 255-1023, AIFSN 7
-		 * VI: CW 7-15, AIFSN 2, TXOP 3008 usec
-		 * VO: CW 3-7, AIFSN 2, TXOP 1504 usec
-BSS ec:fc:c6:26:3d:b1(on wlp1s0)
-	last seen: 2573.470s [boottime]
-	TSF: 31081028845 usec (0d, 08:38:01)
-	freq: 5180.0
-	beacon interval: 100 TUs
-	capability: ESS Privacy (0x0011)
-	signal: -71.00 dBm
-	last seen: 3669 ms ago
-	Information elements from Probe Response frame:
-	SSID: VKU_Student
-	Supported rates: 6.0* 9.0 12.0* 18.0 24.0* 36.0 48.0 54.0 
-	DS Parameter set: channel 36
-	RSN:	 * Version: 1
-		 * Group cipher: CCMP
-		 * Pairwise ciphers: CCMP
-		 * Authentication suites: PSK
-		 * Capabilities: 4-PTKSA-RC 4-GTKSA-RC (0x0028)
-	HT capabilities:
-		Capabilities: 0x1ef
-			RX LDPC
-			HT20/HT40
-			SM Power Save disabled
-			RX HT20 SGI
-			RX HT40 SGI
-			TX STBC
-			RX STBC 1-stream
-			Max AMSDU length: 3839 bytes
-			No DSSS/CCK HT40
-		Maximum RX AMPDU length 65535 bytes (exponent: 0x003)
-		Minimum RX AMPDU time spacing: 4 usec (0x05)
-		HT RX MCS rate indexes supported: 0-31
-		HT TX MCS rate indexes are undefined
-	HT operation:
-		 * primary channel: 36
-		 * secondary channel offset: above
-		 * STA channel width: any
-		 * RIFS: 0
-		 * HT protection: no
-		 * non-GF present: 1
-		 * OBSS non-GF present: 0
-		 * dual beacon: 0
-		 * dual CTS protection: 0
-		 * STBC beacon: 0
-		 * L-SIG TXOP Prot: 0
-		 * PCO active: 0
-		 * PCO phase: 0
-	Extended capabilities:
-		 * Extended Channel Switching
-		 * BSS Transition
-		 * Operating Mode Notification
-		 * TWT Responder Support
-		 * Max Number Of MSDUs In A-MSDU is unlimited
-	VHT capabilities:
-		VHT Capabilities (0x0f8b79b0):
-			Max MPDU length: 3895
-			Supported Channel Width: neither 160 nor 80+80
-			RX LDPC
-			short GI (80 MHz)
-			TX STBC
-			SU Beamformer
-			SU Beamformee
-			MU Beamformer
-		VHT RX MCS set:
-			1 streams: MCS 0-9
-			2 streams: MCS 0-9
-			3 streams: MCS 0-9
-			4 streams: MCS 0-9
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-		VHT RX highest supported: 0 Mbps
-		VHT TX MCS set:
-			1 streams: MCS 0-9
-			2 streams: MCS 0-9
-			3 streams: MCS 0-9
-			4 streams: MCS 0-9
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-		VHT TX highest supported: 0 Mbps
-		VHT extended NSS: supported
-	VHT operation:
-		 * channel width: 1 (80 MHz)
-		 * center freq segment 1: 42
-		 * center freq segment 2: 0
-		 * VHT basic MCS set: 0x0000
-	Transmit Power Envelope:
-		 * Local Maximum Transmit Power For 20 MHz: 23 dBm
-		 * Local Maximum Transmit Power For 40 MHz: 23 dBm
-		 * Local Maximum Transmit Power For 80 MHz: 23 dBm
-	HE capabilities:
-		HE MAC Capabilities (0x000512081000):
-			+HTC HE Supported
-			TWT Responder
-			BSR
-			OM Control
-			Maximum A-MPDU Length Exponent: 2
-			OM Control UL MU Data Disable RX
-		HE PHY Capabilities: (0x44200ec06f5b8518000c00):
-			HE40/HE80/5GHz
-			242 tone RUs/5GHz
-			LDPC Coding in Payload
-			NDP with 4x HE-LTF and 3.2us GI
-			STBC Tx <= 80MHz
-			STBC Rx <= 80MHz
-			Rx HE MU PPDU from Non-AP STA
-			SU Beamformer
-			SU Beamformee
-			MU Beamformer
-			Beamformee STS <= 80MHz: 3
-			Beamformee STS > 80MHz: 3
-			Sounding Dimensions <= 80MHz: 3
-			Sounding Dimensions > 80MHz: 3
-			Ng = 16 SU Feedback
-			Codebook Size SU Feedback
-			Triggered SU Beamforming Feedback
-			PPE Threshold Present
-			Max NC: 3
-			TX 1024-QAM
-			RX 1024-QAM
-		HE RX MCS and NSS set <= 80 MHz
-			1 streams: MCS 0-11
-			2 streams: MCS 0-11
-			3 streams: MCS 0-11
-			4 streams: MCS 0-11
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-		HE TX MCS and NSS set <= 80 MHz
-			1 streams: MCS 0-11
-			2 streams: MCS 0-11
-			3 streams: MCS 0-11
-			4 streams: MCS 0-11
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-		PPE Threshold 0x3b 0x1c 0xc7 0x71 0x1c 0xc7 0x71 0x1c 0xc7 0x71 
-	HE Operation:
-		HE Operation Parameters: (0x003ff4)
-			Default PE Duration: 4
-			TXOP Duration RTS Threshold: 1023
-		BSS Color: 4
-		Basic HE-MCS NSS Set: 0xfffc
-			1 streams: MCS 0-7
-			2 streams: not supported
-			3 streams: not supported
-			4 streams: not supported
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-	WMM:	 * Parameter version 1
-		 * u-APSD
-		 * BE: CW 15-1023, AIFSN 3
-		 * BK: CW 15-1023, AIFSN 7
-		 * VI: CW 7-15, AIFSN 2, TXOP 3008 usec
-		 * VO: CW 3-7, AIFSN 2, TXOP 1504 usec
-BSS ec:fc:c6:26:7f:e6(on wlp1s0)
-	last seen: 2573.470s [boottime]
-	TSF: 2743530000980 usec (31d, 18:05:30)
-	freq: 2462.0
-	beacon interval: 100 TUs
-	capability: ESS Privacy ShortPreamble ShortSlotTime (0x0431)
-	signal: -62.00 dBm
-	last seen: 3669 ms ago
-	SSID: VKU_Staff_Mail
-	Supported rates: 1.0* 2.0* 5.5 11.0 18.0 24.0 36.0 54.0 
-	DS Parameter set: channel 11
-	TIM: DTIM Count 0 DTIM Period 1 Bitmap Control 0x0 Bitmap[0] 0x0
-	ERP: <no flags>
-	Extended supported rates: 6.0 9.0 12.0 48.0 
-	RSN:	 * Version: 1
-		 * Group cipher: CCMP
-		 * Pairwise ciphers: CCMP
-		 * Authentication suites: IEEE 802.1X
-		 * Capabilities: 4-PTKSA-RC 4-GTKSA-RC (0x0028)
-	HT capabilities:
-		Capabilities: 0x1ad
-			RX LDPC
-			HT20
-			SM Power Save disabled
-			RX HT20 SGI
-			TX STBC
-			RX STBC 1-stream
-			Max AMSDU length: 3839 bytes
-			No DSSS/CCK HT40
-		Maximum RX AMPDU length 65535 bytes (exponent: 0x003)
-		Minimum RX AMPDU time spacing: 4 usec (0x05)
-		HT RX MCS rate indexes supported: 0-15
-		HT TX MCS rate indexes are undefined
-	HT operation:
-		 * primary channel: 11
-		 * secondary channel offset: no secondary
-		 * STA channel width: 20 MHz
-		 * RIFS: 0
-		 * HT protection: no
-		 * non-GF present: 1
-		 * OBSS non-GF present: 0
-		 * dual beacon: 0
-		 * dual CTS protection: 0
-		 * STBC beacon: 0
-		 * L-SIG TXOP Prot: 0
-		 * PCO active: 0
-		 * PCO phase: 0
-	Overlapping BSS scan params:
-		 * passive dwell: 20 TUs
-		 * active dwell: 10 TUs
-		 * channel width trigger scan interval: 300 s
-		 * scan passive total per channel: 200 TUs
-		 * scan active total per channel: 20 TUs
-		 * BSS width channel transition delay factor: 5
-		 * OBSS Scan Activity Threshold: 0.25 %
-	Extended capabilities:
-		 * HT Information Exchange Supported
-		 * Extended Channel Switching
-		 * BSS Transition
-		 * Operating Mode Notification
-		 * TWT Responder Support
-	HE capabilities:
-		HE MAC Capabilities (0x000512081000):
-			+HTC HE Supported
-			TWT Responder
-			BSR
-			OM Control
-			Maximum A-MPDU Length Exponent: 2
-			OM Control UL MU Data Disable RX
-		HE PHY Capabilities: (0x20200ec00d418118000c00):
-			242 tone RUs/2.4GHz
-			LDPC Coding in Payload
-			NDP with 4x HE-LTF and 3.2us GI
-			STBC Tx <= 80MHz
-			STBC Rx <= 80MHz
-			Rx HE MU PPDU from Non-AP STA
-			SU Beamformer
-			SU Beamformee
-			Beamformee STS <= 80MHz: 3
-			Sounding Dimensions <= 80MHz: 1
-			Ng = 16 SU Feedback
-			Codebook Size SU Feedback
-			PPE Threshold Present
-			Max NC: 3
-			TX 1024-QAM
-			RX 1024-QAM
-		PPE Threshold 0xfa 0xff 0xfa 0xff 0x39 0x1c 0xc7 0x71 0x1c 0x07 
-	HE Operation:
-		HE Operation Parameters: (0x003ff4)
-			Default PE Duration: 4
-			TXOP Duration RTS Threshold: 1023
-		BSS Color: 45
-		Basic HE-MCS NSS Set: 0xfffc
-			1 streams: MCS 0-7
-			2 streams: not supported
-			3 streams: not supported
-			4 streams: not supported
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-	WMM:	 * Parameter version 1
-		 * u-APSD
-		 * BE: CW 15-1023, AIFSN 3
-		 * BK: CW 15-1023, AIFSN 7
-		 * VI: CW 7-15, AIFSN 2, TXOP 3008 usec
-		 * VO: CW 3-7, AIFSN 2, TXOP 1504 usec
-BSS ec:fc:c6:24:1b:d0(on wlp1s0)
-	last seen: 2574.470s [boottime]
-	TSF: 17863949563 usec (0d, 04:57:43)
-	freq: 5260.0
-	beacon interval: 100 TUs
-	capability: ESS Privacy (0x0011)
-	signal: -79.00 dBm
-	last seen: 2669 ms ago
-	Information elements from Probe Response frame:
-	SSID: VKU_Staff
-	Supported rates: 6.0* 9.0 12.0* 18.0 24.0* 36.0 48.0 54.0 
-	DS Parameter set: channel 52
-	Country: VN	Environment: Indoor/Outdoor
-		Channels [36 - 64] @ 23 dBm
-		Channels [100 - 140] @ 30 dBm
-		Channels [149 - 165] @ 23 dBm
-	Power constraint: 0 dB
-	TPC report: TX power: 23 dBm
-	RSN:	 * Version: 1
-		 * Group cipher: CCMP
-		 * Pairwise ciphers: CCMP
-		 * Authentication suites: PSK
-		 * Capabilities: 4-PTKSA-RC 4-GTKSA-RC (0x0028)
-	HT capabilities:
-		Capabilities: 0x1ef
-			RX LDPC
-			HT20/HT40
-			SM Power Save disabled
-			RX HT20 SGI
-			RX HT40 SGI
-			TX STBC
-			RX STBC 1-stream
-			Max AMSDU length: 3839 bytes
-			No DSSS/CCK HT40
-		Maximum RX AMPDU length 65535 bytes (exponent: 0x003)
-		Minimum RX AMPDU time spacing: 4 usec (0x05)
-		HT RX MCS rate indexes supported: 0-31
-		HT TX MCS rate indexes are undefined
-	HT operation:
-		 * primary channel: 52
-		 * secondary channel offset: above
-		 * STA channel width: any
-		 * RIFS: 0
-		 * HT protection: no
-		 * non-GF present: 1
-		 * OBSS non-GF present: 0
-		 * dual beacon: 0
-		 * dual CTS protection: 0
-		 * STBC beacon: 0
-		 * L-SIG TXOP Prot: 0
-		 * PCO active: 0
-		 * PCO phase: 0
-	Extended capabilities:
-		 * Extended Channel Switching
-		 * BSS Transition
-		 * Operating Mode Notification
-		 * TWT Responder Support
-		 * Max Number Of MSDUs In A-MSDU is unlimited
-	VHT capabilities:
-		VHT Capabilities (0x0f8b79b0):
-			Max MPDU length: 3895
-			Supported Channel Width: neither 160 nor 80+80
-			RX LDPC
-			short GI (80 MHz)
-			TX STBC
-			SU Beamformer
-			SU Beamformee
-			MU Beamformer
-		VHT RX MCS set:
-			1 streams: MCS 0-9
-			2 streams: MCS 0-9
-			3 streams: MCS 0-9
-			4 streams: MCS 0-9
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-		VHT RX highest supported: 0 Mbps
-		VHT TX MCS set:
-			1 streams: MCS 0-9
-			2 streams: MCS 0-9
-			3 streams: MCS 0-9
-			4 streams: MCS 0-9
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-		VHT TX highest supported: 0 Mbps
-		VHT extended NSS: supported
-	VHT operation:
-		 * channel width: 1 (80 MHz)
-		 * center freq segment 1: 58
-		 * center freq segment 2: 0
-		 * VHT basic MCS set: 0x0000
-	Transmit Power Envelope:
-		 * Local Maximum Transmit Power For 20 MHz: 23 dBm
-		 * Local Maximum Transmit Power For 40 MHz: 23 dBm
-		 * Local Maximum Transmit Power For 80 MHz: 23 dBm
-	HE capabilities:
-		HE MAC Capabilities (0x000512081000):
-			+HTC HE Supported
-			TWT Responder
-			BSR
-			OM Control
-			Maximum A-MPDU Length Exponent: 2
-			OM Control UL MU Data Disable RX
-		HE PHY Capabilities: (0x44200ec06f5b8518000c00):
-			HE40/HE80/5GHz
-			242 tone RUs/5GHz
-			LDPC Coding in Payload
-			NDP with 4x HE-LTF and 3.2us GI
-			STBC Tx <= 80MHz
-			STBC Rx <= 80MHz
-			Rx HE MU PPDU from Non-AP STA
-			SU Beamformer
-			SU Beamformee
-			MU Beamformer
-			Beamformee STS <= 80MHz: 3
-			Beamformee STS > 80MHz: 3
-			Sounding Dimensions <= 80MHz: 3
-			Sounding Dimensions > 80MHz: 3
-			Ng = 16 SU Feedback
-			Codebook Size SU Feedback
-			Triggered SU Beamforming Feedback
-			PPE Threshold Present
-			Max NC: 3
-			TX 1024-QAM
-			RX 1024-QAM
-		HE RX MCS and NSS set <= 80 MHz
-			1 streams: MCS 0-11
-			2 streams: MCS 0-11
-			3 streams: MCS 0-11
-			4 streams: MCS 0-11
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-		HE TX MCS and NSS set <= 80 MHz
-			1 streams: MCS 0-11
-			2 streams: MCS 0-11
-			3 streams: MCS 0-11
-			4 streams: MCS 0-11
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-		PPE Threshold 0x3b 0x1c 0xc7 0x71 0x1c 0xc7 0x71 0x1c 0xc7 0x71 
-	HE Operation:
-		HE Operation Parameters: (0x003ff4)
-			Default PE Duration: 4
-			TXOP Duration RTS Threshold: 1023
-		BSS Color: 38
-		Basic HE-MCS NSS Set: 0xfffc
-			1 streams: MCS 0-7
-			2 streams: not supported
-			3 streams: not supported
-			4 streams: not supported
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-	WMM:	 * Parameter version 1
-		 * u-APSD
-		 * BE: CW 15-1023, AIFSN 3
-		 * BK: CW 15-1023, AIFSN 7
-		 * VI: CW 7-15, AIFSN 2, TXOP 3008 usec
-		 * VO: CW 3-7, AIFSN 2, TXOP 1504 usec
-BSS ec:fc:c6:24:1b:d6(on wlp1s0)
-	last seen: 2574.470s [boottime]
-	TSF: 17863952502 usec (0d, 04:57:43)
-	freq: 5260.0
-	beacon interval: 100 TUs
-	capability: ESS Privacy (0x0011)
-	signal: -79.00 dBm
-	last seen: 2669 ms ago
-	Information elements from Probe Response frame:
-	SSID: VKU_Staff_Mail
-	Supported rates: 6.0* 9.0 12.0* 18.0 24.0* 36.0 48.0 54.0 
-	DS Parameter set: channel 52
-	Country: VN	Environment: Indoor/Outdoor
-		Channels [36 - 64] @ 23 dBm
-		Channels [100 - 140] @ 30 dBm
-		Channels [149 - 165] @ 23 dBm
-	Power constraint: 0 dB
-	TPC report: TX power: 23 dBm
-	RSN:	 * Version: 1
-		 * Group cipher: CCMP
-		 * Pairwise ciphers: CCMP
-		 * Authentication suites: IEEE 802.1X
-		 * Capabilities: 4-PTKSA-RC 4-GTKSA-RC (0x0028)
-	HT capabilities:
-		Capabilities: 0x1ef
-			RX LDPC
-			HT20/HT40
-			SM Power Save disabled
-			RX HT20 SGI
-			RX HT40 SGI
-			TX STBC
-			RX STBC 1-stream
-			Max AMSDU length: 3839 bytes
-			No DSSS/CCK HT40
-		Maximum RX AMPDU length 65535 bytes (exponent: 0x003)
-		Minimum RX AMPDU time spacing: 4 usec (0x05)
-		HT RX MCS rate indexes supported: 0-31
-		HT TX MCS rate indexes are undefined
-	HT operation:
-		 * primary channel: 52
-		 * secondary channel offset: above
-		 * STA channel width: any
-		 * RIFS: 0
-		 * HT protection: no
-		 * non-GF present: 1
-		 * OBSS non-GF present: 0
-		 * dual beacon: 0
-		 * dual CTS protection: 0
-		 * STBC beacon: 0
-		 * L-SIG TXOP Prot: 0
-		 * PCO active: 0
-		 * PCO phase: 0
-	Extended capabilities:
-		 * Extended Channel Switching
-		 * BSS Transition
-		 * Operating Mode Notification
-		 * TWT Responder Support
-		 * Max Number Of MSDUs In A-MSDU is unlimited
-	VHT capabilities:
-		VHT Capabilities (0x0f8b79b0):
-			Max MPDU length: 3895
-			Supported Channel Width: neither 160 nor 80+80
-			RX LDPC
-			short GI (80 MHz)
-			TX STBC
-			SU Beamformer
-			SU Beamformee
-			MU Beamformer
-		VHT RX MCS set:
-			1 streams: MCS 0-9
-			2 streams: MCS 0-9
-			3 streams: MCS 0-9
-			4 streams: MCS 0-9
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-		VHT RX highest supported: 0 Mbps
-		VHT TX MCS set:
-			1 streams: MCS 0-9
-			2 streams: MCS 0-9
-			3 streams: MCS 0-9
-			4 streams: MCS 0-9
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-		VHT TX highest supported: 0 Mbps
-		VHT extended NSS: supported
-	VHT operation:
-		 * channel width: 1 (80 MHz)
-		 * center freq segment 1: 58
-		 * center freq segment 2: 0
-		 * VHT basic MCS set: 0x0000
-	Transmit Power Envelope:
-		 * Local Maximum Transmit Power For 20 MHz: 23 dBm
-		 * Local Maximum Transmit Power For 40 MHz: 23 dBm
-		 * Local Maximum Transmit Power For 80 MHz: 23 dBm
-	HE capabilities:
-		HE MAC Capabilities (0x000512081000):
-			+HTC HE Supported
-			TWT Responder
-			BSR
-			OM Control
-			Maximum A-MPDU Length Exponent: 2
-			OM Control UL MU Data Disable RX
-		HE PHY Capabilities: (0x44200ec06f5b8518000c00):
-			HE40/HE80/5GHz
-			242 tone RUs/5GHz
-			LDPC Coding in Payload
-			NDP with 4x HE-LTF and 3.2us GI
-			STBC Tx <= 80MHz
-			STBC Rx <= 80MHz
-			Rx HE MU PPDU from Non-AP STA
-			SU Beamformer
-			SU Beamformee
-			MU Beamformer
-			Beamformee STS <= 80MHz: 3
-			Beamformee STS > 80MHz: 3
-			Sounding Dimensions <= 80MHz: 3
-			Sounding Dimensions > 80MHz: 3
-			Ng = 16 SU Feedback
-			Codebook Size SU Feedback
-			Triggered SU Beamforming Feedback
-			PPE Threshold Present
-			Max NC: 3
-			TX 1024-QAM
-			RX 1024-QAM
-		HE RX MCS and NSS set <= 80 MHz
-			1 streams: MCS 0-11
-			2 streams: MCS 0-11
-			3 streams: MCS 0-11
-			4 streams: MCS 0-11
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-		HE TX MCS and NSS set <= 80 MHz
-			1 streams: MCS 0-11
-			2 streams: MCS 0-11
-			3 streams: MCS 0-11
-			4 streams: MCS 0-11
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-		PPE Threshold 0x3b 0x1c 0xc7 0x71 0x1c 0xc7 0x71 0x1c 0xc7 0x71 
-	HE Operation:
-		HE Operation Parameters: (0x003ff4)
-			Default PE Duration: 4
-			TXOP Duration RTS Threshold: 1023
-		BSS Color: 38
-		Basic HE-MCS NSS Set: 0xfffc
-			1 streams: MCS 0-7
-			2 streams: not supported
-			3 streams: not supported
-			4 streams: not supported
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-	WMM:	 * Parameter version 1
-		 * u-APSD
-		 * BE: CW 15-1023, AIFSN 3
-		 * BK: CW 15-1023, AIFSN 7
-		 * VI: CW 7-15, AIFSN 2, TXOP 3008 usec
-		 * VO: CW 3-7, AIFSN 2, TXOP 1504 usec
-BSS ec:fc:c6:26:7f:e5(on wlp1s0)
-	last seen: 2573.470s [boottime]
-	TSF: 2743529998747 usec (31d, 18:05:29)
-	freq: 2462.0
-	beacon interval: 100 TUs
-	capability: ESS ShortPreamble ShortSlotTime (0x0421)
-	signal: -61.00 dBm
-	last seen: 3669 ms ago
-	SSID: VKU_Staff_MAC
-	Supported rates: 1.0* 2.0* 5.5 11.0 18.0 24.0 36.0 54.0 
-	DS Parameter set: channel 11
-	TIM: DTIM Count 0 DTIM Period 1 Bitmap Control 0x0 Bitmap[0] 0x0
-	ERP: <no flags>
-	Extended supported rates: 6.0 9.0 12.0 48.0 
-	HT capabilities:
-		Capabilities: 0x1ad
-			RX LDPC
-			HT20
-			SM Power Save disabled
-			RX HT20 SGI
-			TX STBC
-			RX STBC 1-stream
-			Max AMSDU length: 3839 bytes
-			No DSSS/CCK HT40
-		Maximum RX AMPDU length 65535 bytes (exponent: 0x003)
-		Minimum RX AMPDU time spacing: 4 usec (0x05)
-		HT RX MCS rate indexes supported: 0-15
-		HT TX MCS rate indexes are undefined
-	HT operation:
-		 * primary channel: 11
-		 * secondary channel offset: no secondary
-		 * STA channel width: 20 MHz
-		 * RIFS: 0
-		 * HT protection: no
-		 * non-GF present: 1
-		 * OBSS non-GF present: 0
-		 * dual beacon: 0
-		 * dual CTS protection: 0
-		 * STBC beacon: 0
-		 * L-SIG TXOP Prot: 0
-		 * PCO active: 0
-		 * PCO phase: 0
-	Overlapping BSS scan params:
-		 * passive dwell: 20 TUs
-		 * active dwell: 10 TUs
-		 * channel width trigger scan interval: 300 s
-		 * scan passive total per channel: 200 TUs
-		 * scan active total per channel: 20 TUs
-		 * BSS width channel transition delay factor: 5
-		 * OBSS Scan Activity Threshold: 0.25 %
-	Extended capabilities:
-		 * HT Information Exchange Supported
-		 * Extended Channel Switching
-		 * BSS Transition
-		 * Operating Mode Notification
-		 * TWT Responder Support
-	HE capabilities:
-		HE MAC Capabilities (0x000512081000):
-			+HTC HE Supported
-			TWT Responder
-			BSR
-			OM Control
-			Maximum A-MPDU Length Exponent: 2
-			OM Control UL MU Data Disable RX
-		HE PHY Capabilities: (0x20200ec00d418118000c00):
-			242 tone RUs/2.4GHz
-			LDPC Coding in Payload
-			NDP with 4x HE-LTF and 3.2us GI
-			STBC Tx <= 80MHz
-			STBC Rx <= 80MHz
-			Rx HE MU PPDU from Non-AP STA
-			SU Beamformer
-			SU Beamformee
-			Beamformee STS <= 80MHz: 3
-			Sounding Dimensions <= 80MHz: 1
-			Ng = 16 SU Feedback
-			Codebook Size SU Feedback
-			PPE Threshold Present
-			Max NC: 3
-			TX 1024-QAM
-			RX 1024-QAM
-		PPE Threshold 0xfa 0xff 0xfa 0xff 0x39 0x1c 0xc7 0x71 0x1c 0x07 
-	HE Operation:
-		HE Operation Parameters: (0x003ff4)
-			Default PE Duration: 4
-			TXOP Duration RTS Threshold: 1023
-		BSS Color: 45
-		Basic HE-MCS NSS Set: 0xfffc
-			1 streams: MCS 0-7
-			2 streams: not supported
-			3 streams: not supported
-			4 streams: not supported
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-	WMM:	 * Parameter version 1
-		 * u-APSD
-		 * BE: CW 15-1023, AIFSN 3
-		 * BK: CW 15-1023, AIFSN 7
-		 * VI: CW 7-15, AIFSN 2, TXOP 3008 usec
-		 * VO: CW 3-7, AIFSN 2, TXOP 1504 usec
-BSS ec:fc:c6:26:7f:e1(on wlp1s0)
-	last seen: 2573.470s [boottime]
-	TSF: 2743454778369 usec (31d, 18:04:14)
-	freq: 2462.0
-	beacon interval: 100 TUs
-	capability: ESS Privacy ShortPreamble ShortSlotTime (0x0431)
-	signal: -60.00 dBm
-	last seen: 3669 ms ago
-	Information elements from Probe Response frame:
-	SSID: VKU_Student
-	Supported rates: 1.0* 2.0* 5.5 11.0 18.0 24.0 36.0 54.0 
-	DS Parameter set: channel 11
-	ERP: <no flags>
-	Extended supported rates: 6.0 9.0 12.0 48.0 
-	RSN:	 * Version: 1
-		 * Group cipher: CCMP
-		 * Pairwise ciphers: CCMP
-		 * Authentication suites: PSK
-		 * Capabilities: 4-PTKSA-RC 4-GTKSA-RC (0x0028)
-	HT capabilities:
-		Capabilities: 0x1ad
-			RX LDPC
-			HT20
-			SM Power Save disabled
-			RX HT20 SGI
-			TX STBC
-			RX STBC 1-stream
-			Max AMSDU length: 3839 bytes
-			No DSSS/CCK HT40
-		Maximum RX AMPDU length 65535 bytes (exponent: 0x003)
-		Minimum RX AMPDU time spacing: 4 usec (0x05)
-		HT RX MCS rate indexes supported: 0-15
-		HT TX MCS rate indexes are undefined
-	HT operation:
-		 * primary channel: 11
-		 * secondary channel offset: no secondary
-		 * STA channel width: 20 MHz
-		 * RIFS: 0
-		 * HT protection: no
-		 * non-GF present: 1
-		 * OBSS non-GF present: 0
-		 * dual beacon: 0
-		 * dual CTS protection: 0
-		 * STBC beacon: 0
-		 * L-SIG TXOP Prot: 0
-		 * PCO active: 0
-		 * PCO phase: 0
-	Overlapping BSS scan params:
-		 * passive dwell: 20 TUs
-		 * active dwell: 10 TUs
-		 * channel width trigger scan interval: 300 s
-		 * scan passive total per channel: 200 TUs
-		 * scan active total per channel: 20 TUs
-		 * BSS width channel transition delay factor: 5
-		 * OBSS Scan Activity Threshold: 0.25 %
-	Extended capabilities:
-		 * HT Information Exchange Supported
-		 * Extended Channel Switching
-		 * BSS Transition
-		 * Operating Mode Notification
-		 * TWT Responder Support
-	HE capabilities:
-		HE MAC Capabilities (0x000512081000):
-			+HTC HE Supported
-			TWT Responder
-			BSR
-			OM Control
-			Maximum A-MPDU Length Exponent: 2
-			OM Control UL MU Data Disable RX
-		HE PHY Capabilities: (0x20200ec00d418118000c00):
-			242 tone RUs/2.4GHz
-			LDPC Coding in Payload
-			NDP with 4x HE-LTF and 3.2us GI
-			STBC Tx <= 80MHz
-			STBC Rx <= 80MHz
-			Rx HE MU PPDU from Non-AP STA
-			SU Beamformer
-			SU Beamformee
-			Beamformee STS <= 80MHz: 3
-			Sounding Dimensions <= 80MHz: 1
-			Ng = 16 SU Feedback
-			Codebook Size SU Feedback
-			PPE Threshold Present
-			Max NC: 3
-			TX 1024-QAM
-			RX 1024-QAM
-		PPE Threshold 0xfa 0xff 0xfa 0xff 0x39 0x1c 0xc7 0x71 0x1c 0x07 
-	HE Operation:
-		HE Operation Parameters: (0x003ff4)
-			Default PE Duration: 4
-			TXOP Duration RTS Threshold: 1023
-		BSS Color: 45
-		Basic HE-MCS NSS Set: 0xfffc
-			1 streams: MCS 0-7
-			2 streams: not supported
-			3 streams: not supported
-			4 streams: not supported
-			5 streams: not supported
-			6 streams: not supported
-			7 streams: not supported
-			8 streams: not supported
-	WMM:	 * Parameter version 1
-		 * u-APSD
-		 * BE: CW 15-1023, AIFSN 3
-		 * BK: CW 15-1023, AIFSN 7
-		 * VI: CW 7-15, AIFSN 2, TXOP 3008 usec
-		 * VO: CW 3-7, AIFSN 2, TXOP 1504 usec
+[
+    {
+        "bssid": "68:51:34:f2:aa:22",
+        "interface": "wlp1s0",
+        "associated": false,
+        "details": {
+            "last seen": [
+                "3305.893s [boottime]",
+                "1233 ms ago"
+            ],
+            "TSF": "1329914272056 usec (15d, 09:25:14)",
+            "freq": "2412.0",
+            "beacon interval": "100 TUs",
+            "capability": "ESS Privacy ShortPreamble ShortSlotTime (0x0431)",
+            "signal": "-81.00 dBm",
+            "SSID": "VKU_Guest",
+            "Supported rates": "1.0* 2.0* 5.5 11.0 18.0 24.0 36.0 54.0",
+            "DS Parameter set": "channel 1",
+            "TIM": "DTIM Count 0 DTIM Period 1 Bitmap Control 0x0 Bitmap[0] 0x0",
+            "ERP": "<no flags>",
+            "Extended supported rates": "6.0 9.0 12.0 48.0",
+            "RSN": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK FT/PSK",
+                "Capabilities": "4-PTKSA-RC 4-GTKSA-RC (0x0028)"
+            },
+            "HT capabilities": {
+                "Capabilities": {
+                    "info": "0x1ad",
+                    "flags": [
+                        "RX LDPC",
+                        "HT20",
+                        "SM Power Save disabled",
+                        "RX HT20 SGI",
+                        "TX STBC",
+                        "RX STBC 1-stream",
+                        "No DSSS/CCK HT40"
+                    ],
+                    "Max AMSDU length": "3839 bytes"
+                },
+                "Maximum RX AMPDU length 65535 bytes (exponent": "0x003)",
+                "Minimum RX AMPDU time spacing": "4 usec (0x05)",
+                "HT RX MCS rate indexes supported": "0-15",
+                "flags": [
+                    "HT TX MCS rate indexes are undefined"
+                ]
+            },
+            "HT operation": {
+                "primary channel": "1",
+                "secondary channel offset": "no secondary",
+                "STA channel width": "20 MHz",
+                "RIFS": "0",
+                "HT protection": "no",
+                "non-GF present": "0",
+                "OBSS non-GF present": "0",
+                "dual beacon": "0",
+                "dual CTS protection": "0",
+                "STBC beacon": "0",
+                "L-SIG TXOP Prot": "0",
+                "PCO active": "0",
+                "PCO phase": "0"
+            },
+            "Overlapping BSS scan params": {
+                "passive dwell": "20 TUs",
+                "active dwell": "10 TUs",
+                "channel width trigger scan interval": "300 s",
+                "scan passive total per channel": "200 TUs",
+                "scan active total per channel": "20 TUs",
+                "BSS width channel transition delay factor": "5",
+                "OBSS Scan Activity Threshold": "0.25 %"
+            },
+            "Extended capabilities": {
+                "flags": [
+                    "HT Information Exchange Supported",
+                    "Extended Channel Switching",
+                    "BSS Transition",
+                    "Operating Mode Notification",
+                    "TWT Responder Support"
+                ]
+            },
+            "HE capabilities": {
+                "HE MAC Capabilities (0x000512081000)": {
+                    "flags": [
+                        "+HTC HE Supported",
+                        "TWT Responder",
+                        "BSR",
+                        "OM Control",
+                        "OM Control UL MU Data Disable RX"
+                    ],
+                    "Maximum A-MPDU Length Exponent": "2"
+                },
+                "HE PHY Capabilities": {
+                    "(0x20200ec00d418118000c00)": "",
+                    "flags": [
+                        "242 tone RUs/2.4GHz",
+                        "LDPC Coding in Payload",
+                        "NDP with 4x HE-LTF and 3.2us GI",
+                        "STBC Tx <= 80MHz",
+                        "STBC Rx <= 80MHz",
+                        "Rx HE MU PPDU from Non-AP STA",
+                        "SU Beamformer",
+                        "SU Beamformee",
+                        "Ng = 16 SU Feedback",
+                        "Codebook Size SU Feedback",
+                        "PPE Threshold Present",
+                        "TX 1024-QAM",
+                        "RX 1024-QAM"
+                    ],
+                    "Beamformee STS <= 80MHz": "3",
+                    "Sounding Dimensions <= 80MHz": "1",
+                    "Max NC": "3"
+                },
+                "flags": [
+                    "PPE Threshold 0xfa 0xff 0xfa 0xff 0x39 0x1c 0xc7 0x71 0x1c 0x07"
+                ]
+            },
+            "HE Operation": {
+                "HE Operation Parameters": {
+                    "info": "(0x003ff4)",
+                    "Default PE Duration": "4",
+                    "TXOP Duration RTS Threshold": "1023"
+                },
+                "BSS Color": "14",
+                "Basic HE-MCS NSS Set": {
+                    "info": "0xfffc",
+                    "1 streams": "MCS 0-7",
+                    "2 streams": "not supported",
+                    "3 streams": "not supported",
+                    "4 streams": "not supported",
+                    "5 streams": "not supported",
+                    "6 streams": "not supported",
+                    "7 streams": "not supported",
+                    "8 streams": "not supported"
+                }
+            },
+            "WMM": {
+                "info": "Parameter version 1",
+                "flags": [
+                    "u-APSD"
+                ],
+                "BE": "CW 15-1023, AIFSN 3",
+                "BK": "CW 15-1023, AIFSN 7",
+                "VI": "CW 7-15, AIFSN 2, TXOP 3008 usec",
+                "VO": "CW 3-7, AIFSN 2, TXOP 1504 usec"
+            }
+        }
+    },
+    {
+        "bssid": "ec:fc:c6:22:e8:61",
+        "interface": "wlp1s0",
+        "associated": false,
+        "details": {
+            "last seen": [
+                "3305.893s [boottime]",
+                "1233 ms ago"
+            ],
+            "TSF": "1209589495628 usec (13d, 23:59:49)",
+            "freq": "2412.0",def parse_raw_bss(raw_data):
+    def clean_text(text):
+        if not text: return ""
+        # Xóa các dấu hoa thị dư thừa ở đầu dòng (thường có trong iw scan)
+        text = re.sub(r"^[\s\*]+", "", text)
+        return text.strip()
+
+    lines = raw_data.split("\n")
+    header = lines[0]
+    
+    # Parse header để lấy BSSID và Interface
+    bssid_match = re.search(r"BSS\s+([0-9a-f:]{17})", header, re.IGNORECASE)
+    interface_match = re.search(r"on\s+([^\s\)]+)", header)
+    
+    bss = {
+        "bssid": bssid_match.group(1) if bssid_match else None,
+        "interface": interface_match.group(1) if interface_match else None,
+        "associated": "associated" in header,
+        "details": {},
+    }
+
+    # Stack dùng để quản lý cấp độ lồng nhau (indentation)
+    # Cấu trúc: (mức_khoảng_trắng, dictionary_đang_ghi)
+    stack = [(-1, bss["details"])]
+    
+    all_lines = [l for l in lines[1:] if l.strip()]
+
+    for i, line in enumerate(all_lines):
+        # Tính độ thụt lề bằng số khoảng trắng/tab ở đầu dòng
+        indent = len(line) - len(line.lstrip())
+        content = clean_text(line)
+        
+        # Kiểm tra dòng tiếp theo có thụt lề sâu hơn không để xác định đây là node cha
+        has_children = False
+        if i + 1 < len(all_lines):
+            next_indent = len(all_lines[i + 1]) - len(all_lines[i + 1].lstrip())
+            if next_indent > indent:
+                has_children = True
+
+        # Pop stack nếu dòng hiện tại thoát ra khỏi cấp độ lồng trước đó
+        while len(stack) > 1 and indent <= stack[-1][0]:
+            stack.pop()
+        
+        current_node = stack[-1][1]
+
+        if ":" in content:
+            parts = content.split(":", 1)
+            key = clean_text(parts[0])
+            val = clean_text(parts[1])
+
+            # Nếu là node cha (có con hoặc thuộc danh sách đặc biệt)
+            special_keys = ["WPA", "RSN", "Country", "HT capabilities", "VHT capabilities", "WMM", "Extended capabilities"]
+            if has_children or key in special_keys or not val:
+                new_node = {}
+                if val:
+                    if "Environment" in val: # Xử lý riêng cho dòng Country
+                        env_parts = val.split("Environment:")
+                        new_node["Code"] = clean_text(env_parts[0])
+                        new_node["Environment"] = clean_text(env_parts[1])
+                    else:
+                        new_node["info"] = val
+                
+                current_node[key] = new_node
+                stack.append((indent, new_node))
+            else:
+                # Key-Value bình thường
+                current_node[key] = val
+        else:
+            # Nếu là dòng không có dấu ":" (thường là các flags/capabilities)
+            # Nếu node hiện tại là Country thì cho vào 'constraints', ngược lại cho vào 'flags'
+            target_key = "constraints" if "Code" in current_node else "flags"
+            if target_key not in current_node:
+                current_node[target_key] = []
+            current_node[target_key].append(content)
+
+    return bss
+            "beacon interval": "100 TUs",
+            "capability": "ESS Privacy ShortPreamble ShortSlotTime (0x0431)",
+            "signal": "-78.00 dBm",
+            "Information elements from Probe Response frame": {},
+            "SSID": "VKU_Student",
+            "Supported rates": "1.0* 2.0* 5.5 11.0 18.0 24.0 36.0 54.0",
+            "DS Parameter set": "channel 1",
+            "ERP": "<no flags>",
+            "Extended supported rates": "6.0 9.0 12.0 48.0",
+            "RSN": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK",
+                "Capabilities": "4-PTKSA-RC 4-GTKSA-RC (0x0028)"
+            },
+            "HT capabilities": {
+                "Capabilities": {
+                    "info": "0x1ad",
+                    "flags": [
+                        "RX LDPC",
+                        "HT20",
+                        "SM Power Save disabled",
+                        "RX HT20 SGI",
+                        "TX STBC",
+                        "RX STBC 1-stream",
+                        "No DSSS/CCK HT40"
+                    ],
+                    "Max AMSDU length": "3839 bytes"
+                },
+                "Maximum RX AMPDU length 65535 bytes (exponent": "0x003)",
+                "Minimum RX AMPDU time spacing": "4 usec (0x05)",
+                "HT RX MCS rate indexes supported": "0-15",
+                "flags": [
+                    "HT TX MCS rate indexes are undefined"
+                ]
+            },
+            "HT operation": {
+                "primary channel": "1",
+                "secondary channel offset": "no secondary",
+                "STA channel width": "20 MHz",
+                "RIFS": "0",
+                "HT protection": "no",
+                "non-GF present": "0",
+                "OBSS non-GF present": "0",
+                "dual beacon": "0",
+                "dual CTS protection": "0",
+                "STBC beacon": "0",
+                "L-SIG TXOP Prot": "0",
+                "PCO active": "0",
+                "PCO phase": "0"
+            },
+            "Overlapping BSS scan params": {
+                "passive dwell": "20 TUs",
+                "active dwell": "10 TUs",
+                "channel width trigger scan interval": "300 s",
+                "scan passive total per channel": "200 TUs",
+                "scan active total per channel": "20 TUs",
+                "BSS width channel transition delay factor": "5",
+                "OBSS Scan Activity Threshold": "0.25 %"
+            },
+            "Extended capabilities": {
+                "flags": [
+                    "HT Information Exchange Supported",
+                    "Extended Channel Switching",
+                    "BSS Transition",
+                    "Operating Mode Notification",
+                    "TWT Responder Support"
+                ]
+            },
+            "HE capabilities": {
+                "HE MAC Capabilities (0x000512081000)": {
+                    "flags": [
+                        "+HTC HE Supported",
+                        "TWT Responder",
+                        "BSR",
+                        "OM Control",
+                        "OM Control UL MU Data Disable RX"
+                    ],
+                    "Maximum A-MPDU Length Exponent": "2"
+                },
+                "HE PHY Capabilities": {
+                    "(0x20200ec00d418118000c00)": "",
+                    "flags": [
+                        "242 tone RUs/2.4GHz",
+                        "LDPC Coding in Payload",
+                        "NDP with 4x HE-LTF and 3.2us GI",
+                        "STBC Tx <= 80MHz",
+                        "STBC Rx <= 80MHz",
+                        "Rx HE MU PPDU from Non-AP STA",
+                        "SU Beamformer",
+                        "SU Beamformee",
+                        "Ng = 16 SU Feedback",
+                        "Codebook Size SU Feedback",
+                        "PPE Threshold Present",
+                        "TX 1024-QAM",
+                        "RX 1024-QAM"
+                    ],
+                    "Beamformee STS <= 80MHz": "3",
+                    "Sounding Dimensions <= 80MHz": "1",
+                    "Max NC": "3"
+                },
+                "flags": [
+                    "PPE Threshold 0xfa 0xff 0xfa 0xff 0x39 0x1c 0xc7 0x71 0x1c 0x07"
+                ]
+            },
+            "HE Operation": {
+                "HE Operation Parameters": {
+                    "info": "(0x003ff4)",
+                    "Default PE Duration": "4",
+                    "TXOP Duration RTS Threshold": "1023"
+                },
+                "BSS Color": "48",
+                "Basic HE-MCS NSS Set": {
+                    "info": "0xfffc",
+                    "1 streams": "MCS 0-7",
+                    "2 streams": "not supported",
+                    "3 streams": "not supported",
+                    "4 streams": "not supported",
+                    "5 streams": "not supported",
+                    "6 streams": "not supported",
+                    "7 streams": "not supported",
+                    "8 streams": "not supported"
+                }
+            },
+            "WMM": {
+                "info": "Parameter version 1",
+                "flags": [
+                    "u-APSD"
+                ],
+                "BE": "CW 15-1023, AIFSN 3",
+                "BK": "CW 15-1023, AIFSN 7",
+                "VI": "CW 7-15, AIFSN 2, TXOP 3008 usec",
+                "VO": "CW 3-7, AIFSN 2, TXOP 1504 usec"
+            }
+        }
+    },
+    {
+        "bssid": "ec:fc:c6:22:e8:62",
+        "interface": "wlp1s0",
+        "associated": false,
+        "details": {
+            "last seen": [
+                "3305.893s [boottime]",
+                "1233 ms ago"
+            ],
+            "TSF": "1209589463948 usec (13d, 23:59:49)",
+            "freq": "2412.0",
+            "beacon interval": "100 TUs",
+            "capability": "ESS Privacy ShortPreamble ShortSlotTime (0x0431)",
+            "signal": "-79.00 dBm",
+            "SSID": "VKU_Guest",
+            "Supported rates": "1.0* 2.0* 5.5 11.0 18.0 24.0 36.0 54.0",
+            "DS Parameter set": "channel 1",
+            "TIM": "DTIM Count 0 DTIM Period 1 Bitmap Control 0x0 Bitmap[0] 0x0",
+            "ERP": "<no flags>",
+            "Extended supported rates": "6.0 9.0 12.0 48.0",
+            "RSN": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK FT/PSK",
+                "Capabilities": "4-PTKSA-RC 4-GTKSA-RC (0x0028)"
+            },
+            "HT capabilities": {
+                "Capabilities": {
+                    "info": "0x1ad",
+                    "flags": [
+                        "RX LDPC",
+                        "HT20",
+                        "SM Power Save disabled",
+                        "RX HT20 SGI",
+                        "TX STBC",
+                        "RX STBC 1-stream",
+                        "No DSSS/CCK HT40"
+                    ],
+                    "Max AMSDU length": "3839 bytes"
+                },
+                "Maximum RX AMPDU length 65535 bytes (exponent": "0x003)",
+                "Minimum RX AMPDU time spacing": "4 usec (0x05)",
+                "HT RX MCS rate indexes supported": "0-15",
+                "flags": [
+                    "HT TX MCS rate indexes are undefined"
+                ]
+            },
+            "HT operation": {
+                "primary channel": "1",
+                "secondary channel offset": "no secondary",
+                "STA channel width": "20 MHz",
+                "RIFS": "0",
+                "HT protection": "no",
+                "non-GF present": "0",
+                "OBSS non-GF present": "0",
+                "dual beacon": "0",
+                "dual CTS protection": "0",
+                "STBC beacon": "0",
+                "L-SIG TXOP Prot": "0",
+                "PCO active": "0",
+                "PCO phase": "0"
+            },
+            "Overlapping BSS scan params": {
+                "passive dwell": "20 TUs",
+                "active dwell": "10 TUs",
+                "channel width trigger scan interval": "300 s",
+                "scan passive total per channel": "200 TUs",
+                "scan active total per channel": "20 TUs",
+                "BSS width channel transition delay factor": "5",
+                "OBSS Scan Activity Threshold": "0.25 %"
+            },
+            "Extended capabilities": {
+                "flags": [
+                    "HT Information Exchange Supported",
+                    "Extended Channel Switching",
+                    "BSS Transition",
+                    "Operating Mode Notification",
+                    "TWT Responder Support"
+                ]
+            },
+            "HE capabilities": {
+                "HE MAC Capabilities (0x000512081000)": {
+                    "flags": [
+                        "+HTC HE Supported",
+                        "TWT Responder",
+                        "BSR",
+                        "OM Control",
+                        "OM Control UL MU Data Disable RX"
+                    ],
+                    "Maximum A-MPDU Length Exponent": "2"
+                },
+                "HE PHY Capabilities": {
+                    "(0x20200ec00d418118000c00)": "",
+                    "flags": [
+                        "242 tone RUs/2.4GHz",
+                        "LDPC Coding in Payload",
+                        "NDP with 4x HE-LTF and 3.2us GI",
+                        "STBC Tx <= 80MHz",
+                        "STBC Rx <= 80MHz",
+                        "Rx HE MU PPDU from Non-AP STA",
+                        "SU Beamformer",
+                        "SU Beamformee",
+                        "Ng = 16 SU Feedback",
+                        "Codebook Size SU Feedback",
+                        "PPE Threshold Present",
+                        "TX 1024-QAM",
+                        "RX 1024-QAM"
+                    ],
+                    "Beamformee STS <= 80MHz": "3",
+                    "Sounding Dimensions <= 80MHz": "1",
+                    "Max NC": "3"
+                },
+                "flags": [
+                    "PPE Threshold 0xfa 0xff 0xfa 0xff 0x39 0x1c 0xc7 0x71 0x1c 0x07"
+                ]
+            },
+            "HE Operation": {
+                "HE Operation Parameters": {
+                    "info": "(0x003ff4)",
+                    "Default PE Duration": "4",
+                    "TXOP Duration RTS Threshold": "1023"
+                },
+                "BSS Color": "48",
+                "Basic HE-MCS NSS Set": {
+                    "info": "0xfffc",
+                    "1 streams": "MCS 0-7",
+                    "2 streams": "not supported",
+                    "3 streams": "not supported",
+                    "4 streams": "not supported",
+                    "5 streams": "not supported",
+                    "6 streams": "not supported",
+                    "7 streams": "not supported",
+                    "8 streams": "not supported"
+                }
+            },
+            "WMM": {
+                "info": "Parameter version 1",
+                "flags": [
+                    "u-APSD"
+                ],
+                "BE": "CW 15-1023, AIFSN 3",
+                "BK": "CW 15-1023, AIFSN 7",
+                "VI": "CW 7-15, AIFSN 2, TXOP 3008 usec",
+                "VO": "CW 3-7, AIFSN 2, TXOP 1504 usec"
+            }
+        }
+    },
+    {
+        "bssid": "ec:fc:c6:22:e8:63",
+        "interface": "wlp1s0",
+        "associated": false,
+        "details": {
+            "last seen": [
+                "3305.893s [boottime]",
+                "1233 ms ago"
+            ],
+            "TSF": "1209589500604 usec (13d, 23:59:49)",
+            "freq": "2412.0",
+            "beacon interval": "100 TUs",
+            "capability": "ESS Privacy ShortPreamble ShortSlotTime (0x0431)",
+            "signal": "-82.00 dBm",
+            "Information elements from Probe Response frame": {},
+            "SSID": "VKU",
+            "Supported rates": "1.0* 2.0* 5.5 11.0 18.0 24.0 36.0 54.0",
+            "DS Parameter set": "channel 1",
+            "ERP": "<no flags>",
+            "Extended supported rates": "6.0 9.0 12.0 48.0",
+            "RSN": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK",
+                "Capabilities": "4-PTKSA-RC 4-GTKSA-RC (0x0028)"
+            },
+            "HT capabilities": {
+                "Capabilities": {
+                    "info": "0x1ad",
+                    "flags": [
+                        "RX LDPC",
+                        "HT20",
+                        "SM Power Save disabled",
+                        "RX HT20 SGI",
+                        "TX STBC",
+                        "RX STBC 1-stream",
+                        "No DSSS/CCK HT40"
+                    ],
+                    "Max AMSDU length": "3839 bytes"
+                },
+                "Maximum RX AMPDU length 65535 bytes (exponent": "0x003)",
+                "Minimum RX AMPDU time spacing": "4 usec (0x05)",
+                "HT RX MCS rate indexes supported": "0-15",
+                "flags": [
+                    "HT TX MCS rate indexes are undefined"
+                ]
+            },
+            "HT operation": {
+                "primary channel": "1",
+                "secondary channel offset": "no secondary",
+                "STA channel width": "20 MHz",
+                "RIFS": "0",
+                "HT protection": "no",
+                "non-GF present": "0",
+                "OBSS non-GF present": "0",
+                "dual beacon": "0",
+                "dual CTS protection": "0",
+                "STBC beacon": "0",
+                "L-SIG TXOP Prot": "0",
+                "PCO active": "0",
+                "PCO phase": "0"
+            },
+            "Overlapping BSS scan params": {
+                "passive dwell": "20 TUs",
+                "active dwell": "10 TUs",
+                "channel width trigger scan interval": "300 s",
+                "scan passive total per channel": "200 TUs",
+                "scan active total per channel": "20 TUs",
+                "BSS width channel transition delay factor": "5",
+                "OBSS Scan Activity Threshold": "0.25 %"
+            },
+            "Extended capabilities": {
+                "flags": [
+                    "HT Information Exchange Supported",
+                    "Extended Channel Switching",
+                    "BSS Transition",
+                    "Operating Mode Notification",
+                    "TWT Responder Support"
+                ]
+            },
+            "HE capabilities": {
+                "HE MAC Capabilities (0x000512081000)": {
+                    "flags": [
+                        "+HTC HE Supported",
+                        "TWT Responder",
+                        "BSR",
+                        "OM Control",
+                        "OM Control UL MU Data Disable RX"
+                    ],
+                    "Maximum A-MPDU Length Exponent": "2"
+                },
+                "HE PHY Capabilities": {
+                    "(0x20200ec00d418118000c00)": "",
+                    "flags": [
+                        "242 tone RUs/2.4GHz",
+                        "LDPC Coding in Payload",
+                        "NDP with 4x HE-LTF and 3.2us GI",
+                        "STBC Tx <= 80MHz",
+                        "STBC Rx <= 80MHz",
+                        "Rx HE MU PPDU from Non-AP STA",
+                        "SU Beamformer",
+                        "SU Beamformee",
+                        "Ng = 16 SU Feedback",
+                        "Codebook Size SU Feedback",
+                        "PPE Threshold Present",
+                        "TX 1024-QAM",
+                        "RX 1024-QAM"
+                    ],
+                    "Beamformee STS <= 80MHz": "3",
+                    "Sounding Dimensions <= 80MHz": "1",
+                    "Max NC": "3"
+                },
+                "flags": [
+                    "PPE Threshold 0xfa 0xff 0xfa 0xff 0x39 0x1c 0xc7 0x71 0x1c 0x07"
+                ]
+            },
+            "HE Operation": {
+                "HE Operation Parameters": {
+                    "info": "(0x003ff4)",
+                    "Default PE Duration": "4",
+                    "TXOP Duration RTS Threshold": "1023"
+                },
+                "BSS Color": "48",
+                "Basic HE-MCS NSS Set": {
+                    "info": "0xfffc",
+                    "1 streams": "MCS 0-7",
+                    "2 streams": "not supported",
+                    "3 streams": "not supported",
+                    "4 streams": "not supported",
+                    "5 streams": "not supported",
+                    "6 streams": "not supported",
+                    "7 streams": "not supported",
+                    "8 streams": "not supported"
+                }
+            },
+            "WMM": {
+                "info": "Parameter version 1",
+                "flags": [
+                    "u-APSD"
+                ],
+                "BE": "CW 15-1023, AIFSN 3",
+                "BK": "CW 15-1023, AIFSN 7",
+                "VI": "CW 7-15, AIFSN 2, TXOP 3008 usec",
+                "VO": "CW 3-7, AIFSN 2, TXOP 1504 usec"
+            }
+        }
+    },
+    {
+        "bssid": "ec:fc:c6:23:0e:63",
+        "interface": "wlp1s0",
+        "associated": false,
+        "details": {
+            "last seen": [
+                "3305.893s [boottime]",
+                "1233 ms ago"
+            ],
+            "TSF": "2589939003758 usec (29d, 23:25:39)",
+            "freq": "2412.0",
+            "beacon interval": "100 TUs",
+            "capability": "ESS Privacy ShortPreamble ShortSlotTime (0x0431)",
+            "signal": "-81.00 dBm",
+            "SSID": "VKU",
+            "Supported rates": "1.0* 2.0* 5.5 11.0 18.0 24.0 36.0 54.0",
+            "DS Parameter set": "channel 1",
+            "TIM": "DTIM Count 0 DTIM Period 1 Bitmap Control 0x0 Bitmap[0] 0x0",
+            "ERP": "<no flags>",
+            "Extended supported rates": "6.0 9.0 12.0 48.0",
+            "RSN": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "PSK",
+                "Capabilities": "4-PTKSA-RC 4-GTKSA-RC (0x0028)"
+            },
+            "HT capabilities": {
+                "Capabilities": {
+                    "info": "0x1ad",
+                    "flags": [
+                        "RX LDPC",
+                        "HT20",
+                        "SM Power Save disabled",
+                        "RX HT20 SGI",
+                        "TX STBC",
+                        "RX STBC 1-stream",
+                        "No DSSS/CCK HT40"
+                    ],
+                    "Max AMSDU length": "3839 bytes"
+                },
+                "Maximum RX AMPDU length 65535 bytes (exponent": "0x003)",
+                "Minimum RX AMPDU time spacing": "4 usec (0x05)",
+                "HT RX MCS rate indexes supported": "0-15",
+                "flags": [
+                    "HT TX MCS rate indexes are undefined"
+                ]
+            },
+            "HT operation": {
+                "primary channel": "1",
+                "secondary channel offset": "no secondary",
+                "STA channel width": "20 MHz",
+                "RIFS": "0",
+                "HT protection": "no",
+                "non-GF present": "0",
+                "OBSS non-GF present": "0",
+                "dual beacon": "0",
+                "dual CTS protection": "0",
+                "STBC beacon": "0",
+                "L-SIG TXOP Prot": "0",
+                "PCO active": "0",
+                "PCO phase": "0"
+            },
+            "Overlapping BSS scan params": {
+                "passive dwell": "20 TUs",
+                "active dwell": "10 TUs",
+                "channel width trigger scan interval": "300 s",
+                "scan passive total per channel": "200 TUs",
+                "scan active total per channel": "20 TUs",
+                "BSS width channel transition delay factor": "5",
+                "OBSS Scan Activity Threshold": "0.25 %"
+            },
+            "Extended capabilities": {
+                "flags": [
+                    "HT Information Exchange Supported",
+                    "Extended Channel Switching",
+                    "BSS Transition",
+                    "Operating Mode Notification",
+                    "TWT Responder Support"
+                ]
+            },
+            "HE capabilities": {
+                "HE MAC Capabilities (0x000512081000)": {
+                    "flags": [
+                        "+HTC HE Supported",
+                        "TWT Responder",
+                        "BSR",
+                        "OM Control",
+                        "OM Control UL MU Data Disable RX"
+                    ],
+                    "Maximum A-MPDU Length Exponent": "2"
+                },
+                "HE PHY Capabilities": {
+                    "(0x20200ec00d418118000c00)": "",
+                    "flags": [
+                        "242 tone RUs/2.4GHz",
+                        "LDPC Coding in Payload",
+                        "NDP with 4x HE-LTF and 3.2us GI",
+                        "STBC Tx <= 80MHz",
+                        "STBC Rx <= 80MHz",
+                        "Rx HE MU PPDU from Non-AP STA",
+                        "SU Beamformer",
+                        "SU Beamformee",
+                        "Ng = 16 SU Feedback",
+                        "Codebook Size SU Feedback",
+                        "PPE Threshold Present",
+                        "TX 1024-QAM",
+                        "RX 1024-QAM"
+                    ],
+                    "Beamformee STS <= 80MHz": "3",
+                    "Sounding Dimensions <= 80MHz": "1",
+                    "Max NC": "3"
+                },
+                "flags": [
+                    "PPE Threshold 0xfa 0xff 0xfa 0xff 0x39 0x1c 0xc7 0x71 0x1c 0x07"
+                ]
+            },
+            "HE Operation": {
+                "HE Operation Parameters": {
+                    "info": "(0x003ff4)",
+                    "Default PE Duration": "4",
+                    "TXOP Duration RTS Threshold": "1023"
+                },
+                "BSS Color": "8",
+                "Basic HE-MCS NSS Set": {
+                    "info": "0xfffc",
+                    "1 streams": "MCS 0-7",
+                    "2 streams": "not supported",
+                    "3 streams": "not supported",
+                    "4 streams": "not supported",
+                    "5 streams": "not supported",
+                    "6 streams": "not supported",
+                    "7 streams": "not supported",
+                    "8 streams": "not supported"
+                }
+            },
+            "WMM": {
+                "info": "Parameter version 1",
+                "flags": [
+                    "u-APSD"
+                ],
+                "BE": "CW 15-1023, AIFSN 3",
+                "BK": "CW 15-1023, AIFSN 7",
+                "VI": "CW 7-15, AIFSN 2, TXOP 3008 usec",
+                "VO": "CW 3-7, AIFSN 2, TXOP 1504 usec"
+            }
+        }
+    },
+    {
+        "bssid": "ec:fc:c6:23:0e:66",
+        "interface": "wlp1s0",
+        "associated": false,
+        "details": {
+            "last seen": [
+                "3305.893s [boottime]",
+                "1233 ms ago"
+            ],
+            "TSF": "2589939008338 usec (29d, 23:25:39)",
+            "freq": "2412.0",
+            "beacon interval": "100 TUs",
+            "capability": "ESS Privacy ShortPreamble ShortSlotTime (0x0431)",
+            "signal": "-82.00 dBm",
+            "SSID": "VKU_Staff_Mail",
+            "Supported rates": "1.0* 2.0* 5.5 11.0 18.0 24.0 36.0 54.0",
+            "DS Parameter set": "channel 1",
+            "TIM": "DTIM Count 0 DTIM Period 1 Bitmap Control 0x0 Bitmap[0] 0x0",
+            "ERP": "<no flags>",
+            "Extended supported rates": "6.0 9.0 12.0 48.0",
+            "RSN": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "IEEE 802.1X",
+                "Capabilities": "4-PTKSA-RC 4-GTKSA-RC (0x0028)"
+            },
+            "HT capabilities": {
+                "Capabilities": {
+                    "info": "0x1ad",
+                    "flags": [
+                        "RX LDPC",
+                        "HT20",
+                        "SM Power Save disabled",
+                        "RX HT20 SGI",
+                        "TX STBC",
+                        "RX STBC 1-stream",
+                        "No DSSS/CCK HT40"
+                    ],
+                    "Max AMSDU length": "3839 bytes"
+                },
+                "Maximum RX AMPDU length 65535 bytes (exponent": "0x003)",
+                "Minimum RX AMPDU time spacing": "4 usec (0x05)",
+                "HT RX MCS rate indexes supported": "0-15",
+                "flags": [
+                    "HT TX MCS rate indexes are undefined"
+                ]
+            },
+            "HT operation": {
+                "primary channel": "1",
+                "secondary channel offset": "no secondary",
+                "STA channel width": "20 MHz",
+                "RIFS": "0",
+                "HT protection": "no",
+                "non-GF present": "0",
+                "OBSS non-GF present": "0",
+                "dual beacon": "0",
+                "dual CTS protection": "0",
+                "STBC beacon": "0",
+                "L-SIG TXOP Prot": "0",
+                "PCO active": "0",
+                "PCO phase": "0"
+            },
+            "Overlapping BSS scan params": {
+                "passive dwell": "20 TUs",
+                "active dwell": "10 TUs",
+                "channel width trigger scan interval": "300 s",
+                "scan passive total per channel": "200 TUs",
+                "scan active total per channel": "20 TUs",
+                "BSS width channel transition delay factor": "5",
+                "OBSS Scan Activity Threshold": "0.25 %"
+            },
+            "Extended capabilities": {
+                "flags": [
+                    "HT Information Exchange Supported",
+                    "Extended Channel Switching",
+                    "BSS Transition",
+                    "Operating Mode Notification",
+                    "TWT Responder Support"
+                ]
+            },
+            "HE capabilities": {
+                "HE MAC Capabilities (0x000512081000)": {
+                    "flags": [
+                        "+HTC HE Supported",
+                        "TWT Responder",
+                        "BSR",
+                        "OM Control",
+                        "OM Control UL MU Data Disable RX"
+                    ],
+                    "Maximum A-MPDU Length Exponent": "2"
+                },
+                "HE PHY Capabilities": {
+                    "(0x20200ec00d418118000c00)": "",
+                    "flags": [
+                        "242 tone RUs/2.4GHz",
+                        "LDPC Coding in Payload",
+                        "NDP with 4x HE-LTF and 3.2us GI",
+                        "STBC Tx <= 80MHz",
+                        "STBC Rx <= 80MHz",
+                        "Rx HE MU PPDU from Non-AP STA",
+                        "SU Beamformer",
+                        "SU Beamformee",
+                        "Ng = 16 SU Feedback",
+                        "Codebook Size SU Feedback",
+                        "PPE Threshold Present",
+                        "TX 1024-QAM",
+                        "RX 1024-QAM"
+                    ],
+                    "Beamformee STS <= 80MHz": "3",
+                    "Sounding Dimensions <= 80MHz": "1",
+                    "Max NC": "3"
+                },
+                "flags": [
+                    "PPE Threshold 0xfa 0xff 0xfa 0xff 0x39 0x1c 0xc7 0x71 0x1c 0x07"
+                ]
+            },
+            "HE Operation": {
+                "HE Operation Parameters": {
+                    "info": "(0x003ff4)",
+                    "Default PE Duration": "4",
+                    "TXOP Duration RTS Threshold": "1023"
+                },
+                "BSS Color": "8",
+                "Basic HE-MCS NSS Set": {
+                    "info": "0xfffc",
+                    "1 streams": "MCS 0-7",
+                    "2 streams": "not supported",
+                    "3 streams": "not supported",
+                    "4 streams": "not supported",
+                    "5 streams": "not supported",
+                    "6 streams": "not supported",
+                    "7 streams": "not supported",
+                    "8 streams": "not supported"
+                }
+            },
+            "WMM": {
+                "info": "Parameter version 1",
+                "flags": [
+                    "u-APSD"
+                ],
+                "BE": "CW 15-1023, AIFSN 3",
+                "BK": "CW 15-1023, AIFSN 7",
+                "VI": "CW 7-15, AIFSN 2, TXOP 3008 usec",
+                "VO": "CW 3-7, AIFSN 2, TXOP 1504 usec"
+            }
+        }
+    },
+    {
+        "bssid": "ec:fc:c6:24:5b:64",
+        "interface": "wlp1s0",
+        "associated": false,
+        "details": {
+            "last seen": [
+                "3306.187s [boottime]",
+                "939 ms ago"
+            ],
+            "TSF": "2243444866754 usec (25d, 23:10:44)",
+            "freq": "2437.0",
+            "beacon interval": "100 TUs",
+            "capability": "ESS Privacy ShortPreamble ShortSlotTime (0x0431)",
+            "signal": "-75.00 dBm",
+            "Information elements from Probe Response frame": {},
+            "SSID": "VKU_Staff_Mail",
+            "Supported rates": "1.0* 2.0* 5.5 11.0 18.0 24.0 36.0 54.0",
+            "DS Parameter set": "channel 6",
+            "ERP": "<no flags>",
+            "Extended supported rates": "6.0 9.0 12.0 48.0",
+            "RSN": {
+                "Version": "1",
+                "Group cipher": "CCMP",
+                "Pairwise ciphers": "CCMP",
+                "Authentication suites": "IEEE 802.1X",
+                "Capabilities": "4-PTKSA-RC 4-GTKSA-RC (0x0028)"
+            },
+            "HT capabilities": {
+                "Capabilities": {
+                    "info": "0x1ad",
+                    "flags": [
+                        "RX LDPC",
+                        "HT20",
+                        "SM Power Save disabled",
+                        "RX HT20 SGI",
+                        "TX STBC",
+                        "RX STBC 1-stream",
+                        "No DSSS/CCK HT40"
+                    ],
+                    "Max AMSDU length": "3839 bytes"
+                },
+                "Maximum RX AMPDU length 65535 bytes (exponent": "0x003)",
+                "Minimum RX AMPDU time spacing": "4 usec (0x05)",
+                "HT RX MCS rate indexes supported": "0-15",
+                "flags": [
+                    "HT TX MCS rate indexes are undefined"
+                ]
+            },
+            "HT operation": {
+                "primary channel": "6",
+                "secondary channel offset": "no secondary",
+                "STA channel width": "20 MHz",
+                "RIFS": "0",
+                "HT protection": "no",
+                "non-GF present": "0",
+                "OBSS non-GF present": "0",
+                "dual beacon": "0",
+                "dual CTS protection": "0",
+                "STBC beacon": "0",
+                "L-SIG TXOP Prot": "0",
+                "PCO active": "0",
+                "PCO phase": "0"
+            },
+            "Overlapping BSS scan params": {
+                "passive dwell": "20 TUs",
+                "active dwell": "10 TUs",
+                "channel width trigger scan interval": "300 s",
+                "scan passive total per channel": "200 TUs",
+                "scan active total per channel": "20 TUs",
+                "BSS width channel transition delay factor": "5",
+                "OBSS Scan Activity Threshold": "0.25 %"
+            },
+            "Extended capabilities": {
+                "flags": [
+                    "HT Information Exchange Supported",
+                    "Extended Channel Switching",
+                    "BSS Transition",
+                    "Operating Mode Notification",
+                    "TWT Responder Support"
+                ]
+            },
+            "HE capabilities": {
+                "HE MAC Capabilities (0x000512081000)": {
+                    "flags": [
+                        "+HTC HE Supported",
+                        "TWT Responder",
+                        "BSR",
+                        "OM Control",
+                        "OM Control UL MU Data Disable RX"
+                    ],
+                    "Maximum A-MPDU Length Exponent": "2"
+                },
+                "HE PHY Capabilities": {
+                    "(0x20200ec00d418118000c00)": "",
+                    "flags": [
+                        "242 tone RUs/2.4GHz",
+                        "LDPC Coding in Payload",
+                        "NDP with 4x HE-LTF and 3.2us GI",
+                        "STBC Tx <= 80MHz",
+                        "STBC Rx <= 80MHz",
+                        "Rx HE MU PPDU from Non-AP STA",
+                        "SU Beamformer",
+                        "SU Beamformee",
+                        "Ng = 16 SU Feedback",
+                        "Codebook Size SU Feedback",
+                        "PPE Threshold Present",
+                        "TX 1024-QAM",
+                        "RX 1024-QAM"
+                    ],
+                    "Beamformee STS <= 80MHz": "3",
+                    "Sounding Dimensions <= 80MHz": "1",
+                    "Max NC": "3"
+                },
+                "flags": [
+                    "PPE Threshold 0xfa 0xff 0xfa 0xff 0x39 0x1c 0xc7 0x71 0x1c 0x07"
+                ]
+            },
+            "HE Operation": {
+                "HE Operation Parameters": {
+                    "info": "(0x003ff4)",
+                    "Default PE Duration": "4",
+                    "TXOP Duration RTS Threshold": "1023"
+                },
+                "BSS Color": "23",
+                "Basic HE-MCS NSS Set": {
+                    "info": "0xfffc",
+                    "1 streams": "MCS 0-7",
+                    "2 streams": "not supported",
+                    "3 streams": "not supported",
+                    "4 streams": "not supported",
+                    "5 streams": "not supported",
+                    "6 streams": "not supported",
+                    "7 streams": "not supported",
+                    "8 streams": "not supported"
+                }
+            },
+            "WMM": {
+                "info": "Parameter version 1",
+                "flags": [
+                    "u-APSD"
+                ],
+                "BE": "CW 15-1023, AIFSN 3",
+                "BK": "CW 15-1023, AIFSN 7",
+                "VI": "CW 7-15, AIFSN 2, TXOP 3008 usec",
+                "VO": "CW 3-7, AIFSN 2, TXOP 1504 usec"
+            }
+        }
+    }
+]

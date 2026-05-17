@@ -1,4 +1,4 @@
-import sys
+import sys, json
 from PySide6.QtWidgets import QApplication, QMainWindow
 from ui_mainwindow import Ui_MainWindow
 
@@ -6,7 +6,6 @@ from pages.dashboard.dashboard_page import DashboardPage
 from pages.scan.scan_page import ScanPage
 from pages.suspicious.suspicious_page import SuspiciousPage
 from pages.analyze.analyze_page import AnalyzePage
-from pages.attack.attack_page import AttackPage
 
 
 class MainWindow(QMainWindow):
@@ -20,30 +19,28 @@ class MainWindow(QMainWindow):
         self.scan_page = ScanPage()
         self.suspicious_page = SuspiciousPage()
         self.analyze_page = AnalyzePage()
-        self.attack_page = AttackPage()
 
         # Add pages to stacked widget
         self.ui.stackedWidget.addWidget(self.dashboard_page)
         self.ui.stackedWidget.addWidget(self.scan_page)
         self.ui.stackedWidget.addWidget(self.suspicious_page)
         self.ui.stackedWidget.addWidget(self.analyze_page)
-        self.ui.stackedWidget.addWidget(self.attack_page)
 
         # Connect navigation buttons
         self.ui.btnDashboard.clicked.connect(self.navigate_page)
         self.ui.btnScan.clicked.connect(self.navigate_page)
         self.ui.btnSuspicious.clicked.connect(self.navigate_page)
         self.ui.btnAnalyze.clicked.connect(self.navigate_page)
-        # self.ui.btnAttack.clicked.connect(self.navigate_page)
 
         # Start on dashboard page
         self.ui.stackedWidget.setCurrentWidget(self.dashboard_page)
 
         # Connect signals between pages
         self.dashboard_page.networks_data.connect(self.scan_page.update_scan_results)
-        self.dashboard_page.networks_data.connect(self.suspicious_page.update_suspicious_results)
+        self.dashboard_page.networks_data.connect(
+            self.suspicious_page.update_suspicious_results
+        )
         self.scan_page.analyze_bssid.connect(self.analyze_page.update_analyze_results)
-        # self.scan_page.bssid_attacked.connect(self.attack_page.attack_network)
 
         self.navigate_page()
 

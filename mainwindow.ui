@@ -360,7 +360,7 @@ QPushButton:hover, QPushButton:checked{
           <item>
            <widget class="QLabel" name="lblVersion">
             <property name="text">
-             <string>v1.0.2 - nguyenduchuy</string>
+             <string>v1.0.3 - nguyenduchuy</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignmentFlag::AlignCenter</set>
