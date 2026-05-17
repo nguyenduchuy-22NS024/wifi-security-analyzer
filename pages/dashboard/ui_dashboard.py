@@ -327,41 +327,6 @@ class Ui_Form(object):
 
         self.horizontalLayout_8.addWidget(self.frCard3)
 
-        self.frCard4 = QFrame(self.frCard)
-        self.frCard4.setObjectName(u"frCard4")
-        self.frCard4.setStyleSheet(u"#lblCardName4, #lblCardValue4 {\n"
-"	font-size: 20px;\n"
-"	font-weight: bold;\n"
-"	color: #f44336;\n"
-"}")
-        self.frCard4.setFrameShape(QFrame.Shape.StyledPanel)
-        self.frCard4.setFrameShadow(QFrame.Shadow.Raised)
-        self.horizontalLayout_6 = QHBoxLayout(self.frCard4)
-        self.horizontalLayout_6.setSpacing(4)
-        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.horizontalLayout_6.setContentsMargins(8, 0, 8, 0)
-        self.lblCardLogo4 = QLabel(self.frCard4)
-        self.lblCardLogo4.setObjectName(u"lblCardLogo4")
-        self.lblCardLogo4.setMaximumSize(QSize(48, 48))
-        self.lblCardLogo4.setPixmap(QPixmap(u":/root/resources/icons8-warning-2-48.png"))
-
-        self.horizontalLayout_6.addWidget(self.lblCardLogo4)
-
-        self.lblCardName4 = QLabel(self.frCard4)
-        self.lblCardName4.setObjectName(u"lblCardName4")
-        self.lblCardName4.setWordWrap(True)
-
-        self.horizontalLayout_6.addWidget(self.lblCardName4)
-
-        self.lblCardValue4 = QLabel(self.frCard4)
-        self.lblCardValue4.setObjectName(u"lblCardValue4")
-        self.lblCardValue4.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.horizontalLayout_6.addWidget(self.lblCardValue4)
-
-
-        self.horizontalLayout_8.addWidget(self.frCard4)
-
 
         self.verticalLayout.addWidget(self.frCard)
 
@@ -450,9 +415,6 @@ class Ui_Form(object):
         self.lblCardLogo3.setText("")
         self.lblCardName3.setText(QCoreApplication.translate("Form", u"Weak Security:", None))
         self.lblCardValue3.setText(QCoreApplication.translate("Form", u"0", None))
-        self.lblCardLogo4.setText("")
-        self.lblCardName4.setText(QCoreApplication.translate("Form", u"Suspicious APs:", None))
-        self.lblCardValue4.setText(QCoreApplication.translate("Form", u"0", None))
         self.lblNotification.setText(QCoreApplication.translate("Form", u"TextLabel", None))
     # retranslateUi
 

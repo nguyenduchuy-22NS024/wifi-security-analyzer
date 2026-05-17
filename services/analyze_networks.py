@@ -1,8 +1,8 @@
-from services.scan_networks import detect_suspicious_networks, evaluate_security
+from services.scan_networks import evaluate_security
 import re
 
 
-def process_security_analysis(details, security_status, suspicious_data):
+def process_security_analysis(details, security_status):
     """
     Unified security analysis: Includes specific evaluations for Mixed Mode configurations.
     """
@@ -21,14 +21,6 @@ def process_security_analysis(details, security_status, suspicious_data):
         score_breakdown.append("Critical: Unencrypted or WEP network detected (0pts)")
         cons.append(
             "Unencrypted network: Data transmission is fully visible to attackers."
-        )
-        return score, score_breakdown, pros, cons
-
-    if suspicious_data:
-        score = 0
-        score_breakdown.append("Critical: Rogue AP / Evil Twin detected! (0pts)")
-        cons.append(
-            "Rogue AP indicator: This access point is likely spoofed or malicious."
         )
         return score, score_breakdown, pros, cons
 
@@ -167,17 +159,9 @@ def analyze_network(target_bssid, networks):
     # Step 1: Security Diagnosis
     security_status = evaluate_security(details)
 
-    # Step 2: Rogue AP Check
-    try:
-        suspicious_list = detect_suspicious_networks(networks)
-    except:
-        suspicious_list = []
-
-    suspicious_data = None
-
     # Step 3: Scoring & Detail Evaluation
     final_score, score_breakdown, pros, cons = process_security_analysis(
-        details, security_status, suspicious_data
+        details, security_status
     )
 
     # Basic Metadata collection
@@ -204,7 +188,6 @@ def analyze_network(target_bssid, networks):
         "ScoreBreakdown": score_breakdown,
         "Pros": pros,
         "Cons": cons,
-        "IsRogue": True if suspicious_data else False,
         "Details": details,
     }
 
@@ -327,15 +310,6 @@ def analyze_dashboard_stats(networks):
             stats["auth_dist"]["Personal (PSK)"] += 1
         else:
             stats["auth_dist"]["None (Open)"] += 1
-
-    # 6. Đếm số lượng AP nghi vấn
-    try:
-        suspicious_results = detect_suspicious_networks(networks)
-        stats["suspicious_aps"] = sum(
-            item.get("ap_count", 0) for item in suspicious_results
-        )
-    except:
-        stats["suspicious_aps"] = 0
 
     return stats
 

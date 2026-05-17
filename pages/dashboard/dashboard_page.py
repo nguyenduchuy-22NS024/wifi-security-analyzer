@@ -34,7 +34,6 @@ class DashboardPage(QWidget):
         self.ui.lblCardValue1.setText(str(stats["total_aps"]))
         self.ui.lblCardValue2.setText(str(stats["strong_security"]))
         self.ui.lblCardValue3.setText(str(stats["weak_security"]))
-        self.ui.lblCardValue4.setText(str(stats["suspicious_aps"]))
 
         self.ui.frCard2.setToolTip(
             f"Very Low Risk: {stats['risk_dist']["Very Low Risk"]}\n"
