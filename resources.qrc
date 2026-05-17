@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="root">
+    <file>resources/icons8-test-passed-32.png</file>
+    <file>resources/icons8-wifi-passed-48.png</file>
     <file>resources/icons8-wifi-4-24.png</file>
     <file>resources/icons8-wifi-2-24.png</file>
     <file>resources/icons8-wifi-1-24.png</file>

@@ -188,12 +188,8 @@ QPushButton:hover, QPushButton:checked{
 	color: #3bd8b1;
 }
 
-#btnSuspicious{
-	color: #ba0003;
-}
-
-#btnAttack {
-	color: #0f518c;
+#btnTrusted{
+	color: #365166;
 }
 
 #btnAnalyze {
@@ -295,13 +291,13 @@ QPushButton:hover, QPushButton:checked{
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="btnSuspicious">
+           <widget class="QPushButton" name="btnTrusted">
             <property name="text">
-             <string>Suspicious</string>
+             <string>Trusted</string>
             </property>
             <property name="icon">
              <iconset resource="resources.qrc">
-              <normaloff>:/root/resources/icons8-wifi-alert-32.png</normaloff>:/root/resources/icons8-wifi-alert-32.png</iconset>
+              <normaloff>:/root/resources/icons8-test-passed-32.png</normaloff>:/root/resources/icons8-test-passed-32.png</iconset>
             </property>
             <property name="iconSize">
              <size>

@@ -110,12 +110,8 @@ class Ui_MainWindow(object):
 "	color: #3bd8b1;\n"
 "}\n"
 "\n"
-"#btnSuspicious{\n"
-"	color: #ba0003;\n"
-"}\n"
-"\n"
-"#btnAttack {\n"
-"	color: #0f518c;\n"
+"#btnTrusted{\n"
+"	color: #365166;\n"
 "}\n"
 "\n"
 "#btnAnalyze {\n"
@@ -161,16 +157,16 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addWidget(self.btnAnalyze)
 
-        self.btnSuspicious = QPushButton(self.frNav)
-        self.btnSuspicious.setObjectName(u"btnSuspicious")
+        self.btnTrusted = QPushButton(self.frNav)
+        self.btnTrusted.setObjectName(u"btnTrusted")
         icon4 = QIcon()
-        icon4.addFile(u":/root/resources/icons8-wifi-alert-32.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnSuspicious.setIcon(icon4)
-        self.btnSuspicious.setIconSize(QSize(32, 32))
-        self.btnSuspicious.setCheckable(True)
-        self.btnSuspicious.setAutoExclusive(True)
+        icon4.addFile(u":/root/resources/icons8-test-passed-32.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnTrusted.setIcon(icon4)
+        self.btnTrusted.setIconSize(QSize(32, 32))
+        self.btnTrusted.setCheckable(True)
+        self.btnTrusted.setAutoExclusive(True)
 
-        self.verticalLayout_2.addWidget(self.btnSuspicious)
+        self.verticalLayout_2.addWidget(self.btnTrusted)
 
 
         self.verticalLayout.addWidget(self.frNav)
@@ -229,7 +225,7 @@ class Ui_MainWindow(object):
         self.btnDashboard.setText(QCoreApplication.translate("MainWindow", u"Dashboard", None))
         self.btnScan.setText(QCoreApplication.translate("MainWindow", u"Scan", None))
         self.btnAnalyze.setText(QCoreApplication.translate("MainWindow", u"Analyze", None))
-        self.btnSuspicious.setText(QCoreApplication.translate("MainWindow", u"Suspicious", None))
+        self.btnTrusted.setText(QCoreApplication.translate("MainWindow", u"Trusted", None))
         self.lblVersion.setText(QCoreApplication.translate("MainWindow", u"v1.0.3 - nguyenduchuy", None))
     # retranslateUi
 

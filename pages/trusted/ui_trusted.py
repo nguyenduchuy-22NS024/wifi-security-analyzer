@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'suspicious.ui'
+## Form generated from reading UI file 'trusted.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.0
 ##
@@ -26,10 +26,10 @@ class Ui_Form(object):
             Form.setObjectName(u"Form")
         Form.resize(1016, 720)
         Form.setStyleSheet(u"background-color: #ffffff;")
-        self.horizontalLayout = QHBoxLayout(Form)
-        self.horizontalLayout.setSpacing(0)
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_3 = QVBoxLayout(Form)
+        self.verticalLayout_3.setSpacing(0)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.frame = QFrame(Form)
         self.frame.setObjectName(u"frame")
         self.frame.setFrameShape(QFrame.Shape.NoFrame)
@@ -45,7 +45,7 @@ class Ui_Form(object):
 "	font-size: 20px;\n"
 "	text-transform: uppercase;\n"
 "	font-weight: bold;\n"
-"	color: #ba0003;\n"
+"	color: #365166;\n"
 "}")
         self.frHeader.setFrameShape(QFrame.Shape.NoFrame)
         self.horizontalLayout_2 = QHBoxLayout(self.frHeader)
@@ -55,7 +55,7 @@ class Ui_Form(object):
         self.lblPageIcon = QLabel(self.frHeader)
         self.lblPageIcon.setObjectName(u"lblPageIcon")
         self.lblPageIcon.setMaximumSize(QSize(48, 48))
-        self.lblPageIcon.setPixmap(QPixmap(u":/root/resources/icons8-wifi-alert-48.png"))
+        self.lblPageIcon.setPixmap(QPixmap(u":/root/resources/icons8-wifi-passed-48.png"))
 
         self.horizontalLayout_2.addWidget(self.lblPageIcon)
 
@@ -74,10 +74,10 @@ class Ui_Form(object):
         self.frBody = QFrame(self.frame)
         self.frBody.setObjectName(u"frBody")
         self.frBody.setFrameShape(QFrame.Shape.NoFrame)
-        self.horizontalLayout_3 = QHBoxLayout(self.frBody)
-        self.horizontalLayout_3.setSpacing(4)
-        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_2 = QVBoxLayout(self.frBody)
+        self.verticalLayout_2.setSpacing(4)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.stackedWidget = QStackedWidget(self.frBody)
         self.stackedWidget.setObjectName(u"stackedWidget")
         self.pageEmpty = QWidget()
@@ -85,15 +85,47 @@ class Ui_Form(object):
         self.frEmpty = QFrame(self.pageEmpty)
         self.frEmpty.setObjectName(u"frEmpty")
         self.frEmpty.setGeometry(QRect(0, 0, 1016, 652))
-        self.frEmpty.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frEmpty.setFrameShape(QFrame.Shape.NoFrame)
         self.frEmpty.setFrameShadow(QFrame.Shadow.Raised)
-        self.verticalLayout_3 = QVBoxLayout(self.frEmpty)
-        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.label_2 = QLabel(self.frEmpty)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setWordWrap(True)
+        self.verticalLayout_5 = QVBoxLayout(self.frEmpty)
+        self.verticalLayout_5.setSpacing(4)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.verticalLayout_5.setContentsMargins(8, 8, 8, 8)
+        self.frStatus = QFrame(self.frEmpty)
+        self.frStatus.setObjectName(u"frStatus")
+        self.frStatus.setMinimumSize(QSize(0, 48))
+        self.frStatus.setMaximumSize(QSize(16777215, 64))
+        self.frStatus.setStyleSheet(u"#lblStatusText {\n"
+"	color: #2196f3;\n"
+"	font-weight: bold;\n"
+"	font-size: 16px;\n"
+"}")
+        self.frStatus.setFrameShape(QFrame.Shape.NoFrame)
+        self.frStatus.setFrameShadow(QFrame.Shadow.Raised)
+        self.horizontalLayout_9 = QHBoxLayout(self.frStatus)
+        self.horizontalLayout_9.setSpacing(4)
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.horizontalLayout_9.setContentsMargins(8, 8, 8, 8)
+        self.lblStatusIcon = QLabel(self.frStatus)
+        self.lblStatusIcon.setObjectName(u"lblStatusIcon")
+        self.lblStatusIcon.setMinimumSize(QSize(32, 32))
+        self.lblStatusIcon.setMaximumSize(QSize(32, 32))
+        self.lblStatusIcon.setPixmap(QPixmap(u":/root/resources/icons8-info-32.png"))
 
-        self.verticalLayout_3.addWidget(self.label_2)
+        self.horizontalLayout_9.addWidget(self.lblStatusIcon)
+
+        self.lblStatusText = QLabel(self.frStatus)
+        self.lblStatusText.setObjectName(u"lblStatusText")
+        self.lblStatusText.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
+
+        self.horizontalLayout_9.addWidget(self.lblStatusText)
+
+
+        self.verticalLayout_5.addWidget(self.frStatus)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_5.addItem(self.verticalSpacer)
 
         self.stackedWidget.addWidget(self.pageEmpty)
         self.pageData = QWidget()
@@ -101,29 +133,26 @@ class Ui_Form(object):
         self.frData = QFrame(self.pageData)
         self.frData.setObjectName(u"frData")
         self.frData.setGeometry(QRect(0, 0, 1016, 652))
-        self.frData.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frData.setFrameShape(QFrame.Shape.NoFrame)
         self.frData.setFrameShadow(QFrame.Shadow.Raised)
-        self.verticalLayout_2 = QVBoxLayout(self.frData)
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.label = QLabel(self.frData)
-        self.label.setObjectName(u"label")
-
-        self.verticalLayout_2.addWidget(self.label)
-
+        self.verticalLayout_4 = QVBoxLayout(self.frData)
+        self.verticalLayout_4.setSpacing(4)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.stackedWidget.addWidget(self.pageData)
 
-        self.horizontalLayout_3.addWidget(self.stackedWidget)
+        self.verticalLayout_2.addWidget(self.stackedWidget)
 
 
         self.verticalLayout.addWidget(self.frBody)
 
 
-        self.horizontalLayout.addWidget(self.frame)
+        self.verticalLayout_3.addWidget(self.frame)
 
 
         self.retranslateUi(Form)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(Form)
@@ -132,8 +161,8 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.lblPageIcon.setText("")
-        self.lblPageName.setText(QCoreApplication.translate("Form", u"Suspicious Networks", None))
-        self.label_2.setText(QCoreApplication.translate("Form", u"Empty", None))
-        self.label.setText(QCoreApplication.translate("Form", u"Data", None))
+        self.lblPageName.setText(QCoreApplication.translate("Form", u"Trusted Networks", None))
+        self.lblStatusIcon.setText("")
+        self.lblStatusText.setText(QCoreApplication.translate("Form", u"No data.", None))
     # retranslateUi
 
