@@ -5,7 +5,6 @@ from ui_mainwindow import Ui_MainWindow
 from pages.dashboard.dashboard_page import DashboardPage
 from pages.scan.scan_page import ScanPage
 from pages.analyze.analyze_page import AnalyzePage
-from pages.trusted.trusted_page import TrustedPage
 
 
 class MainWindow(QMainWindow):
@@ -18,13 +17,11 @@ class MainWindow(QMainWindow):
         self.dashboard_page = DashboardPage()
         self.scan_page = ScanPage()
         self.analyze_page = AnalyzePage()
-        self.trusted_page = TrustedPage()
 
         # Add pages to stacked widget
         self.ui.stackedWidget.addWidget(self.dashboard_page)
         self.ui.stackedWidget.addWidget(self.scan_page)
         self.ui.stackedWidget.addWidget(self.analyze_page)
-        self.ui.stackedWidget.addWidget(self.trusted_page)
 
         # Connect navigation buttons
         self.ui.btnDashboard.clicked.connect(self.navigate_page)
