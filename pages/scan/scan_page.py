@@ -129,7 +129,6 @@ class ScanPage(QWidget):
 
         # Add actions to the context menu
         action_analyze = menu.addAction("Analyze")
-        action_add_trusted_network = menu.addAction("Trusted Network")
 
         # Get the row that was right-clicked
         index = self.ui.tableScanData.indexAt(position)
@@ -143,8 +142,6 @@ class ScanPage(QWidget):
 
         if action == action_analyze:
             self.analyze_network(row)
-        elif action == action_add_trusted_network:
-            self.add_trusted_network(row)
 
     def analyze_network(self, row):
         bssid_item = self.ui.tableScanData.item(row, 2).text()
