@@ -194,11 +194,17 @@ class Ui_Form(object):
 "	font-size: 16px;\n"
 "	font-weight: bold;\n"
 "	color: #0f518c;\n"
+"}\n"
+"\n"
+"#lblBSSID, #lblSSID, #lblChan {\n"
+"	font-size: 14px;\n"
+"	border-right: 1px solid black;\n"
+"	padding-right: 8px;\n"
 "}")
         self.frTarget.setFrameShape(QFrame.Shape.NoFrame)
         self.frTarget.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout = QHBoxLayout(self.frTarget)
-        self.horizontalLayout.setSpacing(4)
+        self.horizontalLayout.setSpacing(8)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(8, 8, 8, 8)
         self.lblTarget = QLabel(self.frTarget)
@@ -213,16 +219,25 @@ class Ui_Form(object):
 
         self.lblSSID = QLabel(self.frTarget)
         self.lblSSID.setObjectName(u"lblSSID")
+        sizePolicy1.setHeightForWidth(self.lblSSID.sizePolicy().hasHeightForWidth())
+        self.lblSSID.setSizePolicy(sizePolicy1)
 
         self.horizontalLayout.addWidget(self.lblSSID)
 
         self.lblBSSID = QLabel(self.frTarget)
         self.lblBSSID.setObjectName(u"lblBSSID")
+        sizePolicy1.setHeightForWidth(self.lblBSSID.sizePolicy().hasHeightForWidth())
+        self.lblBSSID.setSizePolicy(sizePolicy1)
 
         self.horizontalLayout.addWidget(self.lblBSSID)
 
         self.lblChan = QLabel(self.frTarget)
         self.lblChan.setObjectName(u"lblChan")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.lblChan.sizePolicy().hasHeightForWidth())
+        self.lblChan.setSizePolicy(sizePolicy2)
 
         self.horizontalLayout.addWidget(self.lblChan)
 
@@ -272,18 +287,18 @@ class Ui_Form(object):
 
         self.btnCapture = QPushButton(self.frAction)
         self.btnCapture.setObjectName(u"btnCapture")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.btnCapture.sizePolicy().hasHeightForWidth())
-        self.btnCapture.setSizePolicy(sizePolicy2)
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.btnCapture.sizePolicy().hasHeightForWidth())
+        self.btnCapture.setSizePolicy(sizePolicy3)
 
         self.horizontalLayout_5.addWidget(self.btnCapture)
 
         self.btnDeauth = QPushButton(self.frAction)
         self.btnDeauth.setObjectName(u"btnDeauth")
-        sizePolicy2.setHeightForWidth(self.btnDeauth.sizePolicy().hasHeightForWidth())
-        self.btnDeauth.setSizePolicy(sizePolicy2)
+        sizePolicy3.setHeightForWidth(self.btnDeauth.sizePolicy().hasHeightForWidth())
+        self.btnDeauth.setSizePolicy(sizePolicy3)
 
         self.horizontalLayout_5.addWidget(self.btnDeauth)
 
@@ -348,15 +363,15 @@ class Ui_Form(object):
 
         self.btnBrowse = QPushButton(self.frConfigWordlist)
         self.btnBrowse.setObjectName(u"btnBrowse")
-        sizePolicy2.setHeightForWidth(self.btnBrowse.sizePolicy().hasHeightForWidth())
-        self.btnBrowse.setSizePolicy(sizePolicy2)
+        sizePolicy3.setHeightForWidth(self.btnBrowse.sizePolicy().hasHeightForWidth())
+        self.btnBrowse.setSizePolicy(sizePolicy3)
 
         self.horizontalLayout_3.addWidget(self.btnBrowse)
 
         self.btnAttack = QPushButton(self.frConfigWordlist)
         self.btnAttack.setObjectName(u"btnAttack")
-        sizePolicy2.setHeightForWidth(self.btnAttack.sizePolicy().hasHeightForWidth())
-        self.btnAttack.setSizePolicy(sizePolicy2)
+        sizePolicy3.setHeightForWidth(self.btnAttack.sizePolicy().hasHeightForWidth())
+        self.btnAttack.setSizePolicy(sizePolicy3)
 
         self.horizontalLayout_3.addWidget(self.btnAttack)
 
@@ -404,6 +419,10 @@ class Ui_Form(object):
 "	font-size: 16px;\n"
 "	font-weight: bold;\n"
 "	color: #0f518c;\n"
+"}\n"
+"\n"
+"#lblValue {\n"
+"	font-size: 14px;\n"
 "}")
         self.frResult.setFrameShape(QFrame.Shape.NoFrame)
         self.frResult.setFrameShadow(QFrame.Shadow.Raised)
@@ -468,7 +487,7 @@ class Ui_Form(object):
         self.lblCrack.setText(QCoreApplication.translate("Form", u"Crack Password:", None))
         self.lblWordlist.setText(QCoreApplication.translate("Form", u"File Wordlist:", None))
         self.btnBrowse.setText(QCoreApplication.translate("Form", u"Browse...", None))
-        self.btnAttack.setText(QCoreApplication.translate("Form", u"Start Attack", None))
+        self.btnAttack.setText(QCoreApplication.translate("Form", u"Start Crack", None))
         self.lblLog.setText(QCoreApplication.translate("Form", u"Log:", None))
         self.lblResult.setText(QCoreApplication.translate("Form", u"Result:", None))
         self.lblValue.setText(QCoreApplication.translate("Form", u"TextLabel", None))

@@ -395,6 +395,12 @@
 	font-size: 16px;
 	font-weight: bold;
 	color: #0f518c;
+}
+
+#lblBSSID, #lblSSID, #lblChan {
+	font-size: 14px;
+	border-right: 1px solid black;
+	padding-right: 8px;
 }</string>
                 </property>
                 <property name="frameShape">
@@ -405,7 +411,7 @@
                 </property>
                 <layout class="QHBoxLayout" name="horizontalLayout">
                  <property name="spacing">
-                  <number>4</number>
+                  <number>8</number>
                  </property>
                  <property name="leftMargin">
                   <number>8</number>
@@ -434,6 +440,12 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="lblSSID">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
                    <property name="text">
                     <string>TextLabel</string>
                    </property>
@@ -441,6 +453,12 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="lblBSSID">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
                    <property name="text">
                     <string>TextLabel</string>
                    </property>
@@ -448,6 +466,12 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="lblChan">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
                    <property name="text">
                     <string>TextLabel</string>
                    </property>
@@ -694,7 +718,7 @@
                        </sizepolicy>
                       </property>
                       <property name="text">
-                       <string>Start Attack</string>
+                       <string>Start Crack</string>
                       </property>
                      </widget>
                     </item>
@@ -774,6 +798,10 @@
 	font-size: 16px;
 	font-weight: bold;
 	color: #0f518c;
+}
+
+#lblValue {
+	font-size: 14px;
 }</string>
                 </property>
                 <property name="frameShape">
@@ -807,7 +835,7 @@
                     </sizepolicy>
                    </property>
                    <property name="text">
-                    <string>Result:</string>
+                    <string>Password:</string>
                    </property>
                   </widget>
                  </item>

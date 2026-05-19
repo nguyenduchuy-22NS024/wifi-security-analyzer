@@ -1,7 +1,7 @@
-import os
-import subprocess
+import os, subprocess, datetime
+
 from PySide6.QtWidgets import QWidget, QFileDialog, QTextEdit, QVBoxLayout, QMessageBox
-from PySide6.QtCore import Slot, Qt
+from PySide6.QtCore import Slot
 
 from pages.attack.ui_attack import Ui_Form
 from services.scan_networks import get_network_interfaces
@@ -68,7 +68,8 @@ class AttackPage(QWidget):
     # --- HELPERS ---
     def write_log(self, message):
         """Write information to the log interface"""
-        self.log_output.append(f"> {message}")
+        time = datetime.datetime.now().strftime("%H:%M:%S")
+        self.log_output.append(f"[{time}]> {message}")
         # Auto-scroll to the bottom
         self.log_output.verticalScrollBar().setValue(
             self.log_output.verticalScrollBar().maximum()
@@ -148,7 +149,7 @@ class AttackPage(QWidget):
         QMessageBox.information(
             self,
             "Success",
-            "Great! Handshake captured.\nYou can now proceed with cracking.",
+            "Handshake captured.",
         )
 
     # --- DEAUTH CONTROL LOGIC ---
@@ -178,6 +179,8 @@ class AttackPage(QWidget):
         # If running -> Stop
         if self.crack_worker and self.crack_worker.isRunning():
             self.crack_worker.stop()
+            self.reset_crack_ui()
+            self.write_log("Stopping the cracking process... please wait.")
             return
 
         # Check cracking conditions
@@ -217,7 +220,7 @@ class AttackPage(QWidget):
         if success:
             self.ui.lblValue.setText(password)
             self.ui.lblValue.setStyleSheet(
-                "color: #f44336; font-size: 16px; font-weight: bold;"
+                "color: #f44336; font-weight: bold;"
             )
             QMessageBox.critical(self, "Password Found!", f"Wi-Fi Password: {password}")
         else:

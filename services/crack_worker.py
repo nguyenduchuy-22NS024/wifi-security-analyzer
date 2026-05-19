@@ -115,3 +115,9 @@ class CrackWorker(QThread):
 
     def stop(self):
         self._is_running = False
+        if self.process:
+            try:
+                self.process.terminate()
+                self.process.kill()
+            except:
+                pass

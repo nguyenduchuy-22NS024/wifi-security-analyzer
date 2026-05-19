@@ -226,6 +226,6 @@ class Ui_MainWindow(object):
         self.btnScan.setText(QCoreApplication.translate("MainWindow", u"Scan", None))
         self.btnAnalyze.setText(QCoreApplication.translate("MainWindow", u"Analyze", None))
         self.btnAttack.setText(QCoreApplication.translate("MainWindow", u"Attack", None))
-        self.lblVersion.setText(QCoreApplication.translate("MainWindow", u"v1.0.5 - nguyenduchuy", None))
+        self.lblVersion.setText(QCoreApplication.translate("MainWindow", u"v1.0.6 - nguyenduchuy", None))
     # retranslateUi
 
