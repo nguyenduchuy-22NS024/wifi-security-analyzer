@@ -308,6 +308,11 @@ class Ui_Form(object):
 
         self.frSummary = QFrame(self.frData)
         self.frSummary.setObjectName(u"frSummary")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frSummary.sizePolicy().hasHeightForWidth())
+        self.frSummary.setSizePolicy(sizePolicy)
         self.frSummary.setMinimumSize(QSize(0, 0))
         self.frSummary.setMaximumSize(QSize(16777215, 16777215))
         self.frSummary.setStyleSheet(u"#lblSummaryHeader {\n"

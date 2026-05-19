@@ -110,8 +110,8 @@ class Ui_MainWindow(object):
 "	color: #3bd8b1;\n"
 "}\n"
 "\n"
-"#btnTrusted{\n"
-"	color: #365166;\n"
+"#btnAttack{\n"
+"	color: #ed0049;\n"
 "}\n"
 "\n"
 "#btnAnalyze {\n"
@@ -156,6 +156,17 @@ class Ui_MainWindow(object):
         self.btnAnalyze.setAutoExclusive(True)
 
         self.verticalLayout_2.addWidget(self.btnAnalyze)
+
+        self.btnAttack = QPushButton(self.frNav)
+        self.btnAttack.setObjectName(u"btnAttack")
+        icon4 = QIcon()
+        icon4.addFile(u":/root/resources/icons8-sword-32.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnAttack.setIcon(icon4)
+        self.btnAttack.setIconSize(QSize(32, 32))
+        self.btnAttack.setCheckable(True)
+        self.btnAttack.setAutoExclusive(True)
+
+        self.verticalLayout_2.addWidget(self.btnAttack)
 
 
         self.verticalLayout.addWidget(self.frNav)
@@ -214,6 +225,7 @@ class Ui_MainWindow(object):
         self.btnDashboard.setText(QCoreApplication.translate("MainWindow", u"Dashboard", None))
         self.btnScan.setText(QCoreApplication.translate("MainWindow", u"Scan", None))
         self.btnAnalyze.setText(QCoreApplication.translate("MainWindow", u"Analyze", None))
+        self.btnAttack.setText(QCoreApplication.translate("MainWindow", u"Attack", None))
         self.lblVersion.setText(QCoreApplication.translate("MainWindow", u"v1.0.5 - nguyenduchuy", None))
     # retranslateUi
 

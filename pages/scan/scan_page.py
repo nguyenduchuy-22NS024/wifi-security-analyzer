@@ -11,7 +11,7 @@ from services.analyze_networks import analyze_scan_table
 class ScanPage(QWidget):
 
     analyze_bssid = Signal(str, list)
-    attack_bssid = Signal(str)
+    attack_items = Signal(str, str, str)
 
     def __init__(self):
         super().__init__()
@@ -129,6 +129,7 @@ class ScanPage(QWidget):
 
         # Add actions to the context menu
         action_analyze = menu.addAction("Analyze")
+        action_attack = menu.addAction("Attack")
 
         # Get the row that was right-clicked
         index = self.ui.tableScanData.indexAt(position)
@@ -142,7 +143,15 @@ class ScanPage(QWidget):
 
         if action == action_analyze:
             self.analyze_network(row)
+        elif action == action_attack:
+            self.attack_network(row)
 
     def analyze_network(self, row):
         bssid_item = self.ui.tableScanData.item(row, 2).text()
         self.analyze_bssid.emit(bssid_item, self.networks)
+        
+    def attack_network(self, row):
+        ssid_item = self.ui.tableScanData.item(row, 1).text()
+        bssid_item = self.ui.tableScanData.item(row, 2).text()
+        chan_item = self.ui.tableScanData.item(row, 5).text()
+        self.attack_items.emit(ssid_item, bssid_item, chan_item)

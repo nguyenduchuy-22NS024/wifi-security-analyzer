@@ -5,6 +5,7 @@ from ui_mainwindow import Ui_MainWindow
 from pages.dashboard.dashboard_page import DashboardPage
 from pages.scan.scan_page import ScanPage
 from pages.analyze.analyze_page import AnalyzePage
+from pages.attack.attack_page import AttackPage
 
 
 class MainWindow(QMainWindow):
@@ -17,16 +18,19 @@ class MainWindow(QMainWindow):
         self.dashboard_page = DashboardPage()
         self.scan_page = ScanPage()
         self.analyze_page = AnalyzePage()
+        self.attack_page = AttackPage()
 
         # Add pages to stacked widget
         self.ui.stackedWidget.addWidget(self.dashboard_page)
         self.ui.stackedWidget.addWidget(self.scan_page)
         self.ui.stackedWidget.addWidget(self.analyze_page)
+        self.ui.stackedWidget.addWidget(self.attack_page)
 
         # Connect navigation buttons
         self.ui.btnDashboard.clicked.connect(self.navigate_page)
         self.ui.btnScan.clicked.connect(self.navigate_page)
         self.ui.btnAnalyze.clicked.connect(self.navigate_page)
+        self.ui.btnAttack.clicked.connect(self.navigate_page)
 
         # Start on dashboard page
         self.ui.stackedWidget.setCurrentWidget(self.dashboard_page)
@@ -34,6 +38,7 @@ class MainWindow(QMainWindow):
         # Connect signals between pages
         self.dashboard_page.networks_data.connect(self.scan_page.update_scan_results)
         self.scan_page.analyze_bssid.connect(self.analyze_page.update_analyze_results)
+        self.scan_page.attack_items.connect(self.attack_page.get_items)
 
         self.navigate_page()
 
@@ -49,6 +54,9 @@ class MainWindow(QMainWindow):
 
         elif sender == self.ui.btnAnalyze:
             self.ui.stackedWidget.setCurrentWidget(self.analyze_page)
+
+        elif sender == self.ui.btnAttack:
+            self.ui.stackedWidget.setCurrentWidget(self.attack_page)
 
 
 if __name__ == "__main__":
