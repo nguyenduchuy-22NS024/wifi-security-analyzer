@@ -31,13 +31,12 @@ class AttackPage(QWidget):
         # Initialize Log area (Console)
         self.log_output = QTextEdit()
         self.log_output.setReadOnly(True)
-        # Hacker style log interface (Black background, green text)
         self.log_output.setStyleSheet("""
             QTextEdit {
-                background-color: #1e1e1e; 
-                color: #00ff00; 
+                background-color: #ffffff; 
+                color: #0a0a46; 
                 font-family: 'Courier New', monospace;
-                font-size: 13px;
+                font-size: 16px;
                 border: 1px solid #333;
             }
         """)
@@ -218,7 +217,7 @@ class AttackPage(QWidget):
         if success:
             self.ui.lblValue.setText(password)
             self.ui.lblValue.setStyleSheet(
-                "color: #f44336; font-size: 18px; font-weight: bold;"
+                "color: #f44336; font-size: 16px; font-weight: bold;"
             )
             QMessageBox.critical(self, "Password Found!", f"Wi-Fi Password: {password}")
         else:
@@ -227,7 +226,6 @@ class AttackPage(QWidget):
                 self, "Failed", "Password not found in the selected dictionary."
             )
 
-    # --- OTHER UI FUNCTIONS ---
     def browse_wordlist(self):
         file_path, _ = QFileDialog.getOpenFileName(
             self, "Select Dictionary File", "", "Text Files (*.txt)"
