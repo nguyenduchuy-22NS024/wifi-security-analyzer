@@ -1,13 +1,11 @@
 import subprocess
 import os
-import signal
+import re
 from PySide6.QtCore import QThread, Signal
 
 
 class CrackWorker(QThread):
-    # Send status logs to the UI
     status_msg = Signal(str)
-    # Send final result (Success boolean, Password or error message)
     result_found = Signal(bool, str)
     finished = Signal()
 
@@ -18,9 +16,14 @@ class CrackWorker(QThread):
         self.bssid = bssid
         self._is_running = True
         self.process = None
+        # Regex để tìm và loại bỏ ANSI escape codes
+        self.ansi_escape = re.compile(r"\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])")
+
+    def clean_ansi(self, text):
+        """Loại bỏ các mã định dạng Terminal (ANSI codes)"""
+        return self.ansi_escape.sub("", text)
 
     def run(self):
-        # Check if files exist
         if not os.path.exists(self.cap_file):
             self.result_found.emit(False, "Capture file (.cap) not found")
             return
@@ -32,13 +35,19 @@ class CrackWorker(QThread):
         self.status_msg.emit(f"[*] Target: {self.bssid}")
         self.status_msg.emit(f"[*] Wordlist: {os.path.basename(self.wordlist_path)}")
 
-        # aircrack-ng command
-        # -w: path to wordlist
-        # -b: Target BSSID
-        cmd = ["aircrack-ng", "-w", self.wordlist_path, "-b", self.bssid, self.cap_file]
+        # Chạy lệnh với tùy chọn không màu nếu có thể, nhưng regex vẫn an toàn nhất
+        cmd = [
+            "aircrack-ng",
+            "-a",
+            "2",
+            "-b",
+            self.bssid,
+            "-w",
+            self.wordlist_path,
+            self.cap_file,
+        ]
 
         try:
-            # Run the process and read real-time output
             self.process = subprocess.Popen(
                 cmd,
                 stdout=subprocess.PIPE,
@@ -50,29 +59,35 @@ class CrackWorker(QThread):
 
             found_password = None
 
-            # Read each line of output to find the result
-            for line in self.process.stdout:
+            for raw_line in self.process.stdout:
                 if not self._is_running:
                     break
 
-                # Log progress (e.g., "1000 keys tested (500.23 k/s)")
-                if "tested" in line.lower():
-                    self.status_msg.emit(line.strip())
+                # Làm sạch dòng dữ liệu khỏi mã ANSI
+                line = self.clean_ansi(raw_line).strip()
+                if not line:
+                    continue
 
-                # Check if the key was found
+                # Hiển thị tiến trình lên UI (loại bỏ các dòng rác)
+                if "keys tested" in line.lower():
+                    self.status_msg.emit(line)
+
+                # Kiểm tra kết quả bẻ khóa
                 if "KEY FOUND!" in line:
-                    # Extract the password from: [ KEY FOUND! [ password ] ]
-                    start = line.find("[") + 1
-                    end = line.find("]", start)
-                    # Extract string within the second set of brackets
-                    start_pass = line.find("[", end) + 1
-                    end_pass = line.find("]", start_pass)
-                    found_password = line[start_pass:end_pass].strip()
-                    break
+                    # Logic tách chuỗi mới: Tìm phần nằm trong dấu [ ] cuối cùng của dòng
+                    # Ví dụ dòng sạch: "KEY FOUND! [ p419ktx2 ]"
+                    matches = re.findall(r"\[\s*(.*?)\s*\]", line)
+                    if matches:
+                        found_password = matches[
+                            -1
+                        ]  # Lấy kết quả ở dấu ngoặc cuối cùng
+                        break
 
             self.process.wait()
 
             if found_password:
+                # Xóa sạch các ký tự điều khiển còn sót lại nếu có
+                found_password = "".join(c for c in found_password if c.isprintable())
                 self.status_msg.emit(f"\n[!!!] SUCCESS! Password is: {found_password}")
                 self.result_found.emit(True, found_password)
             elif not self._is_running:
@@ -90,7 +105,6 @@ class CrackWorker(QThread):
             self.finished.emit()
 
     def stop_process(self):
-        """Stop the cracking process"""
         self._is_running = False
         if self.process:
             try:
@@ -100,5 +114,4 @@ class CrackWorker(QThread):
                 pass
 
     def stop(self):
-        """Public method to stop the thread from UI"""
         self._is_running = False
