@@ -489,7 +489,7 @@ class Ui_Form(object):
         self.btnBrowse.setText(QCoreApplication.translate("Form", u"Browse...", None))
         self.btnAttack.setText(QCoreApplication.translate("Form", u"Start Crack", None))
         self.lblLog.setText(QCoreApplication.translate("Form", u"Log:", None))
-        self.lblResult.setText(QCoreApplication.translate("Form", u"Result:", None))
+        self.lblResult.setText(QCoreApplication.translate("Form", u"Password:", None))
         self.lblValue.setText(QCoreApplication.translate("Form", u"TextLabel", None))
     # retranslateUi
 

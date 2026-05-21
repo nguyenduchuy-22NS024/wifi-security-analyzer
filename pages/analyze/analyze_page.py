@@ -82,6 +82,7 @@ class AnalyzePage(QWidget):
     def update_analyze_results(self, bssid, networks):
         self.networks = networks
         self.current_bssid = bssid
+        print(bssid)
         data = analyze_network(bssid, self.networks)
         # print(data)
 
