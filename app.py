@@ -37,6 +37,7 @@ class MainWindow(QMainWindow):
 
         # Connect signals between pages
         self.dashboard_page.networks_data.connect(self.scan_page.update_scan_results)
+        self.dashboard_page.networks_data.connect(self.attack_page.update_scan_results)
         self.scan_page.analyze_bssid.connect(self.analyze_page.update_analyze_results)
         self.scan_page.attack_items.connect(self.attack_page.get_items)
 

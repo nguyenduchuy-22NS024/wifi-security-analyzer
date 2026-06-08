@@ -23,8 +23,8 @@ class DeauthWorker(QThread):
             # Use Popen to run the process in the background
             self.process = subprocess.Popen(
                 cmd,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
+                # stdout=subprocess.DEVNULL,
+                # stderr=subprocess.DEVNULL,
                 preexec_fn=os.setsid,  # Create a new process group to kill both sudo and child processes
             )
 

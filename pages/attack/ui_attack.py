@@ -15,9 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QHBoxLayout,
-    QLabel, QLineEdit, QPushButton, QSizePolicy,
-    QSpacerItem, QStackedWidget, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QFrame,
+    QHBoxLayout, QHeaderView, QLabel, QLineEdit,
+    QPushButton, QSizePolicy, QSpacerItem, QStackedWidget,
+    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_Form(object):
@@ -241,6 +242,16 @@ class Ui_Form(object):
 
         self.horizontalLayout.addWidget(self.lblChan)
 
+        self.btnBack = QPushButton(self.frTarget)
+        self.btnBack.setObjectName(u"btnBack")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.btnBack.sizePolicy().hasHeightForWidth())
+        self.btnBack.setSizePolicy(sizePolicy3)
+
+        self.horizontalLayout.addWidget(self.btnBack)
+
 
         self.verticalLayout_4.addWidget(self.frTarget)
 
@@ -287,9 +298,6 @@ class Ui_Form(object):
 
         self.btnCapture = QPushButton(self.frAction)
         self.btnCapture.setObjectName(u"btnCapture")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
         sizePolicy3.setHeightForWidth(self.btnCapture.sizePolicy().hasHeightForWidth())
         self.btnCapture.setSizePolicy(sizePolicy3)
 
@@ -446,6 +454,54 @@ class Ui_Form(object):
         self.verticalLayout_4.addWidget(self.frResult)
 
         self.stackedWidget.addWidget(self.pageData)
+        self.pageScan = QWidget()
+        self.pageScan.setObjectName(u"pageScan")
+        self.frScanData = QFrame(self.pageScan)
+        self.frScanData.setObjectName(u"frScanData")
+        self.frScanData.setGeometry(QRect(0, 0, 1016, 652))
+        self.frScanData.setFrameShape(QFrame.Shape.NoFrame)
+        self.frScanData.setFrameShadow(QFrame.Shadow.Raised)
+        self.verticalLayout_8 = QVBoxLayout(self.frScanData)
+        self.verticalLayout_8.setSpacing(4)
+        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+        self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.tableScanData = QTableWidget(self.frScanData)
+        if (self.tableScanData.columnCount() < 8):
+            self.tableScanData.setColumnCount(8)
+        __qtablewidgetitem = QTableWidgetItem()
+        self.tableScanData.setHorizontalHeaderItem(0, __qtablewidgetitem)
+        __qtablewidgetitem1 = QTableWidgetItem()
+        self.tableScanData.setHorizontalHeaderItem(1, __qtablewidgetitem1)
+        __qtablewidgetitem2 = QTableWidgetItem()
+        self.tableScanData.setHorizontalHeaderItem(2, __qtablewidgetitem2)
+        __qtablewidgetitem3 = QTableWidgetItem()
+        self.tableScanData.setHorizontalHeaderItem(3, __qtablewidgetitem3)
+        __qtablewidgetitem4 = QTableWidgetItem()
+        self.tableScanData.setHorizontalHeaderItem(4, __qtablewidgetitem4)
+        __qtablewidgetitem5 = QTableWidgetItem()
+        self.tableScanData.setHorizontalHeaderItem(5, __qtablewidgetitem5)
+        __qtablewidgetitem6 = QTableWidgetItem()
+        self.tableScanData.setHorizontalHeaderItem(6, __qtablewidgetitem6)
+        __qtablewidgetitem7 = QTableWidgetItem()
+        self.tableScanData.setHorizontalHeaderItem(7, __qtablewidgetitem7)
+        if (self.tableScanData.rowCount() < 1):
+            self.tableScanData.setRowCount(1)
+        __qtablewidgetitem8 = QTableWidgetItem()
+        self.tableScanData.setVerticalHeaderItem(0, __qtablewidgetitem8)
+        __qtablewidgetitem9 = QTableWidgetItem()
+        self.tableScanData.setItem(0, 1, __qtablewidgetitem9)
+        self.tableScanData.setObjectName(u"tableScanData")
+        self.tableScanData.setFrameShape(QFrame.Shape.NoFrame)
+        self.tableScanData.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tableScanData.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.tableScanData.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.tableScanData.setGridStyle(Qt.PenStyle.DashDotDotLine)
+        self.tableScanData.setSortingEnabled(True)
+        self.tableScanData.horizontalHeader().setStretchLastSection(False)
+
+        self.verticalLayout_8.addWidget(self.tableScanData)
+
+        self.stackedWidget.addWidget(self.pageScan)
 
         self.verticalLayout_2.addWidget(self.stackedWidget)
 
@@ -480,6 +536,7 @@ class Ui_Form(object):
         self.lblSSID.setText(QCoreApplication.translate("Form", u"TextLabel", None))
         self.lblBSSID.setText(QCoreApplication.translate("Form", u"TextLabel", None))
         self.lblChan.setText(QCoreApplication.translate("Form", u"TextLabel", None))
+        self.btnBack.setText(QCoreApplication.translate("Form", u"Back", None))
         self.lblCapture.setText(QCoreApplication.translate("Form", u"Capture Handshake:", None))
         self.lblCaptureStatus.setText(QCoreApplication.translate("Form", u"Status:", None))
         self.btnCapture.setText(QCoreApplication.translate("Form", u"Start Capture", None))
@@ -491,5 +548,28 @@ class Ui_Form(object):
         self.lblLog.setText(QCoreApplication.translate("Form", u"Log:", None))
         self.lblResult.setText(QCoreApplication.translate("Form", u"Password:", None))
         self.lblValue.setText(QCoreApplication.translate("Form", u"TextLabel", None))
+        ___qtablewidgetitem = self.tableScanData.horizontalHeaderItem(0)
+        ___qtablewidgetitem.setText(QCoreApplication.translate("Form", u"IN-USE", None))
+        ___qtablewidgetitem1 = self.tableScanData.horizontalHeaderItem(1)
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("Form", u"SSID", None))
+        ___qtablewidgetitem2 = self.tableScanData.horizontalHeaderItem(2)
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("Form", u"BSSID", None))
+        ___qtablewidgetitem3 = self.tableScanData.horizontalHeaderItem(3)
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("Form", u"SIGNAL", None))
+        ___qtablewidgetitem4 = self.tableScanData.horizontalHeaderItem(4)
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("Form", u"BARS", None))
+        ___qtablewidgetitem5 = self.tableScanData.horizontalHeaderItem(5)
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("Form", u"CHANNEL", None))
+        ___qtablewidgetitem6 = self.tableScanData.horizontalHeaderItem(6)
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("Form", u"BANDWIDTH", None))
+        ___qtablewidgetitem7 = self.tableScanData.horizontalHeaderItem(7)
+        ___qtablewidgetitem7.setText(QCoreApplication.translate("Form", u"SECURITY", None))
+        ___qtablewidgetitem8 = self.tableScanData.verticalHeaderItem(0)
+        ___qtablewidgetitem8.setText(QCoreApplication.translate("Form", u"New Row", None))
+
+        __sortingEnabled = self.tableScanData.isSortingEnabled()
+        self.tableScanData.setSortingEnabled(False)
+        self.tableScanData.setSortingEnabled(__sortingEnabled)
+
     # retranslateUi
 

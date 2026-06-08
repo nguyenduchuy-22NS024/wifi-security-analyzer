@@ -2,6 +2,9 @@ import os, subprocess, datetime
 
 from PySide6.QtWidgets import QWidget, QFileDialog, QTextEdit, QVBoxLayout, QMessageBox
 from PySide6.QtCore import Slot
+from PySide6.QtWidgets import QHeaderView, QMenu, QTableWidgetItem, QWidget, QMessageBox
+from PySide6.QtCore import Signal
+from PySide6.QtGui import QColor, Qt, QIcon
 
 from pages.attack.ui_attack import Ui_Form
 from services.scan_networks import get_network_interfaces
@@ -9,6 +12,7 @@ from services.attack_network import toggle_monitor_mode
 from services.deauth_worker import DeauthWorker
 from services.capture_worker import CaptureWorker
 from services.crack_worker import CrackWorker
+from services.analyze_networks import analyze_scan_table
 
 
 class AttackPage(QWidget):
@@ -22,6 +26,7 @@ class AttackPage(QWidget):
         self.target_bssid = ""
         self.target_chan = ""
         self.captured_cap_path = ""
+        self.networks = []
 
         # Workers management
         self.cap_worker = None
@@ -54,6 +59,112 @@ class AttackPage(QWidget):
 
         self.setup_connections()
         self.load_interfaces()
+        self.setup_table()
+        
+    def back_action(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.pageScan)
+        print("Back")
+
+    def setup_table(self):
+        header = self.ui.tableScanData.horizontalHeader()
+
+        # Các cột nhỏ thì vừa khít nội dung
+        header.setSectionResizeMode(0, QHeaderView.ResizeToContents)  # In-use
+        header.setSectionResizeMode(1, QHeaderView.ResizeToContents)  # SSID
+        header.setSectionResizeMode(2, QHeaderView.ResizeToContents)  # BSSID
+        header.setSectionResizeMode(3, QHeaderView.ResizeToContents)  # Signal
+        header.setSectionResizeMode(4, QHeaderView.ResizeToContents)  # Bars
+        header.setSectionResizeMode(5, QHeaderView.ResizeToContents)  # Channel
+        header.setSectionResizeMode(6, QHeaderView.ResizeToContents)  # Band
+
+        header.setSectionResizeMode(7, QHeaderView.Stretch)  # Security
+
+        # Tắt thanh cuộn ngang
+        # self.ui.tableScanData.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.ui.tableScanData.itemDoubleClicked.connect(self.on_row_double_clicked)
+
+    def update_scan_results(self, networks):
+        self.networks = networks
+        table_data = analyze_scan_table(networks)
+        self.ui.stackedWidget.setCurrentWidget(self.ui.pageScan)
+        self.ui.tableScanData.setRowCount(0)
+
+        for network in table_data:
+            row_position = self.ui.tableScanData.rowCount()
+            self.ui.tableScanData.insertRow(row_position)
+
+            # --- Cột 0: IN-USE ---
+            in_use_text = "●" if network["in_use"] else ""
+            item_in_use = QTableWidgetItem(in_use_text)
+            item_in_use.setTextAlignment(Qt.AlignCenter)
+            self.ui.tableScanData.setItem(row_position, 0, item_in_use)
+
+            # --- Cột 1, 2, 3 ---
+            self.ui.tableScanData.setItem(
+                row_position, 1, QTableWidgetItem(network["ssid"])
+            )
+            self.ui.tableScanData.setItem(
+                row_position, 2, QTableWidgetItem(network["bssid"])
+            )
+            self.ui.tableScanData.setItem(
+                row_position, 3, QTableWidgetItem(network["signal"])
+            )
+
+            # --- Cột 4: BARS ---
+            item_bars = QTableWidgetItem()
+            level = network["bar_level"]
+            icon_path = f":/root/resources/icons8-wifi-{level}-24.png"
+            item_bars.setIcon(QIcon(icon_path))
+            item_bars.setTextAlignment(Qt.AlignCenter)
+            self.ui.tableScanData.setItem(row_position, 4, item_bars)
+
+            # --- Cột 5, 6 ---
+            self.ui.tableScanData.setItem(
+                row_position, 5, QTableWidgetItem(str(network["channel"]))
+            )
+            self.ui.tableScanData.setItem(
+                row_position, 6, QTableWidgetItem(network["band"])
+            )
+
+            # --- Cột 7: SECURITY ---
+            sec_text = network["security"]
+            self.ui.tableScanData.setItem(row_position, 7, QTableWidgetItem(sec_text))
+
+            # --- MÀU SẮC DỰA TRÊN RISK ---
+            if "Very Low Risk" in sec_text:
+                color = "#d1ffd1"
+            elif "Low Risk" in sec_text:
+                color = "#e5ffcc"
+            elif "Medium Risk" in sec_text:
+                color = "#fff5cc"
+            elif any(x in sec_text for x in ["High Risk", "Critical", "Unknown"]):
+                color = "#ffcccc"
+            else:
+                color = "#ffffff"
+
+            # Áp dụng màu nền
+            for col in range(self.ui.tableScanData.columnCount()):
+                item = self.ui.tableScanData.item(row_position, col)
+                if item:
+                    item.setBackground(QColor(color))
+
+    def on_row_double_clicked(self, item):
+        """Xử lý khi người dùng nhấn đúp vào bất kỳ ô nào trong dòng"""
+        row = item.row()
+        bssid_item = self.ui.tableScanData.item(row, 2)
+
+        if bssid_item:
+            # bssid = bssid_item.text()
+            self.target_ssid = self.ui.tableScanData.item(row, 1).text()
+            self.target_bssid = self.ui.tableScanData.item(row, 2).text()
+            self.target_chan = self.ui.tableScanData.item(row, 5).text()
+            # print(self.target_ssid, self.target_bssid, self.target_chan)
+            
+            self.ui.stackedWidget.setCurrentWidget(self.ui.pageData)
+            self.get_items(self.target_ssid, self.target_bssid, self.target_chan)
+            
+            
+            # self.analyze_bssid.emit(bssid, self.networks)
 
     def setup_connections(self):
         """Connect button events"""
@@ -64,6 +175,7 @@ class AttackPage(QWidget):
         self.ui.btnCapture.clicked.connect(self.toggle_capture)
         self.ui.btnDeauth.clicked.connect(self.toggle_deauth)
         self.ui.btnAttack.clicked.connect(self.toggle_crack)
+        self.ui.btnBack.clicked.connect(self.back_action)
 
     # --- HELPERS ---
     def write_log(self, message):
@@ -219,9 +331,7 @@ class AttackPage(QWidget):
     def on_crack_result(self, success, password):
         if success:
             self.ui.lblValue.setText(password)
-            self.ui.lblValue.setStyleSheet(
-                "color: #f44336; font-weight: bold;"
-            )
+            self.ui.lblValue.setStyleSheet("color: #f44336; font-weight: bold;")
             QMessageBox.critical(self, "Password Found!", f"Wi-Fi Password: {password}")
         else:
             self.ui.lblValue.setText("Not Found")
